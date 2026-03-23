@@ -36,6 +36,19 @@
     };
   };
 
+  nixConfig = {
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://app.cachix.org/cache/colmena"
+    ];
+    trusted-public-keys = [
+      #"cache.nixos.org-1:AAAAAAAAAAAAAAACHIEDLEFUCEBOOTHI8airomo5ogueM=" # Technically not needed
+      "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
