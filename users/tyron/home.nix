@@ -9,15 +9,16 @@ in
       cfg = config.myNixos.users.${username};
     in
     {
-      options = {
-        myNixos.users.${username}.tags = lib.mkOption {
+      options.myNixos.users.${username}.homeManager = {
+        enable = lib.mkEnableOption "Enable Home Manager";
+        tags = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [ ];
-          description = "List of tags to enable user-specific modules";
+          description = "List of tags to enable user-specific home manager modules";
         };
       };
 
-      config = {
+      config = lib.mkIf cfg.homeManager.enable {
         home-manager.users.${username} =
           {
             osConfig,
@@ -38,7 +39,7 @@ in
             imports = [
               self.modules.homeManager.core
             ]
-            ++ (map (tag: (tagImport tag)) cfg.tags);
+            ++ (map (tag: (tagImport tag)) cfg.homeManager.tags);
             # ++ lib.optionals (lib.elem "dev" cfg.tags) [
             #   self.modules.homeManager.dev
             # ];

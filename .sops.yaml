@@ -29,7 +29,6 @@ keys:
     - &yoga age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
 creation_rules:
   - path_regex: ^*secrets/.*\.(yaml|yml)$
-
     key_groups:
       - age:
           - *tyron_yoga

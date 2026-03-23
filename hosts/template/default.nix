@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.host_yoga =
+  flake.modules.nixos.host_template =
     { lib, ... }:
     {
       #system = "x86_64-linux";
@@ -11,7 +11,7 @@
         user_deploy
       ];
       config = {
-        networking.hostName = "yoga";
+        networking.hostName = "template";
         deployment = {
           targetHost = "localhost";
           targetUser = "deploy";
@@ -25,7 +25,7 @@
         };
 
         hardware.facter.reportPath = ./facter.json;
-        system.stateVersion = "25.05";
+        system.stateVersion = "25.11";
       };
     };
 }

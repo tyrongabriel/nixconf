@@ -7,8 +7,8 @@ default:
 sops-rekey:
     sops updatekeys ./**/secrets.yaml
 
-install-nixos user host system port='22' architecture='x86_64-linux':
-    nixos-anywhere --flake .#{{ system }} {{ user }}@{{ host }} --ssh-port {{ port }} --generate-hardware-config nixos-generate-config ./systems/{{ architecture }}/{{ system }}/hardware-configuration.nix
+install-nixos name host port='22' architecture='x86_64-linux':
+    nixos-anywhere --flake .#{{ name }} --ssh-port {{ port }} --generate-hardware-config nixos-facter ./hosts/{{ name }}/facter.json --target-host {{ host }} --architecture {{ architecture }}
 
 generate-topology outPath='./images/topology/':
     nix build .#topology.config.output

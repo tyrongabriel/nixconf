@@ -4,6 +4,7 @@
   flake.modules.nixos.user_deploy =
     {
       pkgs,
+      config,
       ...
     }:
     {
@@ -15,6 +16,7 @@
           shell = pkgs.bash;
           group = "deploy";
           extraGroups = [ "wheel" ];
+          openssh.authorizedKeys.keyFiles = [ config.sops.secrets."tyron/ssh/public_key".path ];
         };
 
         users.groups.deploy.gid = 900;

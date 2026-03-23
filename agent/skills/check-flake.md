@@ -1,0 +1,1 @@
+After making any modifications to the flake, run `nix flake check` to see if the flake is valid. Read the output and determine if it is valid or not. Fix any mistakes you find (Warnings only if they are relatively important).

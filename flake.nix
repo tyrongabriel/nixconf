@@ -73,6 +73,7 @@
               age
               jq
               just
+              nixos-anywhere
             ];
           };
         };

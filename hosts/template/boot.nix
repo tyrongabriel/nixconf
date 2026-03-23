@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.modules.nixos.host_yoga =
+  flake.modules.nixos.host_template =
     { lib, ... }:
     {
       ## Boot Config ##

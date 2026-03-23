@@ -41,6 +41,11 @@ in
           neededForUsers = true;
           owner = "tyron";
         };
+
+        sops.secrets."tyron/ssh/public_key" = {
+          sopsFile = ./secrets/secrets.yaml;
+          mode = 0444;
+        };
       };
     };
 }
