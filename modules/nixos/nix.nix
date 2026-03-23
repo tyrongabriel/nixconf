@@ -1,8 +1,8 @@
-{ inputs, ... }:
+{ ... }:
 
 {
   flake.modules.nixos.core =
-    { lib, ... }:
+    { ... }:
     {
       nix.settings = {
         trusted-users = [ "@wheel" ];

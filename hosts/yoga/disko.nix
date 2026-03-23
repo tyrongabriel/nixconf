@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.host_yoga = {
     imports = [

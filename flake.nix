@@ -1,8 +1,6 @@
 {
   description = "NixOS infrastructure";
 
-  inputs.self.submodules = true;
-
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

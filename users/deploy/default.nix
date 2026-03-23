@@ -1,10 +1,8 @@
-{ inputs, self, ... }:
+{ ... }:
 
 {
   flake.modules.nixos.user_deploy =
     {
-      config,
-      lib,
       pkgs,
       ...
     }:

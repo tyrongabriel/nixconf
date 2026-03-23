@@ -1,15 +1,10 @@
 {
-  config,
-  lib,
-  pkgs,
-  inputs,
   ...
 }:
 
 {
   flake.modules.nixos.core =
     {
-      config,
       lib,
       pkgs,
       ...

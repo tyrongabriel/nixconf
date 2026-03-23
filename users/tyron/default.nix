@@ -1,10 +1,9 @@
-{ inputs, self, ... }:
+{ ... }:
 
 {
   flake.modules.nixos.user_tyron =
     {
       config,
-      lib,
       pkgs,
       ...
     }:

@@ -1,7 +1,7 @@
 {
   inputs,
   self,
-  withSystem,
+  #withSystem,
   ...
 }:
 
@@ -13,7 +13,7 @@
     };
 
     yoga =
-      { name, ... }:
+      { ... }:
       {
         imports = with self.modules.nixos; [
           host_yoga
