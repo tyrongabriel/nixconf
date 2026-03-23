@@ -27,24 +27,28 @@ in
             "kvm"
             "docker"
           ];
-          hashedPasswordFile = config.sops.secrets."tyron/password".path;
+          initialPassword = "password";
+          #hashedPasswordFile = config.sops.secrets."tyron/password".path;
           # openssh.authorizedKeys.keys = [
           #   "ssh-ed25519 AAAA... tyron@yoga"
           # ];
-          openssh.authorizedKeys.keyFiles = [ config.sops.secrets."tyron/ssh/public_key".path ];
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEqAq3GCuNXFc8mQL+H/czF0+pOlyQ4c4GILKUcrK0fZ 51530686+tyrongabriel@users.noreply.github.com"
+          ];
         };
 
         programs.zsh.enable = true;
 
         sops.secrets."tyron/password" = {
           sopsFile = ./secrets/secrets.yaml;
+          key = "tyron/password";
           neededForUsers = true;
-          owner = "tyron";
+          #owner = "tyron";
         };
 
         sops.secrets."tyron/ssh/public_key" = {
           sopsFile = ./secrets/secrets.yaml;
-          mode = 0444;
+          mode = "0444";
         };
       };
     };

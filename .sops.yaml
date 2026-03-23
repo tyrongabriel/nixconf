@@ -27,6 +27,7 @@ keys:
     - &ltc01 age1rxfv9uygpp87s8552ak7mhyfta9hg8wqjkyqfs8cajk790v70ecqfj96cg
     - &ncvps01 age1usmpn56pql0d4kpz379rjf9rgl3w6x7yk0x6qn088ve4uxwgzf0sw64kwq
     - &yoga age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
+    - &droplet age1y0nqk8s9eqtlaxya56kd3z8eyt2zdy5x49qas8hdmmcxewjhhgxsrlw993
 creation_rules:
   - path_regex: ^*secrets/.*\.(yaml|yml)$
     key_groups:
@@ -37,3 +38,4 @@ creation_rules:
           - *ltc01
           - *ncvps01
           - *yoga
+          - *droplet

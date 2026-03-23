@@ -7,8 +7,10 @@ default:
 sops-rekey:
     sops updatekeys ./**/secrets.yaml
 
-install-nixos name host port='22' architecture='x86_64-linux':
-    nixos-anywhere --flake .#{{ name }} --ssh-port {{ port }} --generate-hardware-config nixos-facter ./hosts/{{ name }}/facter.json --target-host {{ host }} --architecture {{ architecture }}
+install-nixos name host:
+    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter ./hosts/{{ name }}/facter.json  --flake .#droplet --target-host {{ host }}
+
+# You should run sudo systemctl start sshd-keygen.service to re-generate host keys, to not keep the copied ones
 
 generate-topology outPath='./images/topology/':
     nix build .#topology.config.output
