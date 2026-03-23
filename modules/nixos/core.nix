@@ -21,8 +21,6 @@
           curl
           wget
         ];
-        time.timeZone = lib.mkDefault "Europe/London";
-
       };
     };
 }

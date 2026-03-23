@@ -1,5 +1,7 @@
 { ... }:
-
+let
+  username = "tyron";
+in
 {
   flake.modules.nixos.user_tyron =
     {
@@ -10,7 +12,7 @@
     {
 
       config = {
-        users.users.tyron = {
+        users.users.${username} = {
           isNormalUser = true;
           uid = 3001;
           description = "Tyron";

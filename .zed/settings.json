@@ -27,6 +27,9 @@
           "nix": {
             "expr": "((myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.colmenaHive.nodes.\"${cfgName}\".options or {})) {} (builtins.attrNames myFlake.colmenaHive.nodes)) (builtins.getFlake (toString ./.)))",
           },
+          "home-manager": {
+            "expr": "((myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.colmenaHive.nodes.\"${cfgName}\".options.home-manager.users.type.getSubOptions [])) {} (builtins.attrNames myFlake.colmenaHive.nodes)) (builtins.getFlake (toString ./.)))",
+          },
         },
       },
     },
