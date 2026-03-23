@@ -1,0 +1,40 @@
+# Make a user key
+# mkdir -p ~/.config/sops/age
+# From ssh key
+# ssh-to-age -i ~/.ssh/id_ed25519.pub -o ~/.config/sops/age/keys.txt -private-key
+# or use the age-keygen command:
+# age-keygen -o ~/.config/sops/age/keys.txt
+# chmod 600 ~/.config/sops/age/keys.txt
+
+# Display the user public key:
+# age-keygen -y ~/.config/sops/age/keys.txt
+
+# Make a host public key:
+# nix-shell -p ssh-to-age
+# ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
+
+# Add secrets
+# sops secrets/secrets.yaml
+
+# Rekey secrets.yaml after editing recipients in .sops.yaml:
+# sops updatekeys secrets/secrets.yaml
+keys:
+  - &users
+    - &tyron_yoga age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+  - &hosts
+    - &testvm age16fgctth2kfq8esknuzfms46t4l0evx09lyc6u82qfdtyjekenggqj9k896
+    - &hp01 age1amspnyj2m4p2jhw6ktvc9ffw48kggtj38zge0mm0napgqe2xla3qadtlsm
+    - &ltc01 age1rxfv9uygpp87s8552ak7mhyfta9hg8wqjkyqfs8cajk790v70ecqfj96cg
+    - &ncvps01 age1usmpn56pql0d4kpz379rjf9rgl3w6x7yk0x6qn088ve4uxwgzf0sw64kwq
+    - &yoga age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
+creation_rules:
+  - path_regex: ^*secrets/.*\.(yaml|yml)$
+
+    key_groups:
+      - age:
+          - *tyron_yoga
+          - *testvm
+          - *hp01
+          - *ltc01
+          - *ncvps01
+          - *yoga
