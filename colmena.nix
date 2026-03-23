@@ -15,8 +15,8 @@
     yoga =
       { name, ... }:
       {
-        imports = [
-          self.nixosModules.host_yoga
+        imports = with self.modules.nixos; [
+          host_yoga
         ];
 
         networking.hostName = "yoga";

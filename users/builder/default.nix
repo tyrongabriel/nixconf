@@ -1,21 +1,15 @@
 { inputs, self, ... }:
 
 {
-  flake.nixosModules.user_builder =
+  flake.modules.nixos.user_builder =
     {
       config,
       lib,
       pkgs,
       ...
     }:
-    let
-      cfg = config.myNixos.users.builder;
-    in
     {
-      #options.users.users.builder.enable = lib.mkEnableOption "builder user";
-      options.myNixos.users.builder.enable = lib.mkEnableOption "builder user";
-
-      config = lib.mkIf cfg.enable {
+      config = {
         users.users.builder = {
           isSystemUser = true;
           uid = 901;

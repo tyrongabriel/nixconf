@@ -1,21 +1,16 @@
 { inputs, self, ... }:
 
 {
-  flake.nixosModules.user_tyron =
+  flake.modules.nixos.user_tyron =
     {
       config,
       lib,
       pkgs,
       ...
     }:
-    let
-      cfg = config.myNixos.users.tyron;
-    in
     {
-      #options.users.users.tyron.enable = lib.mkEnableOption "tyron user";
-      options.myNixos.users.tyron.enable = lib.mkEnableOption "tyron user";
 
-      config = lib.mkIf cfg.enable {
+      config = {
         users.users.tyron = {
           isNormalUser = true;
           uid = 3001;

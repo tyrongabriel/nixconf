@@ -1,20 +1,15 @@
 { inputs, self, ... }:
 
 {
-  flake.nixosModules.user_deploy =
+  flake.modules.nixos.user_deploy =
     {
       config,
       lib,
       pkgs,
       ...
     }:
-    let
-      cfg = config.myNixos.users.deploy;
-    in
     {
-      options.myNixos.users.deploy.enable = lib.mkEnableOption "deploy user";
-
-      config = lib.mkIf cfg.enable {
+      config = {
         users.users.deploy = {
           isSystemUser = true;
           uid = 900;

@@ -7,7 +7,7 @@
 }:
 
 {
-  flake.nixosModules.core =
+  flake.modules.nixos.core =
     {
       config,
       lib,
@@ -15,26 +15,19 @@
       ...
     }:
     {
-      environment.systemPackages = with pkgs; [
-        vim
-        git
-        htop
-        curl
-        wget
+      imports = [
       ];
-      time.timeZone = lib.mkDefault "Europe/London";
 
-      nix.settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
+      config = {
+        environment.systemPackages = with pkgs; [
+          vim
+          git
+          htop
+          curl
+          wget
         ];
-        auto-optimise-store = true;
-      };
+        time.timeZone = lib.mkDefault "Europe/London";
 
-      nix.gc = {
-        automatic = true;
-        dates = "weekly";
       };
     };
 }
