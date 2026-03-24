@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.modules.nixos.host_droplet =
-    { lib, ... }:
+    { lib, config, ... }:
     {
       #system = "x86_64-linux";
       #specialArgs = { inherit inputs; };
@@ -13,7 +13,7 @@
       config = {
         networking.hostName = "droplet";
         deployment = {
-          targetHost = "2a03:b0c0:3:f0:0:2:30b4:9000";
+          targetHost = "droplet.tail1c2108.ts.net";
           targetUser = "deploy";
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
@@ -27,5 +27,6 @@
         nixpkgs.system = "x86_64-linux";
         system.stateVersion = "25.11";
       };
+
     };
 }

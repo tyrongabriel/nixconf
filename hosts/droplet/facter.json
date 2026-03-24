@@ -317,7 +317,7 @@
           "bhi",
           "its"
         ],
-        "bogo": 4589.21,
+        "bogo": 4589.22,
         "cache": 4096,
         "physical_id": 0,
         "siblings": 1,
@@ -367,7 +367,7 @@
           "/dev/disk/by-label/config-2",
           "/dev/disk/by-path/pci-0000:00:07.0",
           "/dev/disk/by-path/virtio-pci-0000:00:07.0",
-          "/dev/disk/by-uuid/2026-03-23-22-40-07-00",
+          "/dev/disk/by-uuid/2026-03-24-16-21-02-00",
           "/dev/vdb"
         ],
         "resources": [
@@ -874,11 +874,11 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 55
+            "address": 49
           },
           {
             "type": "phwaddr",
-            "address": 55
+            "address": 49
           }
         ],
         "driver": "virtio_net",
@@ -928,11 +928,11 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 57
+            "address": 52
           },
           {
             "type": "phwaddr",
-            "address": 57
+            "address": 52
           }
         ],
         "driver": "virtio_net",
@@ -949,29 +949,6 @@
     "network_interface": [
       {
         "index": 29,
-        "attached_to": 0,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Loopback",
-          "value": 0
-        },
-        "model": "Loopback network interface",
-        "sysfs_id": "/class/net/lo",
-        "unix_device_name": "lo",
-        "unix_device_names": [
-          "lo"
-        ]
-      },
-      {
-        "index": 30,
         "attached_to": 20,
         "class_list": [
           "network_interface"
@@ -996,11 +973,11 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 57
+            "address": 52
           },
           {
             "type": "phwaddr",
-            "address": 57
+            "address": 52
           }
         ],
         "driver": "virtio_net",
@@ -1010,6 +987,29 @@
         ],
         "driver_modules": [
           "virtio_net"
+        ]
+      },
+      {
+        "index": 30,
+        "attached_to": 0,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Loopback",
+          "value": 0
+        },
+        "model": "Loopback network interface",
+        "sysfs_id": "/class/net/lo",
+        "unix_device_name": "lo",
+        "unix_device_names": [
+          "lo"
         ]
       },
       {
@@ -1038,11 +1038,11 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 55
+            "address": 49
           },
           {
             "type": "phwaddr",
-            "address": 55
+            "address": 49
           }
         ],
         "driver": "virtio_net",
