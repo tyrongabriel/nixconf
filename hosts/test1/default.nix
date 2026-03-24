@@ -1,21 +1,18 @@
 { self, ... }:
 {
-  flake.modules.nixos.host_template =
-    { lib, ... }:
+  flake.modules.nixos.host_test1 =
+    { lib, config, ... }:
     {
-      #system = "x86_64-linux";
-      #specialArgs = { inherit inputs; };
       imports = with self.modules.nixos; [
         core
         user_tyron
         user_deploy
       ];
       config = {
-        networking.hostName = "template";
+        networking.hostName = "test1";
         deployment = {
-          targetHost = "localhost";
+          targetHost = "test1.tail1c2108.ts.net";
           targetUser = "deploy";
-          allowLocalDeployment = true;
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
 
@@ -25,6 +22,7 @@
         };
 
         hardware.facter.reportPath = ./facter.json;
+        nixpkgs.system = "x86_64-linux";
         system.stateVersion = "25.11";
       };
     };

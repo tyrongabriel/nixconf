@@ -16,22 +16,22 @@
       #
       networking.useNetworkd = true;
 
-      systemd.network.networks."10-wan" = {
-        matchConfig.Name = "eth0";
-        address = [
-          "YOUR_PUBLIC_IP/20" # e.g., 104.248.x.x/20
-          "YOUR_IPV6_ADDRESS/64"
-        ];
-        routes = [
-          { Gateway = "YOUR_IPV4_GATEWAY"; }
-          { Gateway = "YOUR_IPV6_GATEWAY"; }
-        ];
-        # DigitalOcean DNS
-        networkConfig.DNS = [
-          "67.207.67.2"
-          "67.207.67.3"
-        ];
-      };
+      # systemd.network.networks."10-wan" = {
+      #   matchConfig.Name = "eth0";
+      #   address = [
+      #     "YOUR_PUBLIC_IP/20" # e.g., 104.248.x.x/20
+      #     "YOUR_IPV6_ADDRESS/64"
+      #   ];
+      #   routes = [
+      #     { Gateway = "YOUR_IPV4_GATEWAY"; }
+      #     { Gateway = "YOUR_IPV6_GATEWAY"; }
+      #   ];
+      #   # DigitalOcean DNS
+      #   networkConfig.DNS = [
+      #     "67.207.67.2"
+      #     "67.207.67.3"
+      #   ];
+      # };
 
       #networking.interfaces.eth0 = {
       # # Set this to false to ensure no DHCP is used for this interface

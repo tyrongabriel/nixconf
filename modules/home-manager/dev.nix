@@ -9,6 +9,9 @@
       config = {
         # Dev configuration aggregation
         programs.zed-editor.enable = true;
+        programs.git.settings = {
+          userName = "tyrongabriel";
+        };
       };
     };
 }

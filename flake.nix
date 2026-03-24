@@ -74,6 +74,7 @@
               jq
               just
               nixos-anywhere
+              kickstart
             ];
           };
         };

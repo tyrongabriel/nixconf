@@ -182,3 +182,6 @@ cleanup-bootstrap:
         rm -rf "{{ bootstrap_dir }}"
         echo "🗑️  Bootstrap directory cleaned."
     fi
+
+new template-name:
+    kickstart templates/{{ template-name }} -o hosts

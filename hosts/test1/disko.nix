@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.host_template = {
+  flake.modules.nixos.host_test1 = {
     imports = [
       inputs.disko.nixosModules.disko
     ];
@@ -9,7 +9,7 @@
         sda = {
           type = "disk";
           # The storage device
-          device = "<disk>";
+          device = "/dev/vda";
           content = {
             type = "gpt";
             partitions = {

@@ -1,0 +1,62 @@
+kickstart_version = 1
+name = "NixOS Droplet"
+description = "A NixOS configuration for droplets with disko, networking, and tailscale"
+directory = "."
+# https://keats.github.io/tera/docs/
+
+[[variables]]
+name = "machine_name"
+default = "my-server"
+prompt = "What is the machine name/hostname?"
+validation = "^([a-zA-Z][a-zA-Z0-9_-]+)$"
+
+[[variables]]
+name = "system_architecture"
+default = "x86_64-linux"
+validation = "^(x86_64-linux|aarch64-linux)$"
+prompt = "What system architecture should be used?"
+
+[[variables]]
+name = "disk_device"
+default = "/dev/vda"
+prompt = "What disk device should disko use?"
+
+[[variables]]
+name = "wan_interface"
+default = "eth0"
+prompt = "What is the WAN interface name?"
+
+[[variables]]
+name = "public_ipv4"
+default = ""
+prompt = "Public IPv4 address (e.g. 104.248.x.x/20)"
+
+[[variables]]
+name = "public_ipv6"
+default = ""
+prompt = "Public IPv6 address (e.g. 2a01:xxxx:xxxx::1/64)"
+
+[[variables]]
+name = "ipv4_gateway"
+default = ""
+prompt = "IPv4 gateway"
+
+[[variables]]
+name = "ipv6_gateway"
+default = ""
+prompt = "IPv6 gateway"
+
+[[variables]]
+name = "dns_servers"
+default = "1.1.1.1,1.0.0.1"
+prompt = "DNS servers (comma-separated)"
+
+[[variables]]
+name = "timezone"
+default = "Europe/Vienna"
+prompt = "Timezone"
+
+[[variables]]
+name = "enable_tailscale"
+default = true
+prompt = "Enable Tailscale?"

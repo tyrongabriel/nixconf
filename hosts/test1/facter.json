@@ -317,7 +317,7 @@
           "bhi",
           "its"
         ],
-        "bogo": 4589.21,
+        "bogo": 4589.2,
         "cache": 4096,
         "physical_id": 0,
         "siblings": 1,
@@ -367,7 +367,7 @@
           "/dev/disk/by-label/config-2",
           "/dev/disk/by-path/pci-0000:00:07.0",
           "/dev/disk/by-path/virtio-pci-0000:00:07.0",
-          "/dev/disk/by-uuid/2026-03-24-21-31-31-00",
+          "/dev/disk/by-uuid/2026-03-24-22-54-10-00",
           "/dev/vdb"
         ],
         "resources": [
@@ -874,11 +874,11 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 52
+            "address": 49
           },
           {
             "type": "phwaddr",
-            "address": 52
+            "address": 49
           }
         ],
         "driver": "virtio_net",
@@ -928,11 +928,11 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 56
+            "address": 51
           },
           {
             "type": "phwaddr",
-            "address": 56
+            "address": 51
           }
         ],
         "driver": "virtio_net",
@@ -949,48 +949,6 @@
     "network_interface": [
       {
         "index": 29,
-        "attached_to": 20,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0001",
-          "name": "Ethernet",
-          "value": 1
-        },
-        "model": "Ethernet network interface",
-        "sysfs_id": "/class/net/ens4",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:04.0/virtio2",
-        "unix_device_name": "ens4",
-        "unix_device_names": [
-          "ens4"
-        ],
-        "resources": [
-          {
-            "type": "hwaddr",
-            "address": 56
-          },
-          {
-            "type": "phwaddr",
-            "address": 56
-          }
-        ],
-        "driver": "virtio_net",
-        "driver_module": "virtio_net",
-        "drivers": [
-          "virtio_net"
-        ],
-        "driver_modules": [
-          "virtio_net"
-        ]
-      },
-      {
-        "index": 30,
         "attached_to": 17,
         "class_list": [
           "network_interface"
@@ -1015,11 +973,53 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 52
+            "address": 49
           },
           {
             "type": "phwaddr",
-            "address": 52
+            "address": 49
+          }
+        ],
+        "driver": "virtio_net",
+        "driver_module": "virtio_net",
+        "drivers": [
+          "virtio_net"
+        ],
+        "driver_modules": [
+          "virtio_net"
+        ]
+      },
+      {
+        "index": 30,
+        "attached_to": 20,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0001",
+          "name": "Ethernet",
+          "value": 1
+        },
+        "model": "Ethernet network interface",
+        "sysfs_id": "/class/net/ens4",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:04.0/virtio2",
+        "unix_device_name": "ens4",
+        "unix_device_names": [
+          "ens4"
+        ],
+        "resources": [
+          {
+            "type": "hwaddr",
+            "address": 51
+          },
+          {
+            "type": "phwaddr",
+            "address": 51
           }
         ],
         "driver": "virtio_net",
