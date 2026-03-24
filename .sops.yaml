@@ -13,20 +13,6 @@ creation_rules:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - ***REMOVED***
 
-  # Rule 3: Node-Specific Secrets for droplet
-  - path_regex: ^hosts/droplet/secrets/secrets\.yaml$
-    key_groups:
-      - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1kzqagu2ghka2289rsqd32w9ad5wm883nsa7wvzxetmf3g27yse0qp6pqpq
-
-  # Rule 3: Node-Specific Secrets for test1
-  - path_regex: ^hosts/test1/secrets/secrets\.yaml$
-    key_groups:
-      - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1lmacs0sqjpfch88wk43ae4cv96cs5efrqx5pumrxnhk62h32ryhqezwa4v
-
   # Rule 3: Node-Specific Secrets for yoga
   - path_regex: ^hosts/yoga/secrets/secrets\.yaml$
     key_groups:
