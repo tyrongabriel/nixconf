@@ -34,6 +34,11 @@ in
               homeDirectory = "/home/${username}";
               stateVersion = osConfig.system.stateVersion;
             };
+            programs.git.settings.user = {
+              name = "tyrongabriel";
+              email = "51530686+tyrongabriel@users.noreply.github.com";
+            };
+
             programs.home-manager.enable = true;
 
             imports = [
