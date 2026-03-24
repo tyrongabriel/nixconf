@@ -15,11 +15,19 @@
 
       config = {
         environment.systemPackages = with pkgs; [
-          vim
           git
-          htop
-          curl
+          vim
+          ripgrep
+          fd
+          fzf
+          bat
+          jq
+          tree
           wget
+          curl
+          gnupg
+          pass
+          btop
         ];
       };
     };

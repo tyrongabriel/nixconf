@@ -18,6 +18,7 @@
           curl
           gnupg
           pass
+          btop
         ];
       };
     };
