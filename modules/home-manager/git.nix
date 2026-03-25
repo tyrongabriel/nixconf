@@ -1,7 +1,15 @@
 { self, ... }:
 {
-  flake.modules.home-manager.core =
-    { pkgs, lib, ... }:
+  flake.modules.homeManager.core =
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    let
+      cfg = config.myHome.git;
+    in
     with lib;
     {
       imports = [ ];

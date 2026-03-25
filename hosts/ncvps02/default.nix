@@ -12,13 +12,13 @@
         networking.hostName = "ncvps02";
         deployment = {
           targetHost = "ncvps02.tail1c2108.ts.net";
-          targetUser = "tyron";
+          targetUser = "deploy";
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
 
         myNixos.users.tyron.homeManager = {
           enable = true;
-          tags = [ "dev" ];
+          tags = [ ];
         };
 
         hardware.facter.reportPath = ./facter.json;

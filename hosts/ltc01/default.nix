@@ -18,7 +18,7 @@
 
         myNixos.users.tyron.homeManager = {
           enable = true;
-          tags = [ "dev" ];
+          tags = [ ];
         };
 
         hardware.facter.reportPath = ./facter.json;
