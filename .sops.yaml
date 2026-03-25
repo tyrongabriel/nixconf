@@ -13,6 +13,13 @@ creation_rules:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - ***REMOVED***
 
+  # Rule 3: Node-Specific Secrets for ltc01
+  - path_regex: ^hosts/ltc01/secrets/secrets\.yaml$
+    key_groups:
+      - age:
+        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1axa8hz7mmprv4z507n50jlggv2vnnnasa4ayaqltd50u3qhqldksn2wq0h
+
   # Rule 3: Node-Specific Secrets for yoga
   - path_regex: ^hosts/yoga/secrets/secrets\.yaml$
     key_groups:

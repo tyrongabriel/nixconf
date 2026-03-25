@@ -1,6 +1,6 @@
 kickstart_version = 1
-name = "NixOS Droplet"
-description = "A NixOS configuration for droplets with disko, networking, and tailscale"
+name = "NixOS Node"
+description = "A NixOS configuration for nodes with disko, networking, and tailscale"
 directory = "."
 # https://keats.github.io/tera/docs/
 
@@ -40,16 +40,6 @@ prompt = "Public IPv4 address (e.g. 104.248.x.x/20)"
 name = "public_ipv6"
 default = ""
 prompt = "Public IPv6 address (e.g. 2a01:xxxx:xxxx::1/64)"
-
-[[variables]]
-name = "ipv4_gateway"
-default = ""
-prompt = "IPv4 gateway"
-
-[[variables]]
-name = "ipv6_gateway"
-default = ""
-prompt = "IPv6 gateway"
 
 [[variables]]
 name = "dns_servers"

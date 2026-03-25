@@ -185,3 +185,16 @@ cleanup-bootstrap:
 
 new template-name:
     kickstart templates/{{ template-name }} -o hosts
+
+copy-cluster-key host:
+    #!/usr/bin/env bash
+    # echo "🔐 Extracting cluster private key for deployment..."
+    mkdir -p "{{ bootstrap_dir }}/var/lib/sops-nix"
+
+    nix run nixpkgs#sops -- -d --extract '["cluster_private_key"]' secrets/secrets.yaml \
+        > "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
+    chmod 400 "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
+    scp "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt" "{{ host }}:~/cluster-key.txt"
+    ssh -t {{ host }} 'sudo cp ~/cluster-key.txt /var/lib/sops-nix/cluster-key.txt'
+    ssh {{ host }} 'rm -f ~/cluster-key.txt'
+    rm -f "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
