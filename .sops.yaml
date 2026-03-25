@@ -34,6 +34,13 @@ creation_rules:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - age1hqrjqlm5vqmvwqg7nynskgvj3zlky5ygmn5gmces7x2l4xsnvq8sm7jefp
 
+  # Rule 3: Node-Specific Secrets for ncvps02
+  - path_regex: ^hosts/ncvps02/secrets/secrets\.yaml$
+    key_groups:
+      - age:
+        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
+
   # Rule 3: Node-Specific Secrets for yoga
   - path_regex: ^hosts/yoga/secrets/secrets\.yaml$
     key_groups:
