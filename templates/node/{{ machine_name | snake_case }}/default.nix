@@ -19,6 +19,7 @@
           targetHost = "{{ public_ipv4 | trim }}";
           {% endif -%}
           targetUser = "deploy";
+          tags = [ "server" ];
         };
         time.timeZone = lib.mkDefault "{{ timezone }}";
 

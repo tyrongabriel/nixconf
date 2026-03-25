@@ -13,6 +13,10 @@
         deployment = {
           targetHost = "ncvps02.tail1c2108.ts.net";
           targetUser = "deploy";
+          tags = [
+            "vps"
+            "server"
+          ];
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
 
