@@ -1,6 +1,6 @@
 kickstart_version = 1
-name = "NixOS Droplet"
-description = "A NixOS configuration for droplets with disko, networking, and tailscale"
+name = "NixOS VPS"
+description = "A NixOS configuration for vps' with disko, networking, and tailscale"
 directory = "."
 # https://keats.github.io/tera/docs/
 
