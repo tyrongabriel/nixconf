@@ -198,3 +198,26 @@ copy-cluster-key host:
     ssh -t {{ host }} 'sudo cp ~/cluster-key.txt /var/lib/sops-nix/cluster-key.txt'
     ssh {{ host }} 'rm -f ~/cluster-key.txt'
     rm -f "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
+
+onboard-machine machine ssh-host:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "Fetching host ssh key from host, to get age key..."
+    HOST_AGE=$(ssh -t {{ ssh-host }} "sudo cat /etc/ssh/ssh_host_ed25519_key.pub" | nix run nixpkgs#ssh-to-age -- -i -)
+    mkdir -p "hosts/{{ machine }}/secrets"
+    echo "{\"age\": \"$HOST_AGE\"}" > "hosts/{{ machine }}/secrets/keys.json"
+
+    echo "Regenerating secrets with new host, ensure keys.json exists in directory"
+    if [ ! -f "hosts/{{ machine }}/secrets/keys.json" ]; then
+        echo "❌ missing hosts/{{ machine }}/secrets/keys.json. Manually add the key!"
+        exit 1
+    fi
+    just regenerate-sops
+    just rekey-secrets
+
+    echo "🔐 Copying cluster key to target..."
+    just copy-cluster-key {{ ssh-host }}
+
+    echo "🚀 Applying config  to {{ ssh-host }} (Flake attr: {{ machine }})..."
+    colmena apply --on {{ machine }} --build-on-target

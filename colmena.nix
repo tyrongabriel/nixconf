@@ -8,7 +8,9 @@
 let
   # List all directories in the hosts directory
   hostNames = builtins.attrNames (
-    lib.filterAttrs (n: type: type == "directory" && n != "template") (builtins.readDir ./hosts)
+    lib.filterAttrs (n: type: type == "directory" && n != "template" && n != "yoga") (
+      builtins.readDir ./hosts
+    )
   );
 in
 

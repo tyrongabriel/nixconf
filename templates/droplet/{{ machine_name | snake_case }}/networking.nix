@@ -46,7 +46,7 @@
           "{{ dns | trim }}"
           {% endfor %}
         ];
-      networking.interfaces.eth0 = {
+      networking.interfaces.{{ wan_interface }} = {
       # Set this to false to ensure no DHCP is used for this interface
       #useDHCP = true; # Cloud providers dont give dhcp!!
         # Configure the IPv4 address and subnet mask
