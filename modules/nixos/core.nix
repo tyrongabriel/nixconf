@@ -1,4 +1,5 @@
 {
+  self,
   ...
 }:
 
@@ -7,10 +8,12 @@
     {
       lib,
       pkgs,
+      config,
       ...
     }:
     {
       imports = [
+        self.modules.nixos.tailscale
       ];
 
       config = {
@@ -29,6 +32,25 @@
           pass
           btop
         ];
+
+        myNixos = {
+          tailscale = {
+            enable = true;
+            tailnetName = "tail1c2108.ts.net";
+            authKeyFile = config.sops.secrets."tailscale_auth".path;
+          };
+        };
+
+        sops.secrets."tailscale_auth" = {
+          sopsFile = ../../secrets/secrets.yaml;
+        };
+
+        services.tailscale = {
+          enable = true;
+          openFirewall = true;
+
+          authKeyFile = config.sops.secrets."tailscale_auth".path;
+        };
       };
     };
 }

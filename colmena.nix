@@ -20,6 +20,7 @@ in
       meta = {
         nixpkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
         specialArgs = { inherit inputs; };
+        allowApplyAll = false; # No deployments without --on flag
       };
 
       # template = {

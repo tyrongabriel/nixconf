@@ -4,7 +4,6 @@
     { ... }:
     {
       imports = [
-        self.modules.nixos.tailscale
 
       ];
 

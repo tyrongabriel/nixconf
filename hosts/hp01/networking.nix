@@ -4,8 +4,7 @@
     { ... }:
     {
       imports = [
-        self.modules.nixos.tailscale
-        
+
       ];
 
       networking.useDHCP = true;
@@ -20,9 +19,9 @@
       };
 
       networking.nameservers = [
-          "1.1.1.1"
-          "1.0.0.1"
-          
+        "1.1.1.1"
+        "1.0.0.1"
+
       ];
     };
 }

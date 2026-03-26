@@ -4,8 +4,7 @@
     { ... }:
     {
       imports = [
-        self.modules.nixos.tailscale
-        
+
       ];
 
       networking.useDHCP = true;
@@ -32,20 +31,20 @@
       # };
 
       networking.nameservers = [
-          "1.1.1.1"
-          "1.0.0.1"
-          
-        ];
+        "1.1.1.1"
+        "1.0.0.1"
+
+      ];
       networking.interfaces.eth0 = {
-      # Set this to false to ensure no DHCP is used for this interface
-      #useDHCP = true; # Cloud providers dont give dhcp!!
+        # Set this to false to ensure no DHCP is used for this interface
+        #useDHCP = true; # Cloud providers dont give dhcp!!
         # Configure the IPv4 address and subnet mask
         ipv4.addresses = [
           {
             address = "159.195.9.89";
             prefixLength = 22;
           }
-          
+
         ];
         # Configure the IPv6 address and prefix length
         ipv6.addresses = [
@@ -53,7 +52,7 @@
             address = "2a0a:4cc0:ff:505::";
             prefixLength = 64;
           }
-          
+
         ];
       };
 
