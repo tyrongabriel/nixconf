@@ -26,12 +26,6 @@
           description = "Port on which the K3s API server listens.";
         };
 
-        advertisedApiPort = mkOption {
-          type = types.port;
-          default = 6443;
-          description = "Port on which the K3s server advertises for API requests.";
-        };
-
         serverAddr = mkOption {
           type = types.nullOr types.str;
           default = null;
@@ -81,7 +75,7 @@
           extraFlags =
             serverCfg.extraFlags
             ++ [
-              "--advertise-port=${toString serverCfg.advertisedApiPort}"
+              "--advertise-port=${toString serverCfg.apiPort}"
               "--https-listen-port=${toString serverCfg.apiPort}"
               "--service-node-port-range=${toString serverCfg.nodePortRange.from}-${toString serverCfg.nodePortRange.to}"
               "--advertise-address=${cfg.node.nodeIP}"

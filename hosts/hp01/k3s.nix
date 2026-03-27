@@ -29,7 +29,7 @@
             ];
             tokenFile = config.sops.secrets."k3s/main/token".path;
             nodeIP = nodeIp;
-            advertiseEndpoint = "[${nodeIp}]:6443"; # Used by LB to discover this server
+            #advertiseEndpoint = "[${nodeIp}]:6443"; # Used by LB to discover this server
           };
           server = {
             #clusterInit = true; # Only on first server

@@ -11,6 +11,7 @@
     let
       cfg = config.myNixos.k3s;
       lbCfg = cfg.lb;
+      wrapIpv6 = (ip: if lib.hasInfix ":" ip then "[${ip}]" else ip);
 
       # Find all servers in the same cluster
       clusterServers = lib.filterAttrs (
@@ -20,9 +21,9 @@
           nodeCfg = k3sConfig.node or { };
           hasServerRole = builtins.elem "server" (nodeCfg.roles or [ ]);
           sameCluster = (nodeCfg.clusterName or "") == cfg.node.clusterName;
-          hasAdvertiseEndpoint = (nodeCfg.advertiseEndpoint or null) != null;
+          hasNodeIp = (nodeCfg.nodeIp or null) != null;
         in
-        sameCluster && hasServerRole && hasAdvertiseEndpoint
+        sameCluster && hasServerRole && hasNodeIp
       ) nodes;
 
       # Format servers for HAProxy backend
@@ -30,9 +31,10 @@
         lib.mapAttrsToList (
           name: nodeConfig:
           let
-            endpoint = nodeConfig.config.myNixos.k3s.node.advertiseEndpoint;
+            ip = wrapIpv6 nodeConfig.config.myNixos.k3s.node.nodeIp;
+            port = nodeConfig.config.myNixos.k3s.server.apiPort;
           in
-          "server ${name} ${endpoint} check"
+          "server ${name} ${ip}:${toString port} check"
         ) clusterServers
       );
 
@@ -58,7 +60,7 @@
         assertions = [
           {
             assertion = hasServers;
-            message = "No servers found in cluster '${cfg.node.clusterName}' with advertiseEndpoint set.";
+            message = "No servers found in cluster '${cfg.node.clusterName}' with nodeIp set.";
           }
         ];
 

@@ -30,6 +30,10 @@
           };
           gateway = {
             publicIface = "eth0";
+            domains = [
+              "*.tyrongabriel.com "
+              "tyrongabriel.com"
+            ];
           };
         };
 
