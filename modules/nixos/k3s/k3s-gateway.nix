@@ -10,7 +10,7 @@
     }:
     let
       cfg = config.myNixos.k3s;
-      lbCfg = cfg.lb;
+      gatewayCfg = cfg.gateway;
 
       # Find all servers in the same cluster
       clusterServers = lib.filterAttrs (
@@ -40,21 +40,21 @@
     in
     with lib;
     {
-      options.myNixos.k3s.lb = {
-        apiPort = mkOption {
-          type = types.port;
-          default = 6443;
-          description = "Port on which the load balancer listens for K3s API traffic.";
+      options.myNixos.k3s.gateway = {
+        publicIface = mkOption {
+          type = types.str;
+          default = "eth0";
+          description = "The public interface to use for the gateway";
         };
 
-        extraConfig = mkOption {
-          type = types.lines;
-          default = "";
-          description = "Additional HAProxy configuration to append.";
+        domain = mkOption {
+          type = types.str;
+          default = "k3s.local";
+          description = "The domain from which we will take traffic, and route it to the cluster nodes via tls passthrough.";
         };
       };
 
-      config = mkIf (cfg.enable && builtins.elem "lb" cfg.node.roles) {
+      config = mkIf (cfg.enable && builtins.elem "gateway" cfg.node.roles) {
         assertions = [
           {
             assertion = hasServers;
@@ -62,35 +62,38 @@
           }
         ];
 
-        services.haproxy = {
-          enable = true;
-          config = ''
-            global
-              log /dev/log local0
-              maxconn 4096
+        # services.haproxy = {
+        #   enable = true;
+        #   config = ''
+        #     global
+        #       log /dev/log local0
+        #       maxconn 4096
 
-            defaults
-              log global
-              mode tcp
-              option tcplog
-              timeout connect 5s
-              timeout client 50s
-              timeout server 50s
+        #     defaults
+        #       log global
+        #       mode tcp
+        #       option tcplog
+        #       timeout connect 5s
+        #       timeout client 50s
+        #       timeout server 50s
 
-            frontend k3s_frontend
-              bind *:${toString lbCfg.apiPort}
-              bind [::]:${toString lbCfg.apiPort}
-              default_backend k3s_backend
+        #     frontend k3s_frontend
+        #       bind *:${toString lbCfg.apiPort}
+        #       bind [::]:${toString lbCfg.apiPort}
+        #       default_backend k3s_backend
 
-            backend k3s_backend
-              balance roundrobin
-              ${backendServers}
+        #     backend k3s_backend
+        #       balance roundrobin
+        #       ${backendServers}
 
-            ${lbCfg.extraConfig}
-          '';
-        };
+        #     ${lbCfg.extraConfig}
+        #   '';
+        # };
 
-        networking.firewall.interfaces."${cfg.internalIface}".allowedTCPPorts = [ lbCfg.apiPort ];
+        networking.firewall.interfaces."${gatewayCfg.publicIface}".allowedTCPPorts = [
+          80
+          443
+        ];
       };
     };
 }

@@ -20,11 +20,16 @@
           enable = true;
           node = {
             clusterName = "main";
-            roles = [ "lb" ];
+            roles = [
+              "lb"
+              "gateway"
+            ];
           };
           lb = {
-            enable = true;
             apiPort = 6443;
+          };
+          gateway = {
+            publicIface = "eth0";
           };
         };
 

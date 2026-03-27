@@ -94,13 +94,15 @@
             ++ map (san: "--tls-san=${san}") serverCfg.tlsSANs;
         };
 
-        networking.firewall.allowedTCPPorts = [
-          serverCfg.apiPort # K3s API
-          2379 # etcd client
-          2380 # etcd peer
-        ];
+        networking.firewall.interfaces."${cfg.internalIface}" = {
+          allowedTCPPorts = [
+            serverCfg.apiPort # K3s API
+            2379 # etcd client
+            2380 # etcd peer
+          ];
+          allowedTCPPortRanges = [ serverCfg.nodePortRange ];
+        };
 
-        networking.firewall.allowedTCPPortRanges = [ serverCfg.nodePortRange ];
       };
     };
 }

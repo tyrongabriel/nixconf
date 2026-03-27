@@ -24,6 +24,16 @@
     {
       options.myNixos.k3s = {
         enable = mkEnableOption "K3s Kubernetes";
+        internalIface = mkOption {
+          type = types.nullOr types.str;
+          default = "tailscale0";
+          example = "tailscale0";
+          description = ''
+            Internal interface for the node to manage k3s traffic on.
+            This will be the only port where the node will accept k3s traffic on.
+            (Either the iface of the intranet, or overlay network eg. "tailscale0")
+          '';
+        };
 
         node = {
           clusterName = mkOption {
@@ -38,6 +48,7 @@
                 "server"
                 "agent"
                 "lb"
+                "gateway"
               ]
             );
             default = [ ];
@@ -203,7 +214,7 @@
           ];
 
           # Common firewall ports for all K3s nodes
-          networking.firewall = {
+          networking.firewall.interfaces."${cfg.internalIface}" = {
             allowedTCPPorts = [ 10250 ];
             allowedUDPPorts = [
               8472 # Flannel VXLAN
