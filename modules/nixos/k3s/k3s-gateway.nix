@@ -21,15 +21,15 @@
           nodeCfg = k3sConfig.node or { };
           hasServerRole = builtins.elem "server" (nodeCfg.roles or [ ]);
           sameCluster = (nodeCfg.clusterName or "") == cfg.node.clusterName;
-          hasNodeIp = (nodeCfg.nodeIp or null) != null;
+          hasnodeIP = (nodeCfg.nodeIP or null) != null;
         in
-        sameCluster && hasServerRole && hasNodeIp
+        sameCluster && hasServerRole && hasnodeIP
       ) nodes;
 
       # Format servers for HAProxy backend
-      backendIps = lib.mapAttrsToList (
-        _: nodeConfig: nodeConfig.config.myNixos.k3s.node.nodeIp
-      ) clusterServers;
+      backendIps = (
+        lib.mapAttrsToList (_: nodeConfig: nodeConfig.config.myNixos.k3s.node.nodeIP) clusterServers
+      );
 
       hasServers = builtins.length (lib.attrNames clusterServers) > 0;
     in
@@ -54,7 +54,7 @@
         assertions = [
           {
             assertion = hasServers;
-            message = "No servers found in cluster '${cfg.node.clusterName}' with nodeIp set.";
+            message = "No servers found in cluster '${cfg.node.clusterName}' with nodeIP set.";
           }
         ];
 
@@ -80,7 +80,7 @@
             tcp = {
               routers = {
                 k3s-passthrough = {
-                  rule = "HostSNI(" + lib.concatStringsSep ", " (map (d: "\`${d}\`") cfg.domains) + ")";
+                  rule = "HostSNI(" + lib.concatStringsSep ", " (map (d: "\`${d}\`") cfg.gateway.domains) + ")";
                   service = "k3s-cluster";
                   entryPoints = [ "websecure" ];
                   tls.passthrough = true;

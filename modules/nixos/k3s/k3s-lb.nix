@@ -21,9 +21,9 @@
           nodeCfg = k3sConfig.node or { };
           hasServerRole = builtins.elem "server" (nodeCfg.roles or [ ]);
           sameCluster = (nodeCfg.clusterName or "") == cfg.node.clusterName;
-          hasNodeIp = (nodeCfg.nodeIp or null) != null;
+          hasnodeIP = (nodeCfg.nodeIP or null) != null;
         in
-        sameCluster && hasServerRole && hasNodeIp
+        sameCluster && hasServerRole && hasnodeIP
       ) nodes;
 
       # Format servers for HAProxy backend
@@ -31,7 +31,7 @@
         lib.mapAttrsToList (
           name: nodeConfig:
           let
-            ip = wrapIpv6 nodeConfig.config.myNixos.k3s.node.nodeIp;
+            ip = wrapIpv6 nodeConfig.config.myNixos.k3s.node.nodeIP;
             port = nodeConfig.config.myNixos.k3s.server.apiPort;
           in
           "server ${name} ${ip}:${toString port} check"
@@ -60,7 +60,7 @@
         assertions = [
           {
             assertion = hasServers;
-            message = "No servers found in cluster '${cfg.node.clusterName}' with nodeIp set.";
+            message = "No servers found in cluster '${cfg.node.clusterName}' with nodeIP set.";
           }
         ];
 
