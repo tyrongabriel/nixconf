@@ -73,6 +73,7 @@ if confirm_step "Remove data directories?"; then
         "/var/lib/kubelet"
         "/etc/rancher/k3s"
         "/run/k3s"
+        "/run/flannel"
         "/run/containerd"
         "/var/lib/cni"
         "/var/log/pods"

@@ -20,6 +20,16 @@
           "agent"
         ]
       ) cfg.node.roles;
+
+      flannelConfig = pkgs.writeText "flannel-custom.conf" ''
+        {
+          "IPv6Repo": true,
+          "Backend": {
+            "Type": "${cfg.node.flannelBackend}",
+            "MTU": 1200
+          }
+        }
+      '';
     in
     with lib;
     {
@@ -116,19 +126,19 @@
 
           clusterCIDR = mkOption {
             type = types.str;
-            default = "fdba:bb29:4301::/56";
+            default = "10.42.0.0/16,2001:db8:42::/56";
             description = "Cluster CIDR for pod networking.";
           };
 
           serviceCIDR = mkOption {
             type = types.str;
-            default = "fdba:bb29:4302::/112";
+            default = "10.43.0.0/16,2001:db8:43::/112";
             description = "Service CIDR for Kubernetes services.";
           };
 
           flannelBackend = mkOption {
             type = types.str;
-            default = "wireguard-native";
+            default = "vxlan";
             description = "Flannel backend to use.";
           };
 
@@ -147,6 +157,10 @@
               assertion = builtins.length cfg.node.roles > 0;
               message = "myNixos.k3s.node.roles must contain at least one role.";
             }
+          ];
+          # Because im going insane
+          environment.systemPackages = [
+            (pkgs.writeScriptBin "nuke-k3s" (builtins.readFile ./nuke-k3s.sh))
           ];
 
           warnings = optional (
@@ -172,6 +186,7 @@
             "net.bridge-nf-call-iptables" = mkDefault 1;
             "net.bridge-nf-call-ip6tables" = mkDefault 1;
             "net.ipv4.ip_forward" = 1;
+            "net.ipv6.conf.all.forwarding" = 1;
             # For cloudflare tunnel
             "net.core.rmem_max" = 10000000;
             "net.core.wmem_max" = 10000000;
@@ -200,6 +215,9 @@
                   "--cluster-cidr=${cfg.node.clusterCIDR}"
                   "--service-cidr=${cfg.node.serviceCIDR}"
                   "--flannel-backend=${cfg.node.flannelBackend}"
+                  "--flannel-conf='${flannelConfig}'"
+
+                  #"--flannel-iface=${cfg.internalIface}"
                   # For kube-prometheus
                   "--kube-proxy-arg=metrics-bind-address=::"
                 ]
@@ -213,16 +231,22 @@
           networking.firewall.interfaces."${cfg.internalIface}" = {
             allowedTCPPorts = [ 10250 ];
             allowedUDPPorts = [
-              8472 # Flannel VXLAN
+              8472 # Flannel VXLAN (can leave this if you ever switch back)
+              51820 # Flannel Wireguard IPv4
+              51821 # Flannel Wireguard IPv6
               10250 # Kubelet
               7844 # Cloudflare quic
             ];
           };
 
+          # needed for wireguard-native
+          networking.wireguard.enable = true;
           # Optional packages
           environment.systemPackages =
-            #with pkgs;
-            [ ]
+            with pkgs;
+            [
+              wireguard-tools
+            ]
             ++ optional cfg.node.enableHelm pkgs.kubernetes-helm
             ++ optional cfg.node.enableLonghornSupport pkgs.openiscsi
             ++ optional cfg.node.enableLonghornSupport pkgs.util-linux;

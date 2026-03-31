@@ -1,0 +1,17 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    ports:
+      websecure:
+        proxyProtocol:
+          trustedIPs:
+            # Tell k3s Traefik to accept PROXY protocol from your Tailscale subnet
+            - "fd7a:115c:a1e0::/48"
+      web:
+        proxyProtocol:
+          trustedIPs:
+            - "fd7a:115c:a1e0::/48"

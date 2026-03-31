@@ -46,7 +46,10 @@
           type = lib.types.listOf lib.types.str;
           default = [ ];
           example = [ "*.mydomain.com" ];
-          description = "The domains from which we will take traffic, and route it to the cluster nodes via tls passthrough.";
+          description = ''
+            The domains from which we will take traffic, and route it to the cluster nodes via tls passthrough.
+            Uses regex https://doc.traefik.io/traefik/v3.3/reference/routing-configuration/tcp/router/rules-and-priority/#hostsni-and-hostsniregexp
+          '';
         };
       };
 
@@ -78,14 +81,17 @@
 
           dynamicConfigOptions = {
             tcp = {
-              routers = {
-                k3s-passthrough = {
-                  rule = "HostSNI(" + lib.concatStringsSep ", " (map (d: "\`${d}\`") cfg.gateway.domains) + ")";
-                  service = "k3s-cluster";
-                  entryPoints = [ "websecure" ];
-                  tls.passthrough = true;
-                };
-              };
+              routers = builtins.listToAttrs (
+                lib.imap0 (i: d: {
+                  name = "k3s-passthrough-${toString (i + 1)}";
+                  value = {
+                    rule = "HostSNIRegexp(`${d}`)";
+                    service = "k3s-cluster";
+                    entryPoints = [ "websecure" ];
+                    tls.passthrough = true;
+                  };
+                }) cfg.gateway.domains
+              );
 
               services = {
                 k3s-cluster = {

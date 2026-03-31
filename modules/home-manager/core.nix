@@ -19,6 +19,7 @@
           gnupg
           pass
           btop
+          lnav
         ];
       };
     };
