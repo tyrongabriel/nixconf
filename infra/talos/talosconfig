@@ -1,0 +1,7 @@
+context: main
+contexts:
+    main:
+        endpoints: []
+        ca: ***REMOVED***
+        crt: ***REMOVED***
+        key: ***REMOVED***

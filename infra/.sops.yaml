@@ -1,0 +1,9 @@
+keys:
+  - &maintainer "age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f"
+
+creation_rules:
+  # Secrets in infra
+  - path_regex: ^*secrets\.yaml$
+    key_groups:
+      - age:
+          - *maintainer

@@ -75,6 +75,8 @@
               just
               nixos-anywhere
               kickstart
+              opentofu
+              talosctl
             ];
           };
         };

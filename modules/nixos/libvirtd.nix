@@ -27,6 +27,9 @@
           "d /var/lib/libvirt/images 0770 root libvirtd -"
         ];
 
+        # So guests can talk
+        boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
         boot.kernelModules = [
           "kvm-intel"
           "kvm-amd"

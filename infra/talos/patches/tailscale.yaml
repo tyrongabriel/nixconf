@@ -1,0 +1,8 @@
+machine:
+  files:
+    - content: |
+        TS_AUTHKEY=${tailscale_key}
+        TS_EXTRA_ARGS=--hostname=${hostname}
+      path: /var/etc/tailscale/auth.env
+      permissions: 0o600
+      op: create
