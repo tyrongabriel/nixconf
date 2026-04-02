@@ -14,7 +14,11 @@
           description = "Colmena deploy user";
           shell = pkgs.bash;
           group = "deploy";
-          extraGroups = [ "wheel" ];
+          extraGroups = [
+            "wheel"
+            "libvirtd"
+            "kvm"
+          ];
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEqAq3GCuNXFc8mQL+H/czF0+pOlyQ4c4GILKUcrK0fZ 51530686+tyrongabriel@users.noreply.github.com"
           ];

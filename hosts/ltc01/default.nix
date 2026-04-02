@@ -7,6 +7,7 @@
         core
         user_tyron
         user_deploy
+        libvirtd
       ];
       config = {
         networking.hostName = "ltc01";
