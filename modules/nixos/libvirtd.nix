@@ -30,6 +30,11 @@
         # So guests can talk
         boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
+        environment.systemPackages = with pkgs; [
+          virt-manager # The GUI for managing VMs
+          qemu # The emulator
+        ];
+
         boot.kernelModules = [
           "kvm-intel"
           "kvm-amd"

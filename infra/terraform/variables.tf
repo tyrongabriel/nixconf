@@ -35,6 +35,6 @@ variable "nodes" {
   default = {
     "talos-ltc01-01" = { host = "ltc01", type = "controlplane", bootstrap = true }
     "talos-ltc01-02" = { host = "ltc01", type = "worker" }
-    "talos-hp01-01"  = { host = "hp01", type = "controlplane" }
+    #"talos-hp01-01"  = { host = "hp01", type = "controlplane" }
   }
 }

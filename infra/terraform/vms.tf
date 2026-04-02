@@ -8,14 +8,14 @@ resource "libvirt_pool" "default_ltc01" {
   }
 }
 
-resource "libvirt_pool" "default_hp01" {
-  provider = libvirt.hp01
-  name     = "default"
-  type     = "dir"
-  target {
-    path = "/var/lib/libvirt/images"
-  }
-}
+# resource "libvirt_pool" "default_hp01" {
+#   provider = libvirt.hp01
+#   name     = "default"
+#   type     = "dir"
+#   target {
+#     path = "/var/lib/libvirt/images"
+#   }
+# }
 
 # Base volumes per libvirt host
 resource "libvirt_volume" "talos_base_ltc01" {
@@ -26,13 +26,13 @@ resource "libvirt_volume" "talos_base_ltc01" {
   format   = "raw"
 }
 
-resource "libvirt_volume" "talos_base_hp01" {
-  provider = libvirt.hp01
-  name     = "talos-base.raw"
-  pool     = libvirt_pool.default_hp01.name
-  source   = var.factory_image_url
-  format   = "raw"
-}
+# resource "libvirt_volume" "talos_base_hp01" {
+#   provider = libvirt.hp01
+#   name     = "talos-base.raw"
+#   pool     = libvirt_pool.default_hp01.name
+#   source   = var.factory_image_url
+#   format   = "raw"
+# }
 
 # VM-specific Overlay volumes
 resource "libvirt_volume" "vm_disk_ltc01" {
@@ -45,15 +45,15 @@ resource "libvirt_volume" "vm_disk_ltc01" {
   format         = "qcow2"
 }
 
-resource "libvirt_volume" "vm_disk_hp01" {
-  for_each       = { for k, v in var.nodes : k => v if v.host == "hp01" }
-  provider       = libvirt.hp01
-  name           = "${each.key}.qcow2"
-  pool           = libvirt_pool.default_hp01.name
-  base_volume_id = libvirt_volume.talos_base_hp01.id
-  size           = each.value.disk_size
-  format         = "qcow2"
-}
+# resource "libvirt_volume" "vm_disk_hp01" {
+#   for_each       = { for k, v in var.nodes : k => v if v.host == "hp01" }
+#   provider       = libvirt.hp01
+#   name           = "${each.key}.qcow2"
+#   pool           = libvirt_pool.default_hp01.name
+#   base_volume_id = libvirt_volume.talos_base_hp01.id
+#   size           = each.value.disk_size
+#   format         = "qcow2"
+# }
 
 # Talos Secrets and Machine Configuration
 resource "talos_machine_secrets" "this" {}
@@ -67,7 +67,6 @@ locals {
       }
     }
   })
-
 
   cp_yaml_patches = [
     for f in fileset("${path.module}/../talos/patches/controlplane", "*.yaml") : file("${path.module}/../talos/patches/controlplane/${f}")
@@ -105,16 +104,35 @@ resource "libvirt_ignition" "talos_config_ltc01" {
   provider = libvirt.ltc01
   name     = "${each.key}-config.ign"
   pool     = libvirt_pool.default_ltc01.name
-  content  = each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration
+  content  = jsonencode(yamldecode(each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration))
 }
 
-resource "libvirt_ignition" "talos_config_hp01" {
-  for_each = { for k, v in var.nodes : k => v if v.host == "hp01" }
-  provider = libvirt.hp01
-  name     = "${each.key}-config.ign"
-  pool     = libvirt_pool.default_hp01.name
-  content  = each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration
+# resource "libvirt_ignition" "talos_config_hp01" {
+#   for_each = { for k, v in var.nodes : k => v if v.host == "hp01" }
+#   provider = libvirt.hp01
+#   name     = "${each.key}-config.ign"
+#   pool     = libvirt_pool.default_hp01.name
+#   content  = jsonencode(yamldecode(each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration))
+# }
+
+# Libvirt Networks
+resource "libvirt_network" "k8s_ltc01" {
+  provider  = libvirt.ltc01
+  name      = "k8s_net"
+  mode      = "nat"
+  domain    = "k8s.local"
+  addresses = ["10.17.3.0/24"]
+  autostart = true
 }
+
+# resource "libvirt_network" "k8s_hp01" {
+#   provider  = libvirt.hp01
+#   name      = "k8s_net"
+#   mode      = "nat"
+#   domain    = "k8s.local"
+#   addresses = ["10.17.4.0/24"]
+#   autostart = true
+# }
 
 # Libvirt Domains
 resource "libvirt_domain" "talos_node_ltc01" {
@@ -131,31 +149,31 @@ resource "libvirt_domain" "talos_node_ltc01" {
   }
 
   network_interface {
-    network_name = "default"
+    network_id = libvirt_network.k8s_ltc01.id
   }
 
   coreos_ignition = libvirt_ignition.talos_config_ltc01[each.key].id
 }
 
-resource "libvirt_domain" "talos_node_hp01" {
-  for_each    = { for k, v in var.nodes : k => v if v.host == "hp01" }
-  provider    = libvirt.hp01
-  name        = each.key
-  memory      = each.value.memory
-  vcpu        = each.value.vcpu
-  type        = "kvm"
-  fw_cfg_name = "opt/org.talos.config"
+# resource "libvirt_domain" "talos_node_hp01" {
+#   for_each    = { for k, v in var.nodes : k => v if v.host == "hp01" }
+#   provider    = libvirt.hp01
+#   name        = each.key
+#   memory      = each.value.memory
+#   vcpu        = each.value.vcpu
+#   type        = "qemu"
+#   fw_cfg_name = "opt/org.talos.config"
 
-  disk {
-    volume_id = libvirt_volume.vm_disk_hp01[each.key].id
-  }
+#   disk {
+#     volume_id = libvirt_volume.vm_disk_hp01[each.key].id
+#   }
 
-  network_interface {
-    network_name = "default"
-  }
+#   network_interface {
+#     network_id = libvirt_network.k8s_hp01.id
+#   }
 
-  coreos_ignition = libvirt_ignition.talos_config_hp01[each.key].id
-}
+#   coreos_ignition = libvirt_ignition.talos_config_hp01[each.key].id
+# }
 
 # Client config output
 data "talos_client_configuration" "this" {
@@ -170,7 +188,6 @@ output "talosconfig" {
   sensitive = true
 }
 
-
 ### BOOTSTRAP ###
 locals {
   # Find the key of the node that has bootstrap set to true
@@ -181,7 +198,7 @@ locals {
 resource "talos_machine_bootstrap" "this" {
   depends_on = [
     libvirt_domain.talos_node_ltc01,
-    libvirt_domain.talos_node_hp01
+    #libvirt_domain.talos_node_hp01
   ]
 
   client_configuration = talos_machine_secrets.this.client_configuration

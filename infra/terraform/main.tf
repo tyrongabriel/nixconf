@@ -35,7 +35,7 @@ terraform {
 }
 
 variable "state_passphrase" {
-  type    = string
+  type = string
 }
 
 provider "sops" {}
@@ -49,10 +49,10 @@ provider "libvirt" {
 }
 
 # Host hp01
-provider "libvirt" {
-  alias = "hp01"
-  uri   = "qemu+ssh://deploy@hp01.tail1c2108.ts.net/system"
-}
+# provider "libvirt" {
+#   alias = "hp01"
+#   uri   = "qemu+ssh://deploy@hp01.tail1c2108.ts.net/system"
+# }
 
 # Load encrypted secrets
 data "sops_file" "secrets" {
