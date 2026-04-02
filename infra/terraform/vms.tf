@@ -1,29 +1,140 @@
-resource "libvirt_volume" "vm_disk" {
-  pool = "default"
-  for_each       = var.nodes
-  # Logic to pick host1 or host2 provider based on each.value.host
-  # Note: Libvirt provider selection with for_each requires separate modules or
-  # duplicated blocks if hosts are truly distinct. For simplicity:
-  name           = "${each.key}-disk.qcow2"
-  base_volume_id = each.value.host == "host1" ? libvirt_volume.talos_base_host1.id : libvirt_volume.talos_base_host2.id
-  size           = 42949672960
+# Base volumes per libvirt host
+resource "libvirt_volume" "talos_base_ltc01" {
+  provider = libvirt.ltc01
+  name     = "talos-base.raw"
+  pool     = "default"
+  source   = var.factory_image_url
+  format   = "raw"
 }
 
-resource "libvirt_domain" "talos_node" {
-  type = "qemu"
+resource "libvirt_volume" "talos_base_hp01" {
+  provider = libvirt.hp01
+  name     = "talos-base.raw"
+  pool     = "default"
+  source   = var.factory_image_url
+  format   = "raw"
+}
+
+# VM-specific Overlay volumes
+resource "libvirt_volume" "vm_disk_ltc01" {
+  for_each       = { for k, v in var.nodes : k => v if v.host == "ltc01" }
+  provider       = libvirt.ltc01
+  name           = "${each.key}.qcow2"
+  pool           = "default"
+  base_volume_id = libvirt_volume.talos_base_ltc01.id
+  size           = each.value.disk_size
+  format         = "qcow2"
+}
+
+resource "libvirt_volume" "vm_disk_hp01" {
+  for_each       = { for k, v in var.nodes : k => v if v.host == "hp01" }
+  provider       = libvirt.hp01
+  name           = "${each.key}.qcow2"
+  pool           = "default"
+  base_volume_id = libvirt_volume.talos_base_hp01.id
+  size           = each.value.disk_size
+  format         = "qcow2"
+}
+
+# Talos Secrets and Machine Configuration
+resource "talos_machine_secrets" "this" {}
+
+locals {
+  # Patch Talos configuration to inject the Tailscale Auth Key and install the extension if provided by the factory image
+  tailscale_patch = yamlencode({
+    machine = {
+      env = {
+        TS_AUTHKEY = data.sops_file.secrets.data["tailscale_auth_key"]
+      }
+    }
+  })
+}
+
+# Per-role config (controlplane/worker)
+data "talos_machine_configuration" "controlplane" {
+  cluster_name = var.cluster_name
+  # This endpoint needs to be a stable IP/DNS, for example, the first controlplane node or a load balancer
+  cluster_endpoint = "https://ncvps02.${var.tailscale_domain}:6443"
+  machine_type     = "controlplane"
+  machine_secrets  = talos_machine_secrets.this.machine_secrets
+  config_patches   = [local.tailscale_patch]
+}
+
+data "talos_machine_configuration" "worker" {
+  cluster_name     = var.cluster_name
+  cluster_endpoint = "https://ncvps02.${var.tailscale_domain}:6443"
+  machine_type     = "worker"
+  machine_secrets  = talos_machine_secrets.this.machine_secrets
+  config_patches   = [local.tailscale_patch]
+}
+
+# Ignition Configurations -> per host -> per machine
+resource "libvirt_ignition" "talos_config_ltc01" {
+  for_each = { for k, v in var.nodes : k => v if v.host == "ltc01" }
   provider = libvirt.ltc01
-  name     = "talos-ltc01-01"
-  memory   = "4096"
-  vcpu     = 2
+  name     = "${each.key}-config.ign"
+  pool     = "default"
+  content  = each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration
+}
+
+resource "libvirt_ignition" "talos_config_hp01" {
+  for_each = { for k, v in var.nodes : k => v if v.host == "hp01" }
+  provider = libvirt.hp01
+  name     = "${each.key}-config.ign"
+  pool     = "default"
+  content  = each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration
+}
+
+# Libvirt Domains
+resource "libvirt_domain" "talos_node_ltc01" {
+  for_each    = { for k, v in var.nodes : k => v if v.host == "ltc01" }
+  provider    = libvirt.ltc01
+  name        = each.key
+  memory      = each.value.memory
+  vcpu        = each.value.vcpu
+  type        = "kvm"
+  fw_cfg_name = "opt/org.talos.config"
 
   disk {
-    volume_id = libvirt_volume.vm_disk_01.id
+    volume_id = libvirt_volume.vm_disk_ltc01[each.key].id
   }
 
-  # Pass the Talos config via 'user_data' (cloud-init style)
-  # or use the Talos Provider to apply it over the network
-  fw_cfg {
-    name  = "opt/org.talos.config"
-    value = data.talos_machine_configuration.node.machine_configuration
+  network_interface {
+    network_name = "default"
   }
+
+  coreos_ignition = libvirt_ignition.talos_config_ltc01[each.key].id
+}
+
+resource "libvirt_domain" "talos_node_hp01" {
+  for_each    = { for k, v in var.nodes : k => v if v.host == "hp01" }
+  provider    = libvirt.hp01
+  name        = each.key
+  memory      = each.value.memory
+  vcpu        = each.value.vcpu
+  type        = "kvm"
+  fw_cfg_name = "opt/org.talos.config"
+
+  disk {
+    volume_id = libvirt_volume.vm_disk_hp01[each.key].id
+  }
+
+  network_interface {
+    network_name = "default"
+  }
+
+  coreos_ignition = libvirt_ignition.talos_config_hp01[each.key].id
+}
+
+# Client config output
+data "talos_client_configuration" "this" {
+  cluster_name         = var.cluster_name
+  client_configuration = talos_machine_secrets.this.client_configuration
+  endpoints            = [for k, v in var.nodes : "${k}.${var.tailscale_domain}" if v.type == "controlplane"]
+  nodes                = [for k, v in var.nodes : "${k}.${var.tailscale_domain}"]
+}
+
+output "talosconfig" {
+  value     = data.talos_client_configuration.this.talos_config
+  sensitive = true
 }
