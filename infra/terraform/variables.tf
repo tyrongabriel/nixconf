@@ -30,9 +30,10 @@ variable "nodes" {
     memory    = optional(number, 4096)
     vcpu      = optional(number, 2)
     disk_size = optional(number, 42949672960) # 40GB
+    bootstrap = optional(bool, false)
   }))
   default = {
-    "talos-ltc01-01" = { host = "ltc01", type = "controlplane" }
+    "talos-ltc01-01" = { host = "ltc01", type = "controlplane", bootstrap = true }
     "talos-ltc01-02" = { host = "ltc01", type = "worker" }
     "talos-hp01-01"  = { host = "hp01", type = "controlplane" }
   }

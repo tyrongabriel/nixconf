@@ -1,6 +1,23 @@
 terraform {
   required_version = ">= 1.6.0"
 
+  encryption {
+    key_provider "pbkdf2" "my_passphrase" {
+      # It is best to pass this via an environment variable rather than hardcoding
+      # Looks for  TOFU_KMS_PBKDF2_MY_PASSPHRASE_PASSPHRASE
+      passphrase = var.state_passphrase
+    }
+    method "aes_gcm" "my_method" {
+      keys = key_provider.pbkdf2.my_passphrase
+    }
+    state {
+      method = method.aes_gcm.my_method
+    }
+    plan {
+      method = method.aes_gcm.my_method
+    }
+  }
+
   required_providers {
     libvirt = {
       source  = "dmacvicar/libvirt"
@@ -15,6 +32,10 @@ terraform {
       version = "0.7.0"
     }
   }
+}
+
+variable "state_passphrase" {
+  type    = string
 }
 
 provider "sops" {}

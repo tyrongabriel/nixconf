@@ -1,8 +1,27 @@
+# Storage pools
+resource "libvirt_pool" "default_ltc01" {
+  provider = libvirt.ltc01
+  name     = "default"
+  type     = "dir"
+  target {
+    path = "/var/lib/libvirt/images"
+  }
+}
+
+resource "libvirt_pool" "default_hp01" {
+  provider = libvirt.hp01
+  name     = "default"
+  type     = "dir"
+  target {
+    path = "/var/lib/libvirt/images"
+  }
+}
+
 # Base volumes per libvirt host
 resource "libvirt_volume" "talos_base_ltc01" {
   provider = libvirt.ltc01
   name     = "talos-base.raw"
-  pool     = "default"
+  pool     = libvirt_pool.default_ltc01.name
   source   = var.factory_image_url
   format   = "raw"
 }
@@ -10,7 +29,7 @@ resource "libvirt_volume" "talos_base_ltc01" {
 resource "libvirt_volume" "talos_base_hp01" {
   provider = libvirt.hp01
   name     = "talos-base.raw"
-  pool     = "default"
+  pool     = libvirt_pool.default_hp01.name
   source   = var.factory_image_url
   format   = "raw"
 }
@@ -20,7 +39,7 @@ resource "libvirt_volume" "vm_disk_ltc01" {
   for_each       = { for k, v in var.nodes : k => v if v.host == "ltc01" }
   provider       = libvirt.ltc01
   name           = "${each.key}.qcow2"
-  pool           = "default"
+  pool           = libvirt_pool.default_ltc01.name
   base_volume_id = libvirt_volume.talos_base_ltc01.id
   size           = each.value.disk_size
   format         = "qcow2"
@@ -30,7 +49,7 @@ resource "libvirt_volume" "vm_disk_hp01" {
   for_each       = { for k, v in var.nodes : k => v if v.host == "hp01" }
   provider       = libvirt.hp01
   name           = "${each.key}.qcow2"
-  pool           = "default"
+  pool           = libvirt_pool.default_hp01.name
   base_volume_id = libvirt_volume.talos_base_hp01.id
   size           = each.value.disk_size
   format         = "qcow2"
@@ -48,6 +67,18 @@ locals {
       }
     }
   })
+
+
+  cp_yaml_patches = [
+    for f in fileset("${path.module}/../talos/patches/controlplane", "*.yaml") : file("${path.module}/../talos/patches/controlplane/${f}")
+  ]
+  worker_yaml_patches = [
+    for f in fileset("${path.module}/../talos/patches/worker", "*.yaml") : file("${path.module}/../talos/patches/worker/${f}")
+  ]
+
+  # Combine them all together
+  cp_all_patches     = concat([local.tailscale_patch], local.cp_yaml_patches)
+  worker_all_patches = concat([local.tailscale_patch], local.worker_yaml_patches)
 }
 
 # Per-role config (controlplane/worker)
@@ -57,7 +88,7 @@ data "talos_machine_configuration" "controlplane" {
   cluster_endpoint = "https://ncvps02.${var.tailscale_domain}:6443"
   machine_type     = "controlplane"
   machine_secrets  = talos_machine_secrets.this.machine_secrets
-  config_patches   = [local.tailscale_patch]
+  config_patches   = local.cp_all_patches
 }
 
 data "talos_machine_configuration" "worker" {
@@ -65,7 +96,7 @@ data "talos_machine_configuration" "worker" {
   cluster_endpoint = "https://ncvps02.${var.tailscale_domain}:6443"
   machine_type     = "worker"
   machine_secrets  = talos_machine_secrets.this.machine_secrets
-  config_patches   = [local.tailscale_patch]
+  config_patches   = local.worker_all_patches
 }
 
 # Ignition Configurations -> per host -> per machine
@@ -73,7 +104,7 @@ resource "libvirt_ignition" "talos_config_ltc01" {
   for_each = { for k, v in var.nodes : k => v if v.host == "ltc01" }
   provider = libvirt.ltc01
   name     = "${each.key}-config.ign"
-  pool     = "default"
+  pool     = libvirt_pool.default_ltc01.name
   content  = each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration
 }
 
@@ -81,7 +112,7 @@ resource "libvirt_ignition" "talos_config_hp01" {
   for_each = { for k, v in var.nodes : k => v if v.host == "hp01" }
   provider = libvirt.hp01
   name     = "${each.key}-config.ign"
-  pool     = "default"
+  pool     = libvirt_pool.default_hp01.name
   content  = each.value.type == "controlplane" ? data.talos_machine_configuration.controlplane.machine_configuration : data.talos_machine_configuration.worker.machine_configuration
 }
 
@@ -136,5 +167,37 @@ data "talos_client_configuration" "this" {
 
 output "talosconfig" {
   value     = data.talos_client_configuration.this.talos_config
+  sensitive = true
+}
+
+
+### BOOTSTRAP ###
+locals {
+  # Find the key of the node that has bootstrap set to true
+  bootstrap_node = [for k, v in var.nodes : k if v.bootstrap][0]
+}
+
+# 1. Automatically bootstrap the cluster on the designated node
+resource "talos_machine_bootstrap" "this" {
+  depends_on = [
+    libvirt_domain.talos_node_ltc01,
+    libvirt_domain.talos_node_hp01
+  ]
+
+  client_configuration = talos_machine_secrets.this.client_configuration
+  node                 = "${local.bootstrap_node}.${var.tailscale_domain}"
+}
+
+# 2. Automatically fetch the Kubernetes Kubeconfig once bootstrapped
+resource "talos_cluster_kubeconfig" "this" {
+  depends_on = [talos_machine_bootstrap.this]
+
+  client_configuration = talos_machine_secrets.this.client_configuration
+  node                 = "${local.bootstrap_node}.${var.tailscale_domain}"
+}
+
+# Output the Kubeconfig alongside the Talosconfig
+output "kubeconfig" {
+  value     = talos_cluster_kubeconfig.this.kubeconfig_raw
   sensitive = true
 }
