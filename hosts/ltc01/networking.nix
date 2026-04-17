@@ -7,6 +7,8 @@
 
       ];
 
+      #myNixos.tailscale.advertiseRoutes = "192.168.8.0/24";
+
       networking.useDHCP = true;
       networking.interfaces.enp0s31f6 = {
         # Set this to false to ensure no DHCP is used for this interface

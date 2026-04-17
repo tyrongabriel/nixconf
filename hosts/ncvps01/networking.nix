@@ -4,8 +4,15 @@
     { ... }:
     {
       imports = [
-
+        self.modules.nixos.adguard
       ];
+
+      myNixos.adguard = {
+        enable = true;
+        netbirdIp = "100.64.100.154";
+        webUiPort = 3000;
+        netbird-interface = "nb-home";
+      };
 
       networking.useDHCP = true;
       #networking.useNetworkd = true;

@@ -67,6 +67,12 @@
           default = null;
           description = "External interface for NAT (used with exit nodes). Defaults to eth0 if available.";
         };
+
+        advertiseRoutes = mkOption {
+          type = types.str;
+          default = "";
+          description = "Routes to advertise to other nodes (comma-separated, e.g. \"10.0.0.0/8,192.168.0.0/24\") or empty string to not advertise routes.";
+        };
       };
 
       config = lib.mkIf cfg.enable {
@@ -81,6 +87,7 @@
             (lib.optional cfg.enableSSH "--ssh")
             ++ (lib.optional cfg.exitNode "--advertise-exit-node")
             ++ (lib.optional cfg.allowLanAccess "--accept-routes")
+            ++ (lib.optional (cfg.advertiseRoutes != "") "--advertise-routes=${cfg.advertiseRoutes}")
             ++ cfg.extraUpFlags;
         };
 

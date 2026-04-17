@@ -77,6 +77,8 @@
               kickstart
               opentofu
               talosctl
+              talhelper
+              yq
             ];
           };
         };

@@ -14,6 +14,7 @@
     {
       imports = [
         self.modules.nixos.tailscale
+        self.modules.nixos.netbird-home
       ];
 
       config = {
@@ -39,9 +40,18 @@
             tailnetName = "tail1c2108.ts.net";
             authKeyFile = config.sops.secrets."tailscale_auth".path;
           };
+
+          netbird-home = {
+            enable = true;
+            authFile = config.sops.secrets."netbird_home_auth".path;
+          };
         };
 
         sops.secrets."tailscale_auth" = {
+          sopsFile = ../../secrets/secrets.yaml;
+        };
+
+        sops.secrets."netbird_home_auth" = {
           sopsFile = ../../secrets/secrets.yaml;
         };
 
