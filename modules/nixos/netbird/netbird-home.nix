@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.netbird-home =
+  flake.modules.nixos.netbird =
     {
       config,
       pkgs,
@@ -8,11 +8,11 @@
       ...
     }:
     let
-      cfg = config.myNixos.netbird-home;
+      cfg = config.myNixos.netbird.home;
     in
     with lib;
     {
-      options.myNixos.netbird-home = {
+      options.myNixos.netbird.home = {
         enable = mkEnableOption "NetBird for Homelab nodes";
         authFile = mkOption {
           type = types.path;
@@ -21,6 +21,7 @@
       };
 
       config = mkIf cfg.enable {
+        services.resolved.enable = true;
         services.netbird = {
           enable = true;
           package = pkgs.netbird;

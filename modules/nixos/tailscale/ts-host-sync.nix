@@ -20,7 +20,7 @@
         };
       };
 
-      config = lib.mkIf cfg.enableHostSync {
+      config = lib.mkIf (cfg.enableHostSync && cfg.enable) {
         systemd = {
           services.tailscale-host-sync = {
             description = "Sync Tailscale hostnames to /etc/hosts";

@@ -12,7 +12,7 @@
       config = {
         networking.hostName = "hp01";
         deployment = {
-          targetHost = "hp01.tail1c2108.ts.net";
+          targetHost = "hp01.netbird.cloud";
           targetUser = "deploy";
           tags = [
             "vps"

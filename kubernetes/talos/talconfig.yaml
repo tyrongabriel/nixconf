@@ -1,0 +1,46 @@
+---
+clusterName: my-cluster
+endpoint: https://ncvps02.netbird.cloud:6443
+allowSchedulingOnControlPlanes: true
+nodes:
+  - hostname: ncvps01
+    controlPlane: true
+    ipAddress: 192.168.200.11
+    installDisk: /dev/sda
+    # patches:
+    #   - ./patches/ncvps01.yaml
+    nodeLabels:
+      location: cloud
+  # - hostname: warmachine
+  #   controlPlane: false
+  #   ipAddress: 192.168.200.12
+  #   installDiskSelector:
+  #     size: 128GB
+# controlPlane:
+#   schematic:
+#     customization:
+#       systemExtensions:
+#         officialExtensions:
+#           - siderolabs/netbird
+#       extraKernelArgs:
+#         - net.ifnames=0
+#   patches:
+#     - |-
+#       machine:
+#         kubelet
+#           extraArgs:
+#             rotate-server-certificates: "true"
+# worker:
+#   schematic:
+#     customization:
+#       systemExtensions:
+#         officialExtensions:
+#           - siderolabs/netbird
+#       extraKernelArgs:
+#         - net.ifnames=0
+#   patches:
+#     - |-
+#       machine:
+#         kubelet
+#           extraArgs:
+#             rotate-server-certificates: "true"

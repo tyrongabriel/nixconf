@@ -7,11 +7,12 @@
         core
         user_tyron
         user_deploy
+        traefik
       ];
       config = {
         networking.hostName = "ncvps01";
         deployment = {
-          targetHost = "ncvps01.tail1c2108.ts.net";
+          targetHost = "ncvps01.netbird.cloud";
           targetUser = "deploy";
           tags = [
             "vps"
@@ -23,6 +24,22 @@
         myNixos.users.tyron.homeManager = {
           enable = true;
           tags = [ ];
+        };
+
+        myNixos.traefik = {
+          enable = true;
+          netbird.enable = true;
+          k8s-lb = {
+            enable = true;
+            k8sApi.hosts = [
+              "ltc01.netbird.cloud:6443"
+              "hp01.netbird.cloud:6443"
+            ];
+            talosApi.hosts = [
+              "ltc01.netbird.cloud:50000"
+              "hp01.netbird.cloud:50000"
+            ];
+          };
         };
 
         hardware.facter.reportPath = ./facter.json;
