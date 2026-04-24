@@ -1,18 +1,20 @@
 { self, ... }:
 {
   flake.modules.nixos.host_ncvps01 =
-    { ... }:
+    { lib, ... }:
     {
       imports = [
-        self.modules.nixos.adguard
+        #self.modules.nixos.adguard
       ];
 
-      myNixos.adguard = {
-        enable = true;
-        netbirdIp = "100.64.100.154";
-        webUiPort = 3000;
-        netbird-interface = "nb-home";
-      };
+      # myNixos.adguard = {
+      #   enable = true;
+      #   netbirdIp = "100.64.100.154";
+      #   webUiPort = 3000;
+      #   netbird-interface = "nb-home";
+      # };
+      #
+      #myNixos.netbird.home.enable = lib.mkForce false;
 
       networking.useDHCP = true;
       #networking.useNetworkd = true;

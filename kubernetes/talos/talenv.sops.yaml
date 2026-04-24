@@ -1,0 +1,16 @@
+NETBIRD_SETUP_KEY: ENC[AES256_GCM,data:/dIwXTIMV02xgbedSS51pRbQMAqlmO8SQnb9+5BBLmfuuXts,iv:6Yiznheb4bRm13Ccomdx3D+B01L/Dj3qPNUtwUcq9g4=,tag:1FQu8rOQmMbykeevuVPx3A==,type:str]
+sops:
+    age:
+        - recipient: age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHbmY4bE05NCsxekxGZFlI
+            ZGtueWJPcjNrOStnbWU2QXBKTDZDRytGWkdVCmNUTllyOFh5R2ZMV29TK1Z3NnJE
+            RFNEL1VjbFl2UklyMGNtOWRRdmNpbncKLS0tIHhPWk41Z2NyQ1d1eTFXUFU3czJx
+            RkpxcDBxUUk5eEhZaW83YzBYNXRlWVEKxg8+WM95N/loL60GSXqn5f0SIVnjhphb
+            JrlSA6djDGiVDlZTYmykoZGR7ImcOlwd92eMdanVZRej1GdAfWV4Ow==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-24T13:53:10Z"
+    mac: ENC[AES256_GCM,data:csUsqC5fYvriZWz6ruSsOfrRPdMuACVfMUyy1Ucl3iec7LXHlM+pIjH7Ds42FDx0P+0CDUrv6LAfO3tvc+LEXf6H2Tn6ev/aKBXaGRhpM+vg7sq9atkmKef8vuOG0KP/g91W0+lOQrw12fSDccEiKGDjS7XzkHdqGS3MkYGsA70=,iv:qzE87zZPnoRwe7SNTUQRHOyERqe4SWz+DbnpfPvZarM=,tag:VrXcVbPP6zmh2H9FLz5dyQ==,type:str]
+    unencrypted_suffix: _unencrypted
+    version: 3.12.2

@@ -32,6 +32,7 @@
           gnupg
           pass
           btop
+          dig
         ];
 
         myNixos = {
@@ -55,12 +56,12 @@
           sopsFile = ../../secrets/secrets.yaml;
         };
 
-        services.tailscale = {
-          enable = true;
-          openFirewall = true;
+        # services.tailscale = {
+        #   enable = false;
+        #   openFirewall = true;
 
-          authKeyFile = config.sops.secrets."tailscale_auth".path;
-        };
+        #   authKeyFile = config.sops.secrets."tailscale_auth".path;
+        # };
       };
     };
 }

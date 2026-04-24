@@ -12,7 +12,8 @@
       config = {
         networking.hostName = "ncvps01";
         deployment = {
-          targetHost = "ncvps01.netbird.cloud";
+          targetHost = "152.53.149.109";
+          #"ncvps01.netbird.cloud";
           targetUser = "deploy";
           tags = [
             "vps"

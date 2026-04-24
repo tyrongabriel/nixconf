@@ -1,46 +1,79 @@
----
-clusterName: my-cluster
-endpoint: https://ncvps02.netbird.cloud:6443
+clusterName: homelab
+talosVersion: v1.12.4
+kubernetesVersion: v1.35.4
+
 allowSchedulingOnControlPlanes: true
+
+endpoint: https://api.cluster.netbird.cloud:6443
+
+cniConfig:
+  name: none
+
+# ==========================================
+# GLOBAL: Applies to ALL nodes
+# ==========================================
+patches:
+  # Inject the Netbird Setup Key into every node's environment
+  - |-
+    machine:
+      env:
+        NB_SETUP_KEY: ${NETBIRD_SETUP_KEY}
+
+# ==========================================
+# ROLE: Applies to ALL Control Plane nodes
+# ==========================================
+controlPlane:
+  # Netbird extension for all control plane nodes
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/netbird
+  # patches:
+  # Fake DNS for the API Server applied to all control plane nodes
+  # - |-
+  #   machine:
+  #     network:
+  #       extraHostEntries:
+  #         - ip: 10.0.0.5 # Point to the first node; change to LB IP later
+  #           aliases:
+  #             - api.cluster.local
+
+# ==========================================
+# ROLE: Applies to ALL Worker nodes
+# ==========================================
+worker:
+  # Netbird extension for all future worker nodes
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/netbird
+
 nodes:
   - hostname: ncvps01
+    installDisk: /dev/vda
+    ipAddress: 152.53.149.109
     controlPlane: true
-    ipAddress: 192.168.200.11
-    installDisk: /dev/sda
-    # patches:
-    #   - ./patches/ncvps01.yaml
-    nodeLabels:
-      location: cloud
-  # - hostname: warmachine
-  #   controlPlane: false
-  #   ipAddress: 192.168.200.12
-  #   installDiskSelector:
-  #     size: 128GB
-# controlPlane:
-#   schematic:
-#     customization:
-#       systemExtensions:
-#         officialExtensions:
-#           - siderolabs/netbird
-#       extraKernelArgs:
-#         - net.ifnames=0
-#   patches:
-#     - |-
-#       machine:
-#         kubelet
-#           extraArgs:
-#             rotate-server-certificates: "true"
-# worker:
-#   schematic:
-#     customization:
-#       systemExtensions:
-#         officialExtensions:
-#           - siderolabs/netbird
-#       extraKernelArgs:
-#         - net.ifnames=0
-#   patches:
-#     - |-
-#       machine:
-#         kubelet
-#           extraArgs:
-#             rotate-server-certificates: "true"
+    machineSpec:
+      mode: metal
+
+    # Define the schematic HERE for node-specific customizations
+    schematic:
+      customization:
+        extraKernelArgs:
+          - net.ifnames=0
+          - console=ttyS0,115200n8
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/amd-ucode
+            - siderolabs/iscsi-tools
+            - siderolabs/netbird
+            - siderolabs/qemu-guest-agent
+
+    patches:
+      - |-
+        machine:
+          features:
+            kubernetesTalosAPIAccess:
+             enabled: true
