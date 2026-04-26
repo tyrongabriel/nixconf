@@ -8,6 +8,25 @@ global_secrets := "secrets/secrets.yaml"
 default:
     @just --list
 
+gitleaks-secrets:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "🔍 Scanning for secrets with gitleaks... Writing line by line redactions to /tmp/secrets.txt"
+    gitleaks git -f json -r - --no-banner -l fatal | jq '.[].Secret' -r > /tmp/secrets.txt || true
+
+gitleaks-cleanup:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if [[ -f "/tmp/secrets.txt" ]]; then
+        echo "🧹 Cleaning up gitleaks secrets file..."
+        rm -f /tmp/secrets.txt
+        echo "✅ Cleanup complete."
+    else
+        echo "⚠️  No gitleaks secrets file found to clean."
+    fi
+
 # ----------------------------------------------------------------------
 # 1. SETUP COMMANDS (Run these once to initialize your environment)
 # ----------------------------------------------------------------------

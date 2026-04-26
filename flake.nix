@@ -80,6 +80,8 @@
               talhelper
               yq
               cilium-cli
+              gitleaks
+              pre-commit
             ];
           };
         };

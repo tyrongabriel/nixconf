@@ -4,14 +4,14 @@ creation_rules:
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - ***REMOVED***
+        - age17khcy56n07ffmt7l932cxgpjqgelmqpp8er8yqaqtv6xulyvvdlsm9drlz
 
   # Rule 2: Shared Host Secrets
   - path_regex: ^hosts/[^/]+/secrets/shared\.secrets\.yaml$
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - ***REMOVED***
+        - age17khcy56n07ffmt7l932cxgpjqgelmqpp8er8yqaqtv6xulyvvdlsm9drlz
 
   # Rule 3: Node-Specific Secrets for hp01
   - path_regex: ^hosts/hp01/secrets/secrets\.yaml$
