@@ -14,15 +14,11 @@
       # Map the list of strings into HAProxy server lines
       # Input: ["host1.tailnet:6443"] -> Output: "server server-0 host1.tailnet:6443 check resolvers tailscale"
       k8sApiServers = lib.concatStringsSep "\n      " (
-        lib.imap0 (
-          i: hostStr: "server server-${toString i} ${hostStr} check ssl verify none"
-        ) lbCfg.k8sApi.hosts
+        lib.imap0 (i: hostStr: "server server-${toString i} ${hostStr} check") lbCfg.k8sApi.hosts
       );
 
       talosApiServers = lib.concatStringsSep "\n      " (
-        lib.imap0 (
-          i: hostStr: "server server-${toString i} ${hostStr} check ssl verify none"
-        ) lbCfg.talosApi.hosts
+        lib.imap0 (i: hostStr: "server server-${toString i} ${hostStr} check") lbCfg.talosApi.hosts
       );
     in
     with lib;

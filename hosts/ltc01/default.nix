@@ -15,8 +15,7 @@
           targetHost = "ltc01.netbird.cloud";
           targetUser = "deploy";
           tags = [
-            "vps"
-            "server"
+            "deprecated"
           ];
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";

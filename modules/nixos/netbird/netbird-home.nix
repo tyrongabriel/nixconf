@@ -21,6 +21,9 @@
       };
 
       config = mkIf cfg.enable {
+        # DNS is fucked otherwisee
+        security.polkit.enable = true;
+        environment.systemPackages = [ pkgs.openresolv ];
         services.resolved.enable = true;
         services.netbird = {
           enable = true;
