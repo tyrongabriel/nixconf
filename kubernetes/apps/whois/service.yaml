@@ -1,0 +1,14 @@
+---
+# 3. Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: whois-service
+spec:
+  selector:
+    app: whois
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whois-ingress
+  annotations:
+    # Adjust this annotation based on your controller (e.g., nginx, traefik)
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+    - host: whois.yourdomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whois-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - whois.yourdomain.com
+      secretName: whois-tls-cert
