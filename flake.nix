@@ -79,6 +79,7 @@
               talosctl
               talhelper
               yq
+              cilium-cli
             ];
           };
         };

@@ -81,10 +81,11 @@ cilium install \
 ## Bootstrap FluxCD
 
 ```bash
+export GITHUB_TOKEN="$(wl-paste)"
 flux bootstrap github \
-  --owner=<your-github-user> \
-  --repository=<your-repo> \
+  --owner=tyrongabriel \
+  --repository=nixconf \
   --branch=main \
-  --path=clusters/my-cluster \
+  --path=./kubernetes/cluster \
   --personal
 ```

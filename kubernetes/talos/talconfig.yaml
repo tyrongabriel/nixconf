@@ -1,10 +1,13 @@
 clusterName: homelab
-talosVersion: v1.12.4
+talosVersion: v1.12.0
 kubernetesVersion: v1.35.4
 
 allowSchedulingOnControlPlanes: true
 
 endpoint: https://api.cluster.netbird.cloud:6443
+# This applies to the Talos Machine API (Port 50000)
+additionalApiServerCertSans:
+  - api.cluster.netbird.cloud
 
 cniConfig:
   name: none
@@ -12,12 +15,12 @@ cniConfig:
 # ==========================================
 # GLOBAL: Applies to ALL nodes
 # ==========================================
-patches:
-  # Inject the Netbird Setup Key into every node's environment
-  - |-
-    machine:
-      env:
-        NB_SETUP_KEY: ${NETBIRD_SETUP_KEY}
+#patches:
+#   # Inject the Netbird Setup Key into every node's environment
+#   - |-
+#     machine:
+#       env:
+#         NB_SETUP_KEY: ${NB_SETUP_KEY}
 
 # ==========================================
 # ROLE: Applies to ALL Control Plane nodes
@@ -29,26 +32,38 @@ controlPlane:
       systemExtensions:
         officialExtensions:
           - siderolabs/netbird
-  # patches:
-  # Fake DNS for the API Server applied to all control plane nodes
-  # - |-
-  #   machine:
-  #     network:
-  #       extraHostEntries:
-  #         - ip: 10.0.0.5 # Point to the first node; change to LB IP later
-  #           aliases:
-  #             - api.cluster.local
+  # Inject the config specific to the Netbird extension
+  extensionServices:
+    - name: netbird
+      environment:
+        - NB_SETUP_KEY=${NB_SETUP_KEY}
+  patches:
+    - |-
+      machine:
+        certSANs:
+          - api.cluster.netbird.cloud
+    - |-
+      machine:
+        network:
+          extraHostEntries:
+            - ip: 152.53.149.109
+              aliases:
+                - api.cluster.netbird.cloud
 
 # ==========================================
 # ROLE: Applies to ALL Worker nodes
 # ==========================================
 worker:
-  # Netbird extension for all future worker nodes
   schematic:
     customization:
       systemExtensions:
         officialExtensions:
           - siderolabs/netbird
+  # Also inject for workers
+  extensionServices:
+    - name: netbird
+      environment:
+        - NB_SETUP_KEY=${NB_SETUP_KEY}
 
 nodes:
   - hostname: ncvps01
