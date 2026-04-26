@@ -1,3 +1,4 @@
+# Many thanks to @timkicker for bringing a previously commited secret to my attention!
 repos:
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.0
