@@ -6,3 +6,4 @@ resources:
   - deployment.yaml
   - service.yaml
   - netbird-resource.yaml
+  - ingress.yaml

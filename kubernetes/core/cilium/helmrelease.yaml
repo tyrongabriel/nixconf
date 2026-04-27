@@ -13,6 +13,14 @@ spec:
         kind: HelmRepository
         name: cilium
   values:
+    ingressController:
+      enabled: true
+      default: true
+      loadbalancerMode: shared
+      service:
+        type: NodePort
+        insecureNodePort: 30080
+        secureNodePort: 30443
     ipam:
       mode: kubernetes
     kubeProxyReplacement: true

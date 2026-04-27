@@ -20,6 +20,18 @@
       talosApiServers = lib.concatStringsSep "\n      " (
         lib.imap0 (i: hostStr: "server server-${toString i} ${hostStr} check") lbCfg.talosApi.hosts
       );
+
+      ingressHttpServers = lib.concatStringsSep "\n      " (
+        lib.imap0 (
+          i: hostStr: "server server-${toString i} ${hostStr}:${toString lbCfg.ingress.http.nodePort} check"
+        ) lbCfg.ingress.http.hosts
+      );
+
+      ingressHttpsServers = lib.concatStringsSep "\n      " (
+        lib.imap0 (
+          i: hostStr: "server server-${toString i} ${hostStr}:${toString lbCfg.ingress.https.nodePort} check"
+        ) lbCfg.ingress.https.hosts
+      );
     in
     with lib;
     {
@@ -70,6 +82,54 @@
           };
         };
 
+        ingress = {
+          http = mkOption {
+            type = types.submodule {
+              options = {
+                apiPort = mkOption {
+                  type = types.port;
+                  default = 80;
+                  description = "Port on which the HTTP ingress load balancer listens.";
+                };
+                nodePort = mkOption {
+                  type = types.port;
+                  default = 30080;
+                  description = "NodePort for the HTTP ingress backend.";
+                };
+                hosts = mkOption {
+                  type = types.listOf types.str;
+                  default = [ ];
+                  example = [ "10.0.0.1" ];
+                  description = "List of backend HTTP hosts in hostname or ip format.";
+                };
+              };
+            };
+            default = { };
+          };
+          https = mkOption {
+            type = types.submodule {
+              options = {
+                apiPort = mkOption {
+                  type = types.port;
+                  default = 443;
+                  description = "Port on which the HTTPS ingress load balancer listens.";
+                };
+                nodePort = mkOption {
+                  type = types.port;
+                  default = 30443;
+                  description = "NodePort for the HTTPS ingress backend.";
+                };
+                hosts = mkOption {
+                  type = types.listOf types.str;
+                  default = [ ];
+                  example = [ "10.0.0.1" ];
+                  description = "List of backend HTTPS hosts in hostname or ip format.";
+                };
+              };
+            };
+            default = { };
+          };
+        };
       };
 
       config = mkIf lbCfg.enable {
@@ -119,6 +179,22 @@
                 balance roundrobin
                 ${talosApiServers}
 
+            frontend ingress_http
+                bind *:${toString lbCfg.ingress.http.apiPort}
+                default_backend ingress_http_backend
+
+            backend ingress_http_backend
+                balance roundrobin
+                ${ingressHttpServers}
+
+            frontend ingress_https
+                bind *:${toString lbCfg.ingress.https.apiPort}
+                default_backend ingress_https_backend
+
+            backend ingress_https_backend
+                balance roundrobin
+                ${ingressHttpsServers}
+
             listen stats
                 bind *:8404
                 stats enable
@@ -130,6 +206,8 @@
         networking.firewall.allowedTCPPorts = [
           lbCfg.k8sApi.apiPort
           lbCfg.talosApi.apiPort
+          lbCfg.ingress.http.apiPort
+          lbCfg.ingress.https.apiPort
           8404
         ];
       };

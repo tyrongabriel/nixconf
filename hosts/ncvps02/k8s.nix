@@ -24,6 +24,16 @@
             "ltc01.netbird.cloud:50000"
             "hp01.netbird.cloud:50000"
           ];
+          ingress.http.hosts = [
+            "ncvps01.netbird.cloud"
+            "ltc01.netbird.cloud"
+            "hp01.netbird.cloud"
+          ];
+          ingress.https.hosts = [
+            "ncvps01.netbird.cloud"
+            "ltc01.netbird.cloud"
+            "hp01.netbird.cloud"
+          ];
         };
       };
 
