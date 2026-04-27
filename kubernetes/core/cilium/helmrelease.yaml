@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.19.1 # Update this to match the version installed by your CLI
+      version: ^1.19.1 # Update this to match the version installed by your CLI
       sourceRef:
         kind: HelmRepository
         name: cilium
