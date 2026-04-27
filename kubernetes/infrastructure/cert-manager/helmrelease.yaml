@@ -1,18 +1,72 @@
+# clusters/my-cluster/helm-releases/cert-manager.yaml
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
-  interval: 1h
+  interval: 30m
   chart:
     spec:
       chart: cert-manager
-      version: "v1.20.2"
+      version: "1.20.2"
       sourceRef:
         kind: HelmRepository
         name: jetstack
         namespace: flux-system
+      interval: 12h
+  install:
+    # Install CRDs with the chart
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
-    installCRDs: true
-    replicaCount: 1
+    # Install CRDs as part of the Helm release
+    crds:
+      enabled: true
+      keep: true
+
+    # Replica count for high availability
+    replicaCount: 2
+
+    # Resource limits
+    resources:
+      requests:
+        cpu: 20m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+
+    # Webhook configuration
+    webhook:
+      replicaCount: 2
+      resources:
+        requests:
+          cpu: 20m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
+
+    # CA Injector configuration
+    cainjector:
+      replicaCount: 2
+      resources:
+        requests:
+          cpu: 20m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+
+    # Enable Prometheus metrics
+    prometheus:
+      enabled: true
+      servicemonitor:
+        enabled: true
+
+    # DNS01 recursive nameservers for ACME challenges
+    extraArgs:
+      - --dns01-recursive-nameservers-only
+      - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
