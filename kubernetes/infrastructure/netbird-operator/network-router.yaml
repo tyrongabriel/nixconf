@@ -1,0 +1,8 @@
+apiVersion: netbird.io/v1alpha1
+kind: NetworkRouter
+metadata:
+  name: main
+  namespace: netbird
+spec:
+  dnsZoneRef:
+    name: netbird.cloud

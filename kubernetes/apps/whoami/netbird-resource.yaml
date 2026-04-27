@@ -1,0 +1,12 @@
+apiVersion: netbird.io/v1alpha1
+kind: NetworkResource
+metadata:
+  name: whoami
+spec:
+  networkRouterRef:
+    name: main
+    namespace: netbird
+  serviceRef:
+    name: whoami
+  groups:
+    - name: All
