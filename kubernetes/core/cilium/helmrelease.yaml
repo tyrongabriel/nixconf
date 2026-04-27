@@ -17,8 +17,8 @@ spec:
       enabled: true
       default: true
       loadbalancerMode: shared
-      # service:
-      #   type: NodePort
+      service:
+        type: NodePort
       #   insecureNodePort: 30080
       #   secureNodePort: 30443
     envoy:

@@ -93,7 +93,7 @@
                 };
                 nodePort = mkOption {
                   type = types.port;
-                  default = 80;
+                  default = 30080;
                   description = "NodePort for the HTTP ingress backend.";
                 };
                 hosts = mkOption {
@@ -116,7 +116,7 @@
                 };
                 nodePort = mkOption {
                   type = types.port;
-                  default = 443;
+                  default = 30443;
                   description = "NodePort for the HTTPS ingress backend.";
                 };
                 hosts = mkOption {
