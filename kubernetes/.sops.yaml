@@ -11,6 +11,7 @@ creation_rules:
 
   # 2. General rule for all other directories (Maintainer + Cluster)
   - path_regex: ^.*(secrets|\.secrets|\.sops|\.enc)\.yaml$
+    encrypted_regex: "^(data|stringData|email)$"
     key_groups:
       - age:
           - *maintainer

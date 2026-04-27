@@ -1,32 +1,32 @@
-apiVersion: ENC[AES256_GCM,data:/xM=,iv:UA4qz8D+06o7HwLVDc9IazbcYGdBOPVz+YgM8Al0kck=,tag:5WSdNwo+RCn9fRAMI7WZxg==,type:str]
-kind: ENC[AES256_GCM,data:YPSCubl4,iv:Qs95JRQAUkamdqad+mUZVDTM48HjIDGZU6WI/FUs1gM=,tag:/j0sylqIKtJ+PdQqmEl9Ug==,type:str]
+apiVersion: v1
+kind: Secret
 metadata:
-    name: ENC[AES256_GCM,data:4kMiNJT3qcmInoy1T/WKXGiMBeU=,iv:uJJmKx6RBKBGWdrfa9/eEsaRuNx1uBbv7M2bZwI8IL8=,tag:RaIv4TJzdBC3hH8tnnMXig==,type:str]
-    namespace: ENC[AES256_GCM,data:fpmwDF4EEw==,iv:J9+Dx+p/iX2Dzkh34E1uFP1KiwvPMWiH6KUtCo/O84Y=,tag:9uyhIUQfzjIXOcZ7qKDSQA==,type:str]
-type: ENC[AES256_GCM,data:HaZjN0c8,iv:rRUDbdT7o2bKByEV2qT03BGCYO1YPzX6/ZL8yNEsiOo=,tag:BbIAMDdwI7o19Xhc68IUmg==,type:str]
+  name: netbird-mgmt-api-key
+  namespace: netbird
+type: Opaque
 stringData:
-    NB_API_KEY: ENC[AES256_GCM,data:lYE8ObA53Hh6CDj9JxXSyYn3RxyMTuJ9pOxC9gQOsZ5wWrbaF9Y+VA==,iv:/oo1UDIr0WYDYU/v8O2l1ECV0DQfAGOUKX06o+agONI=,tag:JM45lPn5AWBwQbeUiWH8pg==,type:str]
+  NB_API_KEY: ENC[AES256_GCM,data:gxaSYkvHgPTvjksoOvwf3tFfOJndq4/Vl7WtrhoqCPWrb2mqNednzg==,iv:LWQWnqk7s8vjMnGpLhSlUP0SoQsBjWdcdrP2i3GHKHQ=,tag:WjI4mzqDvFcT+BDQ5r+ayw==,type:str]
 sops:
-    age:
-        - recipient: age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArVVY3ZTl1QnpDN2dlZHEy
-            TVRxM20wQ0FTZzdCSGhqV2xvbnRYb2pHSnlNCnlWbU9pYkRpRkIwUmNFU0xVVmhX
-            T0tkUHo2Y0YveFRRbGswbXp3SXpuajgKLS0tIGtvTDBiYy9qSVhRTURPM3paSTJj
-            UjhEcnJMZHB5RXNlSmZyM2RFOEhaOVEK01nL9fpCchb8a1Uh4D9J8IagMB1F1RwK
-            zV9WBrP566QvwbRSQu2OLNRB1qovd38tK0Q0LZxZbUz9qP7ZVSPqQg==
-            -----END AGE ENCRYPTED FILE-----
-        - recipient: age14rr3w2m7egq0tx8l89fzd0d8ldgdfw6tmxpc4csjgtulwd949eesuuxslr
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFQU9FalMzVVBNYXY2MWxi
-            VGVaakoyWmNvWXNsWjg1K1M1TTFCbnlNdFhzCkxrYkZXcFJqZGJSWjYzWDBOVzZz
-            dDNFYnJNQ1ZDQUFYd1FveVRibS9ZbVUKLS0tIFhyRFRqS1ZrbFlyQXc5U01iZGVp
-            N0JBcXNHakswVHhUWTJPVzNiTWNmN0EKZPAu8s/ndM8lTHywBZv1UGyNKy/ughWH
-            AyV1UlNXe9Zvv2r91PXdLUAZocaHG191wsrHAqDu2BpMJX4exkpyIA==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-04-27T11:14:33Z"
-    mac: ENC[AES256_GCM,data:YZX7vX9ePTFbJFLCBkOXMi2FfNqfWlktar8dr7Q2LvWA0nA/HxC4aGB+CjYQrwfVGPx3Bf1IhP5yEJWd78GDUMQlvsS+bucMBtEtXAnA3yP7azwP0ImeJ5HQFHr5n16Yp3/bRZuezpSQCdusfYbrJOAWFA0hPhMaQyvY4FRM/8k=,iv:f8gHQwRc5NuhW26WjlAycEh28NXDmtzMm5jZiQYtk1c=,tag:rT1zWe76gkqBk3B2bomdUw==,type:str]
-    unencrypted_suffix: _unencrypted
-    version: 3.12.2
+  age:
+    - recipient: age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMMFZBaWxWaXNUZitsdHJV
+        VGU0SDAwcWJkdUtjNTFxSjRKcEw1TVR4MnhJCmVwMjA2UjczSlNvRzgzVmY5UGJ6
+        dUhucHcvK3Z3cElPUFQ3K2U1MHNLS00KLS0tIDFvc0FBZXo1alBOVmxudXdWOVhu
+        c1JsbkFFdTF1TndKbVZKcWN0NFcwWTQK35CIz14yN5GOBcG9tClgC/qdq8Kh4I1e
+        4714gldwgP4YSkGHMTFyzPcDWTP/5Mn7f6CBGYFO3B7e9Wstjj2Hpw==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age14rr3w2m7egq0tx8l89fzd0d8ldgdfw6tmxpc4csjgtulwd949eesuuxslr
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3RlZ1UCtGRHVJbnRzdS96
+        cU9naFUzVWg5NnR3UjVwQW0wem5XS1hscmhRClVFZmIxQmhRaGd1b1pNbDJvNzQz
+        bXhKcXdRclJkOTJnZGtxYU5zcTFvSk0KLS0tIEcyTU1RYlFpZXcxcmw1RkF2REdi
+        V2t6ZFc5RG9uTW4zdlVFdEdnRGZTbGsKPnDPCEao0hXVCIluVXuJzEJTQ+lNCf8N
+        kUijFCKa852+tOH63Dcpm+FaBk9RnlX0sf0ZECXkmxvGmS7tfZqG4A==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2026-04-27T11:20:24Z"
+  mac: ENC[AES256_GCM,data:TBDE2nWiYoaOfv/tJ1ZmzwVi8qF44O++zjcyoO/tLEWIVMygIuNYnjfLJUJJnfpL3XR3QOZKsGLGJzfYbmutEqxk0WAiKfzLi275tPmavd/v951pwKsuqsI2GTNtlbDdUrWDDq1DXbqp/fGUJJH7x51+ri02GwCnTi22Qbxgj4U=,iv:+ZplqqCK1QFBBunIvyZQ7nIvyzqRHn3x0+ILXBjE4DA=,tag:QUAqYwuMvRguTxxHK1nggw==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.12.2

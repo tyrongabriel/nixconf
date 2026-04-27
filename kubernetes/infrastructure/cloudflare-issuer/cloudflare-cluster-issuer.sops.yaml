@@ -1,41 +1,41 @@
-apiVersion: ENC[AES256_GCM,data:cunIOuvsfWAd49fK5xxUMw8L,iv:hwUN4BlpSLEWjmHgh3ANrw0DWR8zbfBgnIxo76ag09w=,tag:xCIxYH0mdCANNlQJHyOrDw==,type:str]
-kind: ENC[AES256_GCM,data:0/py9ly4NYKLARWEXA==,iv:5YaDeSu7JNutvkPuKFHI4vG4LWTSGxmrkZkqlG6DRW0=,tag:UTS8bzodWIiZwZ/dyHXVBg==,type:str]
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
 metadata:
-    name: ENC[AES256_GCM,data:yBYzEfCx9IRfoY7EKvULh/63fZE/sw==,iv:mMnps+7avNETPr5wg4NvVbVS1iExYeZUxRmFxm11lrw=,tag:gjHlPUQYWwkEv4C8/dtXZw==,type:str]
-    namespace: ENC[AES256_GCM,data:c4iUKIhz/RcnkzY+,iv:+Dwdk3i+2QZUHExQ8SOx4Nfd2jzrEaSnJa7p6hHUrSY=,tag:KZTBy/yXVG2o/pPHlihISw==,type:str]
+    name: cloudflare-cert-issuer
+    namespace: cert-manager
 spec:
     acme:
-        server: ENC[AES256_GCM,data:nZEBIAqAH3e9Bc3XYSiG3Y50XrcjV4Z8ZWGAu1GSkB87NePde0tACi1RLK5U6w==,iv:tKtWoUh7+hgsxh2AHV1bkuDPtFSF2GPpSqm3W41L/c4=,tag:XmsaQMqGLoAd5gVRhPNwhg==,type:str]
-        email: ENC[AES256_GCM,data:rHemCJARP/KH+nwFTsv81e7RRrTFhjUWeg==,iv:MZMVOc937oKNa01/Hx4SKlL/r6J4Ys5EPEM+bHFVhYU=,tag:PZN2xRbB0XIssqhplrA01g==,type:str]
+        server: https://acme-v02.api.letsencrypt.org/directory
+        email: ENC[AES256_GCM,data:veGwEgjozO7AwznnMBOq88LS27A4GXenhA==,iv:GuSOFOfTA48j4l7bIVWAbzy4C5Sv29lW5DvTtR/Yaq4=,tag:y7iUsb9wITIKBhPVx+MCkQ==,type:str]
         privateKeySecretRef:
-            name: ENC[AES256_GCM,data:vwuHfBJpQA+Kd5e9GEqWFJeCVhPgMoECG+wmvgg=,iv:wrbAdQHMlwjSE563sfbPm/KX/+j00+wCFJQ+5RaXO8Q=,tag:0K/oCvcQ1TtwgU9eimjZaw==,type:str]
+            name: cloudflare-issuer-account-key
         solvers:
             - dns01:
                 cloudflare:
                     apiTokenSecretRef:
-                        name: ENC[AES256_GCM,data:UZX4RpNCySZnDTFa8VJJYkOKrKY=,iv:q6PWAmrOQ+RUzr4tQgpDS1+Qv5c/YgxTfiLdWdaW77M=,tag:1Lg5491eOcEx2xdlbOYTIA==,type:str]
-                        key: ENC[AES256_GCM,data:AS6LGFMg6U4f,iv:Fz2pF1tXMEiOP1scIXaGGroLaro2+pWREN2AQWzMeaQ=,tag:AwD/RjWt7fHjd3eMMy7ucw==,type:str]
+                        name: cloudflare-api-token
+                        key: api-token
 sops:
     age:
         - recipient: age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHQWFwN3Q2M3gvbnJDaGRh
-            dWhkK3ZBMXpKb2FucGZUNm9jQVlxUjhheEhVClY2SStHbkxGaVJDU1FVWDZQL1Bw
-            b2tYakdXclJpeG5rcE1JS2JxTmI4UU0KLS0tIDlQTm1wVUhPYVY2blN6c0lWMTd1
-            eVVITHBleVZrcEgwcWdpM2xpOExMQk0KhZjA9unyLI/6rcxl7lu9kbuK42kVgTuj
-            xmQKzKp4RNM8gizwkU5kzjCXmk4vZzaRMLCgiF4Hokx17uezX4NA4w==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1SkJCeE1RdW9yeUoxbkJ0
+            M3FxZzJkMnAzNHV2UzJWcjArN0F3Z2IwS2xrCkFld3hHK1VRdTVVRnNmR01jdHN2
+            UHBQQTdkSzZHVkw2cHgvM3hjbFBlbncKLS0tIHVOaDRYM2J1eDg5OU0vMTJocHBk
+            V0JkRFRQN25pWXN5N1RWODJJcW91b1EKGLqBDSSCjqnmPYXF7yN64F5li2PPHbTT
+            Ar5VpjzB6aMstyW2biH1TRIp82w7eZ8aXA3SE5KZ9tK2FB3ec4x7FQ==
             -----END AGE ENCRYPTED FILE-----
         - recipient: age14rr3w2m7egq0tx8l89fzd0d8ldgdfw6tmxpc4csjgtulwd949eesuuxslr
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyM3V0Q1E2RGcwMERMWGZX
-            bzNlN0cwZ2dWeWVlTytES3MxZ0tnbldqNUg4CnlvSFJUQTBQV21oY1R6dEVoQ0FS
-            dFl5ZEQ4MFhoMkUwUGpsM1BJcWtsb1EKLS0tIGtRaFN1YXo4dlBWdjh3YkkrTTZ0
-            NkowUGsyRUVhVG9ybEROanNteFJwUkkK1vdd+C4+Pkskh7Jw/YFImC3eD7EFG+HH
-            DvOadrvQfPEcqZLJ44xq/tCyofppJ1RUC+UeWCXwWHVolwvF93x5jQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLQ0Vodm1ZeDU5L3NqWThG
+            K3NVTFU2ekpVUzBKdU5kbVJwaDhTaldkSlcwCjJUbjI5VFlVYndVRkhvemtvbjVm
+            dUJtb2ZLczU4S1psYXZuWXN0TXViUzAKLS0tIGY0dTNTUElPbmJMM2hvMzlZY2Zz
+            bkFDSW45d213cTZNdUs3Q2ZzM1RQVUUK/SHF88lX1YzV7edPyYok/yE+M+pZiMM7
+            3HoSP17RCch4s+jTb7So1mDkChi1BGJBQUthTtkYo4lpp8k8LhSvkg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-04-27T09:55:45Z"
-    mac: ENC[AES256_GCM,data:NTp4CEFYaXViD5+AQJVDuafX8r6jjD5AqMqBRVknRdpLBg1qlCVkyOO8AtMfcOLMNUC1SoI4kzuhJjZmLoSBzf5+eHyKdCAzjfx5UlUkGZgqkcncTSx+4j1DUk1EXxAIZ1MLnMhK1vJTYNgXMPB6ZlxYjWhowa8KM7CZn4BojCA=,iv:KHx3XHzkouaWElqJFDaxq+XG0wkUULeKYu55tktfofg=,tag:w+v2QbfSU37Ahyg08kShOA==,type:str]
-    unencrypted_suffix: _unencrypted
+    lastmodified: "2026-04-27T11:22:34Z"
+    mac: ENC[AES256_GCM,data:OS6MhZBm7hvXogll8tY4dnvAsh/MkrUmg4544hjf2IN1ks+Q5cVJbGYavD48AlWkdv8/aaAuzZs4DHq+oryZoA86opPJgxKOV+yUbKZ2JW52ei8UPkM2J7Y1Ak5MmUKOW8TYWquJAKHtrc4IRyuJfW3GbM45lgq7tjBx45d0a5U=,iv:zt0wRSeonvXqqRs/S1WzwKVSb/royrMN6q4YXYsIz58=,tag:WYo5uT6vRXeEng2CA57ywQ==,type:str]
+    encrypted_regex: ^(data|stringData|email)$
     version: 3.12.2
