@@ -4,6 +4,8 @@ kind: Gateway
 metadata:
   name: shared-gateway
   namespace: kube-system
+  annotations:
+    io.cilium/gateway-service-type: "NodePort" # Forces Cilium to use NodePorts
 spec:
   gatewayClassName: cilium
   listeners:
