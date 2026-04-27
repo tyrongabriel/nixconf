@@ -61,10 +61,10 @@ spec:
           memory: 256Mi
 
     # Enable Prometheus metrics
-    prometheus:
-      enabled: true
-      servicemonitor:
-        enabled: true
+    # prometheus:
+    #   enabled: true
+    #   servicemonitor:
+    #     enabled: true
 
     # DNS01 recursive nameservers for ACME challenges
     extraArgs:
