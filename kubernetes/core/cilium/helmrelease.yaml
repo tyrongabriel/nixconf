@@ -17,10 +17,12 @@ spec:
       enabled: true
       default: true
       loadbalancerMode: shared
-      service:
-        type: NodePort
-        insecureNodePort: 30080
-        secureNodePort: 30443
+      # service:
+      #   type: NodePort
+      #   insecureNodePort: 30080
+      #   secureNodePort: 30443
+    envoy:
+      enabled: true
     ipam:
       mode: kubernetes
     kubeProxyReplacement: true

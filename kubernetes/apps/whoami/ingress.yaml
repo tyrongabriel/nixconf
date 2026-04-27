@@ -1,28 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: whoami
-  namespace: whoami
+  name: whoami-ingress
+  namespace: default
   annotations:
-    cert-manager.io/cluster-issuer: "cloudflare-cert-issuer"
+    # Use your Cloudflare ClusterIssuer name here
+    cert-manager.io/cluster-issuer: "cloudflare-issuer"
+    # Optional: Force HTTPS
+    ingress.cilium.io/force-https: "true"
 spec:
+  ingressClassName: cilium # Specifically target Cilium
   tls:
     - hosts:
-        - "*.tyrongabriel.com"
-        - "tyrongabriel.com"
-      secretName: whoami-tls
+        - whoami.tyrongabriel.com
+      secretName: whoami-tls-secret
   rules:
-    - host: "*.tyrongabriel.com"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: whoami
-                port:
-                  number: 80
-    - host: "tyrongabriel.com"
+    - host: whoami.tyrongabriel.com
       http:
         paths:
           - path: /
