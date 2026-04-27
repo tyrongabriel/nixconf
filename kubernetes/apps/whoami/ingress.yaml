@@ -5,7 +5,7 @@ metadata:
   namespace: default
   annotations:
     # Use your Cloudflare ClusterIssuer name here
-    cert-manager.io/cluster-issuer: "cloudflare-issuer"
+    cert-manager.io/cluster-issuer: "cloudflare-cert-issuer"
     # Optional: Force HTTPS
     ingress.cilium.io/force-https: "true"
 spec:
