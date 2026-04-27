@@ -8,6 +8,8 @@ spec:
   path: ./kubernetes/apps
   prune: true
   wait: true
+  dependsOn:
+    - name: infrastructure
   sourceRef:
     kind: GitRepository
     name: flux-system
