@@ -5,6 +5,9 @@ metadata:
   namespace: netbird
 spec:
   interval: 10m
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
   install:
     createNamespace: true
     remediation:
