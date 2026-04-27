@@ -1,9 +1,17 @@
 keys:
   - &maintainer "age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f"
+  - &cluster "age14rr3w2m7egq0tx8l89fzd0d8ldgdfw6tmxpc4csjgtulwd949eesuuxslr"
 
 creation_rules:
-  # Secrets in infra
-  - path_regex: ^*(secrets|\.secrets|\.sops|\.enc)\.yaml$
+  # 1. Rule for the talos/ directory (Maintainer only)
+  - path_regex: ^talos/.*(secrets|\.secrets|\.sops|\.enc)\.yaml$
     key_groups:
       - age:
           - *maintainer
+
+  # 2. General rule for all other directories (Maintainer + Cluster)
+  - path_regex: ^.*(secrets|\.secrets|\.sops|\.enc)\.yaml$
+    key_groups:
+      - age:
+          - *maintainer
+          - *cluster
