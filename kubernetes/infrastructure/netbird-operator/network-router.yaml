@@ -5,4 +5,4 @@ metadata:
   namespace: netbird
 spec:
   dnsZoneRef:
-    name: netbird.cloud
+    name: cluster.netbird.cloud
