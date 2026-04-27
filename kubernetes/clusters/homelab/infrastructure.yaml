@@ -10,6 +10,7 @@ spec:
   wait: true
   dependsOn:
     - name: core
+    - name: gateway-api-crds
   sourceRef:
     kind: GitRepository
     name: flux-system
