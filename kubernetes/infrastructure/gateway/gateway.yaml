@@ -1,0 +1,19 @@
+# 2. The Shared Gateway
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: shared-gateway
+  namespace: kube-system
+spec:
+  gatewayClassName: cilium
+  listeners:
+    - name: https
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: wildcard-tls-secret # References the secret above
+      allowedRoutes:
+        namespaces:
+          from: All # Allows whoami1, whoami2, etc. to attach from any namespace

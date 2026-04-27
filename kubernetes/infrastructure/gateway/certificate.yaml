@@ -1,0 +1,15 @@
+# 1. The Wildcard Certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-tyrongabriel-com
+  namespace: kube-system # Or a central 'infra' namespace
+spec:
+  secretName: wildcard-tls-secret
+  issuerRef:
+    name: cloudflare-cert-issuer
+    kind: ClusterIssuer
+  commonName: "*.tyrongabriel.com"
+  dnsNames:
+    - "*.tyrongabriel.com"
+    - "tyrongabriel.com"
