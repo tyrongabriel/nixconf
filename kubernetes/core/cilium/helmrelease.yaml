@@ -37,8 +37,8 @@ spec:
     ipam:
       mode: kubernetes
     # Masquerading: use iptables (NOT eBPF) to stay KubeSpan-compatible
-    masquerade:
-      enabled: false
+    enableIPv4Masquerade: false
+    enableIPv6Masquerade: false
     kubeProxyReplacement: true
     securityContext:
       capabilities:
