@@ -1,11 +1,13 @@
 clusterName: homelab
-talosVersion: v1.12.0
+talosVersion: v1.12.6
 kubernetesVersion: v1.35.4
 
 allowSchedulingOnControlPlanes: true
 
+# The external endpoint pointing to your HAProxy load balancer
 endpoint: https://api.cluster.netbird.cloud:6443
-# This applies to the Talos Machine API (Port 50000)
+
+# Ensure the Talos API and Kube API accept the HAProxy domain
 additionalApiServerCertSans:
   - api.cluster.netbird.cloud
 
@@ -15,55 +17,50 @@ cniConfig:
 # ==========================================
 # GLOBAL: Applies to ALL nodes
 # ==========================================
-#patches:
-#   # Inject the Netbird Setup Key into every node's environment
-#   - |-
-#     machine:
-#       env:
-#         NB_SETUP_KEY: ${NB_SETUP_KEY}
+patches:
+  # 1. Enable KubeSpan for native node-to-node encrypted mesh
+  - |-
+    machine:
+      network:
+        kubespan:
+          enabled: true
+          advertiseKubernetesNetworks: false
+          allowDownPeerBypass: false
+          mtu: 1420
+          filters:
+            endpoints:
+              - 0.0.0.0/0
+              - ::/0
+
+  # 2. Enable KubeSpan discovery
+  - |-
+    cluster:
+      discovery:
+        enabled: true
+  # 3. Resolve the API endpoint locally
+  - |-
+    machine:
+      network:
+        extraHostEntries:
+          - ip: 159.195.9.89
+            aliases:
+              - api.cluster.netbird.cloud
+  # Disable kube-proxy (Cilium will handle service routing)
+  - |-
+    cluster:
+      proxy:
+        disabled: true
 
 # ==========================================
 # ROLE: Applies to ALL Control Plane nodes
 # ==========================================
 controlPlane:
-  # Netbird extension for all control plane nodes
-  schematic:
-    customization:
-      systemExtensions:
-        officialExtensions:
-          - siderolabs/netbird
-  # Inject the config specific to the Netbird extension
-  extensionServices:
-    - name: netbird
-      environment:
-        - NB_SETUP_KEY=${NB_SETUP_KEY}
   patches:
+    # Add the HAProxy domain to the Talos Machine API certs
     - |-
       machine:
         certSANs:
           - api.cluster.netbird.cloud
-    - |-
-      machine:
-        network:
-          extraHostEntries:
-            - ip: 159.195.9.89
-              aliases:
-                - api.cluster.netbird.cloud
-
-# ==========================================
-# ROLE: Applies to ALL Worker nodes
-# ==========================================
-worker:
-  schematic:
-    customization:
-      systemExtensions:
-        officialExtensions:
-          - siderolabs/netbird
-  # Also inject for workers
-  extensionServices:
-    - name: netbird
-      environment:
-        - NB_SETUP_KEY=${NB_SETUP_KEY}
 
 nodes:
   - hostname: ncvps01
@@ -72,7 +69,8 @@ nodes:
     controlPlane: true
     machineSpec:
       mode: metal
-    # Define the schematic HERE for node-specific customizations
+    certSANs:
+      - ncvps01
     schematic:
       customization:
         extraKernelArgs:
@@ -82,7 +80,6 @@ nodes:
           officialExtensions:
             - siderolabs/amd-ucode
             - siderolabs/iscsi-tools
-            - siderolabs/netbird
             - siderolabs/util-linux-tools
             - siderolabs/qemu-guest-agent
 
@@ -96,6 +93,8 @@ nodes:
   - hostname: ltc01
     installDisk: /dev/nvme0n1
     ipAddress: 192.168.8.10
+    certSANs:
+      - ltc01
     controlPlane: true
     machineSpec:
       mode: metal
@@ -105,20 +104,21 @@ nodes:
           officialExtensions:
             - siderolabs/intel-ucode
             - siderolabs/iscsi-tools
-            - siderolabs/netbird
             - siderolabs/util-linux-tools
 
   - hostname: hp01
-    installDisk: /dev/sda
+    installDiskSelector:
+      size: "> 128GB"
     ipAddress: 192.168.8.11
     controlPlane: true
     machineSpec:
       mode: metal
+    certSANs:
+      - hp01
     schematic:
       customization:
         systemExtensions:
           officialExtensions:
             - siderolabs/intel-ucode
             - siderolabs/iscsi-tools
-            - siderolabs/netbird
             - siderolabs/util-linux-tools

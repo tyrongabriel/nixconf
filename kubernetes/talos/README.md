@@ -77,6 +77,7 @@ cilium install \
   --set k8sServiceHost=localhost \
   --set k8sServicePort=7445
 ```
+Masquerade must be OFF for kuebspan!!!
 
 ## Bootstrap FluxCD
 

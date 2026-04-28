@@ -14,7 +14,7 @@ in
       config = {
         users.users.${username} = {
           isNormalUser = true;
-          uid = 3001;
+          uid = 3801;
           description = "Tyron";
           shell = pkgs.zsh;
           group = "users";

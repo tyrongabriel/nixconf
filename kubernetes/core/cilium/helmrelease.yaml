@@ -36,6 +36,9 @@ spec:
             - NET_BIND_SERVICE
     ipam:
       mode: kubernetes
+    # Masquerading: use iptables (NOT eBPF) to stay KubeSpan-compatible
+    masquerade:
+      enabled: false
     kubeProxyReplacement: true
     securityContext:
       capabilities:

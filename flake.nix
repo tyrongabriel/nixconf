@@ -34,6 +34,11 @@
       url = "github:zhaofengli/colmena";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    talhelper = {
+      url = "github:budimanjojo/talhelper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -77,7 +82,7 @@
               kickstart
               opentofu
               talosctl
-              talhelper
+              inputs.talhelper.packages.${pkgs.stdenv.hostPlatform.system}.default
               yq
               cilium-cli
               gitleaks

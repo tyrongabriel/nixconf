@@ -7,6 +7,9 @@
       lib,
       ...
     }:
+    let
+      ncvps01 = "152.53.149.109";
+    in
     with lib;
     {
       imports = [ self.modules.nixos.k8s ];
@@ -15,24 +18,16 @@
         myNixos.k8s.lb = {
           enable = true;
           k8sApi.hosts = [
-            "ncvps01.netbird.cloud:6443"
-            "ltc01.netbird.cloud:6443"
-            "hp01.netbird.cloud:6443"
+            "${ncvps01}:6443"
           ];
           talosApi.hosts = [
-            "ncvps01.netbird.cloud:50000"
-            "ltc01.netbird.cloud:50000"
-            "hp01.netbird.cloud:50000"
+            "${ncvps01}:50000"
           ];
           ingress.http.hosts = [
-            "ncvps01.netbird.cloud"
-            "ltc01.netbird.cloud"
-            "hp01.netbird.cloud"
+            ncvps01
           ];
           ingress.https.hosts = [
-            "ncvps01.netbird.cloud"
-            "ltc01.netbird.cloud"
-            "hp01.netbird.cloud"
+            ncvps01
           ];
         };
       };
