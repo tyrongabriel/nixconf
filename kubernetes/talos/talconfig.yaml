@@ -26,9 +26,12 @@ patches:
           enabled: true
           advertiseKubernetesNetworks: false
           allowDownPeerBypass: false
-          mtu: 1420
+          mtu: 1280    # Changed from 1420 -> tls failed
           filters:
             endpoints:
+              - "!10.0.0.0/8"
+              - "!172.16.0.0/12"
+              - "!192.168.0.0/16"
               - 0.0.0.0/0
               - ::/0
 
@@ -50,6 +53,15 @@ patches:
     cluster:
       proxy:
         disabled: true
+  - |-
+    cluster:
+      etcd:
+        advertisedSubnets:
+          - fd00::/8
+  # cluster:etcd:extraArgs:
+  #             # Allow etcd to hear requests on both the tunnel and the real network
+  #             listen-peer-urls: https://0.0.0.0:2380,https://[::]:2380
+  #             listen-client-urls: https://0.0.0.0:2379,https://[::]:2379
 
 # ==========================================
 # ROLE: Applies to ALL Control Plane nodes
@@ -89,6 +101,11 @@ nodes:
           features:
             kubernetesTalosAPIAccess:
              enabled: true
+      # - |-
+      #   cluster:
+      #     etcd:
+      #       advertisedSubnets:
+      #         - 152.53.149.0/24
 
   - hostname: ltc01
     installDisk: /dev/nvme0n1
