@@ -80,7 +80,10 @@ cilium install \
 Masquerade must be OFF for kuebspan!!!
 
 ## Bootstrap FluxCD
-
+Token:
+Administration: Read & Write
+Contents: Read & Write
+Metadata: Read-Only
 ```bash
 export GITHUB_TOKEN="$(wl-paste)"
 flux bootstrap github \
