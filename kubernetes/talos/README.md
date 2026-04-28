@@ -90,6 +90,6 @@ flux bootstrap github \
   --owner=tyrongabriel \
   --repository=nixconf \
   --branch=main \
-  --path=./kubernetes/cluster \
+  --path=./kubernetes/clusters/homelab \
   --personal
 ```
