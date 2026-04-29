@@ -1,0 +1,27 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-db
+  namespace: authentik
+spec:
+  instances: 3
+
+  storage:
+    size: 12Gi
+    storageClass: longhorn-rc-1
+
+  bootstrap:
+    initdb:
+      database: authentik
+      owner: authentik
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      max_slot_wal_keep_size: "1GB"
+      max_wal_size: "2GB"
+      min_wal_size: "512MB"
+
+  backup:
+    volumeSnapshot:
+      className: longhorn-snapshot-vsc
