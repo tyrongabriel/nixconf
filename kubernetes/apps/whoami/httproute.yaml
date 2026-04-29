@@ -16,6 +16,6 @@ spec:
     - backendRefs:
         # Points to the Authentik proxy outpost service
         # The outpost will forward authenticated requests to whoami internally
-        - name: authentik-server
+        - name: ak-outpost-authentik-embedded-outpost
           namespace: authentik
-          port: 80
+          port: 9000
