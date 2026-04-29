@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: "^2026.2.0"
+      version: "^2025.2.0"
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -19,48 +19,57 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
+    namespaceOverride: authentik
+    global:
+      namespaceOverride: authentik
+
     authentik:
+      namespace: authentik
       existingSecret:
         secretName: authentik-secret
       postgresql:
-        host: "authentik-db-rw.authentik.svc.cluster.local"
-        name: "authentik"
-        user: "authentik"
-        # Password is sourced from the CNPG-managed secret via env below
-        password: ""
+        host: authentik-db-rw
+        user: file:///postgres-creds/username
+        password: file:///postgres-creds/password
 
     server:
-      replicas: 2
+      volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-db-app
+      volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
       resources:
         requests:
           cpu: 100m
           memory: 512Mi
         limits:
           memory: 1Gi
-      env:
-        - name: AUTHENTIK_POSTGRESQL__PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: authentik-db-app
-              key: password
 
     worker:
-      replicas: 2
+      volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-db-app
+      volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
       resources:
         requests:
           cpu: 100m
           memory: 512Mi
         limits:
           memory: 1Gi
-      env:
-        - name: AUTHENTIK_POSTGRESQL__PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: authentik-db-app
-              key: password
 
     postgresql:
       enabled: false
 
     redis:
       enabled: true
+      master:
+        persistence:
+          size: 1Gi
+          storageClass: longhorn-rc-1
