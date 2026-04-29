@@ -28,7 +28,7 @@ spec:
       existingSecret:
         secretName: authentik-secret
       postgresql:
-        host: authentik-db-rw
+        host: "authentik-db-rw"
         user: file:///postgres-creds/username
         password: file:///postgres-creds/password
 
