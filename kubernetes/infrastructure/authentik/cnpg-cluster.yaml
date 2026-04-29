@@ -22,6 +22,6 @@ spec:
       max_wal_size: "2GB"
       min_wal_size: "512MB"
 
-  backup:
-    volumeSnapshot:
-      className: longhorn-snapshot-vsc
+  # backup:
+  #   volumeSnapshot:
+  #     className: longhorn-snapshot-vsc
