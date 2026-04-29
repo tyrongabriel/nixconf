@@ -4,7 +4,7 @@ namespace: authentik
 resources:
   - namespace.yaml
   - cnpg-cluster.yaml
-  - secret.yaml
+  - secret.sops.yaml
   - helmrepository.yaml
   - helmrelease.yaml
   - httproute.yaml
