@@ -3,6 +3,9 @@ kind: HTTPRoute
 metadata:
   name: whoami-route
   namespace: whoami
+  annotations:
+    # These annotations tell the Authentik proxy outpost about this route
+    # The outpost reads these to determine which app to use
 spec:
   parentRefs:
     - name: shared-gateway
@@ -11,5 +14,8 @@ spec:
     - "whoami.tyrongabriel.com"
   rules:
     - backendRefs:
-        - name: whoami
+        # Points to the Authentik proxy outpost service
+        # The outpost will forward authenticated requests to whoami internally
+        - name: authentik-server
+          namespace: authentik
           port: 80
