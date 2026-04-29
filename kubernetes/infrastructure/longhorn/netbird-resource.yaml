@@ -1,0 +1,13 @@
+apiVersion: netbird.io/v1alpha1
+kind: NetworkResource
+metadata:
+  name: longhorn-ui
+  namespace: longhorn-system
+spec:
+  networkRouterRef:
+    name: main
+    namespace: netbird
+  serviceRef:
+    name: longhorn-frontend
+  groups:
+    - name: All

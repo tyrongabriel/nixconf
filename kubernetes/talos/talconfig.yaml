@@ -53,6 +53,12 @@ patches:
     cluster:
       proxy:
         disabled: true
+
+  # Enable Longhorn default disk creation on all nodes
+  - |-
+    machine:
+      nodeLabels:
+        node.longhorn.io/create-default-disk: "true"
   - |-
     cluster:
       etcd:
