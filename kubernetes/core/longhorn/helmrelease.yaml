@@ -25,10 +25,6 @@ spec:
       storageOverProvisioningPercentage: 100
       storageMinimalAvailablePercentage: 25
       backupTarget: ""
-      # Talos OS compatibility
-      taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
-      systemManagedComponentsNodeSelector:
-        node-role.kubernetes.io/control-plane: ""
 
     persistence:
       defaultClass: true
