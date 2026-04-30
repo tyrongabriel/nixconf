@@ -29,7 +29,16 @@ spec:
       enabled: false
     redis:
       enabled: false
+    valkey-cluster:
+      persistence:
+        storageClass: longhorn-rc-1
     gitea:
+      additionalConfigFromEnvs:
+        - name: GITEA__database__PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: gitea-db-app
+              key: password
       config:
         database:
           DB_TYPE: postgres
@@ -40,12 +49,6 @@ spec:
           ROOT_URL: "https://git.tyrongabriel.com/"
           DOMAIN: "git.tyrongabriel.com"
           SSH_DOMAIN: "git.tyrongabriel.com"
-    env:
-      - name: GITEA__database__PASSWD
-        valueFrom:
-          secretKeyRef:
-            name: gitea-db-app
-            key: password
     persistence:
       enabled: true
       storageClass: longhorn-rc-1
