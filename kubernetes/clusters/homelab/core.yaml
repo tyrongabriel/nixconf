@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  retryInterval: 15s
   path: ./kubernetes/core
   prune: true
   wait: true
