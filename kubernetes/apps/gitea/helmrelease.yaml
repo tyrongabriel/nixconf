@@ -1,0 +1,52 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: gitea
+  namespace: gitea
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: gitea
+      version: "^12.5.0"
+      sourceRef:
+        kind: HelmRepository
+        name: gitea
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    postgresql-ha:
+      enabled: false
+    postgresql:
+      enabled: false
+    redis-cluster:
+      enabled: false
+    redis:
+      enabled: false
+    gitea:
+      config:
+        database:
+          DB_TYPE: postgres
+          HOST: gitea-db-rw.gitea.svc.cluster.local:5432
+          NAME: gitea
+          USER: gitea
+        server:
+          ROOT_URL: "https://git.tyrongabriel.com/"
+          DOMAIN: "git.tyrongabriel.com"
+          SSH_DOMAIN: "git.tyrongabriel.com"
+    env:
+      - name: GITEA__database__PASSWD
+        valueFrom:
+          secretKeyRef:
+            name: gitea-db-app
+            key: password
+    persistence:
+      enabled: true
+      storageClass: longhorn-rc-1
+      size: 20Gi
