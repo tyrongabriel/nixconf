@@ -114,7 +114,7 @@ spec:
     valkey-cluster:
       enabled: true
       cluster:
-        nodes: 3
+        nodes: 2
         replicas: 0
       valkey:
         resources:
