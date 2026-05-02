@@ -33,6 +33,10 @@ spec:
     # ---------------------------------------------------------
     gitea:
       config:
+        service:
+          DISABLE_REGISTRATION: true # Must be false so Authentik can "register" the user on first login
+          ALLOW_ONLY_EXTERNAL_REGISTRATION: true # Rejects anyone trying to register via standard email/password
+          SHOW_REGISTRATION_BUTTON: false # Removes the "Sign Up" button from the
         server:
           DOMAIN: git.tyrongabriel.com
           ROOT_URL: https://git.tyrongabriel.com/
