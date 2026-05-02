@@ -8,6 +8,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       namespace: whoami
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      namespace: it-tools
   to:
     - group: ""
       kind: Service
