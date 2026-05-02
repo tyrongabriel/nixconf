@@ -33,6 +33,9 @@ spec:
     # ---------------------------------------------------------
     gitea:
       config:
+        oauth2_client:
+          ENABLE_AUTO_REGISTRATION: true # Registers users for oauth users
+          UPDATE_AVATAR: true # Upon each login will update the avatar matching auth
         service:
           DISABLE_REGISTRATION: false # Must be false so Authentik can "register" the user on first login
           ALLOW_ONLY_EXTERNAL_REGISTRATION: true # Rejects anyone trying to register via standard email/password
