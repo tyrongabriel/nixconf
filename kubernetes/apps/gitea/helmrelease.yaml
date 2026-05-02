@@ -22,10 +22,10 @@ spec:
       retries: 3
 
   # # Merge sensitive values dynamically into the Helm release from secrets.sops.yaml
-  # valuesFrom:
-  #   - kind: Secret
-  #     name: gitea-helm-secrets
-  #     valuesKey: values.yaml
+  valuesFrom:
+    - kind: Secret
+      name: gitea-helm-secrets
+      valuesKey: values.yaml
 
   values:
     # ---------------------------------------------------------
@@ -42,19 +42,22 @@ spec:
         database:
           DB_TYPE: postgres
           # CoreOS/CloudNativePG automatically provisions a RW service named <cluster-name>-rw
-          HOST: gitea-db-rw.gitea.svc.cluster.local:5432
           NAME: gitea
           USER: gitea
-
-    # ---------------------------------------------------------
-    # Auto-link CNPG Secret to Gitea
-    # ---------------------------------------------------------
-    env:
-      - name: GITEA__database__PASSWD
-        valueFrom:
-          secretKeyRef:
-            name: gitea-db-app # The auto-generated secret from CNPG
-            key: password # The password key inside that secret
+      # ---------------------------------------------------------
+      # Auto-link CNPG Secret to Gitea app.ini
+      # ---------------------------------------------------------
+      additionalConfigFromEnvs:
+        - name: GITEA__DATABASE__HOST
+          valueFrom:
+            secretKeyRef:
+              name: gitea-db-app # The auto-generated secret from CNPG
+              key: host # The password key inside that secret
+        - name: GITEA__DATABASE__PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: gitea-db-app # The auto-generated secret from CNPG
+              key: password # The password key inside that secret
 
     # ---------------------------------------------------------
     # Resource Limitations (Small minimums, high limits)
