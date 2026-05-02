@@ -20,36 +20,100 @@ spec:
   upgrade:
     remediation:
       retries: 3
+
+  # # Merge sensitive values dynamically into the Helm release from secrets.sops.yaml
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: gitea-helm-secrets
+  #     valuesKey: values.yaml
+
   values:
-    postgresql-ha:
-      enabled: false
-    postgresql:
-      enabled: false
-    redis-cluster:
-      enabled: false
-    redis:
-      enabled: false
-    valkey-cluster:
-      persistence:
-        storageClass: longhorn-rc-1
+    # ---------------------------------------------------------
+    # Core Gitea Configuration
+    # ---------------------------------------------------------
     gitea:
-      additionalConfigFromEnvs:
-        - name: GITEA__database__PASSWD
-          valueFrom:
-            secretKeyRef:
-              name: gitea-db-app
-              key: password
       config:
+        server:
+          DOMAIN: git.tyrongabriel.com
+          ROOT_URL: https://git.tyrongabriel.com/
+          SSH_DOMAIN: git.tyrongabriel.com
+          # To ensure proper traffic routing from your HTTPRoute
+          HTTP_PORT: 3000
         database:
           DB_TYPE: postgres
+          # CoreOS/CloudNativePG automatically provisions a RW service named <cluster-name>-rw
           HOST: gitea-db-rw.gitea.svc.cluster.local:5432
           NAME: gitea
           USER: gitea
-        server:
-          ROOT_URL: "https://git.tyrongabriel.com/"
-          DOMAIN: "git.tyrongabriel.com"
-          SSH_DOMAIN: "git.tyrongabriel.com"
+
+    # ---------------------------------------------------------
+    # Auto-link CNPG Secret to Gitea
+    # ---------------------------------------------------------
+    env:
+      - name: GITEA__database__PASSWD
+        valueFrom:
+          secretKeyRef:
+            name: gitea-db-app # The auto-generated secret from CNPG
+            key: password # The password key inside that secret
+
+    # ---------------------------------------------------------
+    # Resource Limitations (Small minimums, high limits)
+    # ---------------------------------------------------------
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "128Mi"
+      limits:
+        cpu: "1000m"
+        memory: "2Gi"
+
+    # ---------------------------------------------------------
+    # Service and Ingress
+    # ---------------------------------------------------------
+    ingress:
+      enabled: false # Handled externally by your HTTPRoute
+
+    service:
+      http:
+        type: ClusterIP
+        port: 3000
+
+    # ---------------------------------------------------------
+    # Persistent Storage (Main Gitea Shared Data)
+    # ---------------------------------------------------------
     persistence:
       enabled: true
-      storageClass: longhorn-rc-1
-      size: 20Gi
+      storageClass: "longhorn-rc-3"
+      size: 15Gi
+
+    # ---------------------------------------------------------
+    # High-Availability Database (PostgreSQL HA)
+    # ---------------------------------------------------------
+    postgresql:
+      enabled: false # Disable single-node postgres
+
+    postgresql-ha:
+      enabled: false # Disabled internal HA Postgres to use cnpgsql instead
+
+    # ---------------------------------------------------------
+    # High-Availability Caching & Queues (Valkey Cluster)
+    # ---------------------------------------------------------
+    valkey:
+      enabled: false # Disable single-node valkey
+
+    valkey-cluster:
+      enabled: true
+      cluster:
+        nodes: 3
+        replicas: 0
+      valkey:
+        resources:
+          requests:
+            cpu: "25m"
+            memory: "64Mi"
+          limits:
+            cpu: "250m"
+            memory: "512Mi"
+      persistence:
+        storageClass: "longhorn-rc-1"
+        size: 5Gi

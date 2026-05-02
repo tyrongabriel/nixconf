@@ -8,13 +8,23 @@ spec:
   storage:
     size: 10Gi
     storageClass: longhorn-rc-1
+
   bootstrap:
     initdb:
       database: gitea
       owner: gitea
+      # To specify the password matching your secrets.sops.yaml, you can add:
+      # secret:
+      #   name: <name-of-postgres-credential-secret>
+
   postgresql:
     parameters:
       max_connections: "100"
       max_slot_wal_keep_size: "1GB"
       max_wal_size: "2GB"
       min_wal_size: "512MB"
+
+  # Optionally setup snapshots/backups using Longhorn
+  # backup:
+  #   volumeSnapshot:
+  #     className: longhorn-snapshot-vsc
