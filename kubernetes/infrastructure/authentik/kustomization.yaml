@@ -12,10 +12,12 @@ resources:
 
 secretGenerator:
   - name: authentik-smtp-values
+    namespace: authentik
     type: Opaque
     files:
       - values.yaml=helmsecret.sops.yaml
   - name: authentik-secret
+    namespace: authentik
     type: Opaque
     files:
       - values.yaml=secret.sops.yaml
