@@ -1,0 +1,8 @@
+nameReference:
+  - kind: Secret
+    version: v1
+    fieldSpecs:
+      - path: spec/valuesFrom/name
+        kind: HelmRelease
+      - path: spec/values/authentik/existingSecret/secretName
+        kind: HelmRelease

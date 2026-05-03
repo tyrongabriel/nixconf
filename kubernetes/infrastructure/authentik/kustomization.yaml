@@ -10,6 +10,9 @@ resources:
   - httproute.yaml
   - referencegrant.yaml
 
+configurations:
+  - kustomizeconfig.yaml
+
 secretGenerator:
   - name: authentik-smtp-values
     namespace: authentik
