@@ -3,9 +3,19 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - cnpg-cluster.yaml
-  - secret.sops.yaml
-  - helmsecret.sops.yaml
+  #- secret.sops.yaml
+  #- helmsecret.sops.yaml
   - helmrepository.yaml
   - helmrelease.yaml
   - httproute.yaml
   - referencegrant.yaml
+
+secretGenerator:
+  - name: authentik-smtp-values
+    type: Opaque
+    files:
+      - values.yaml=helmsecret.sops.yaml
+  - name: authentik-smtp-values
+    type: Opaque
+    files:
+      - values.yaml=authentik-secret
