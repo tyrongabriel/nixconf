@@ -67,7 +67,6 @@ spec:
           memory: 512Mi
         limits:
           memory: 1Gi
-          worker:
       # # Should Remove the privelege warning
       # containerSecurityContext:
       #   allowPrivilegeEscalation: false
