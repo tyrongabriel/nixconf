@@ -37,6 +37,8 @@ spec:
         password: file:///postgres-creds/password
 
     server:
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
       volumes:
         - name: postgres-creds
           secret:
@@ -53,6 +55,8 @@ spec:
           memory: 1Gi
 
     worker:
+      podAnnotations:
+        reloader.stakater.com/auto: "true"
       volumes:
         - name: postgres-creds
           secret:
