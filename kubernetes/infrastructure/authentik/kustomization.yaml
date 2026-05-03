@@ -15,7 +15,7 @@ secretGenerator:
     type: Opaque
     files:
       - values.yaml=helmsecret.sops.yaml
-  - name: authentik-smtp-values
+  - name: authentik-secret
     type: Opaque
     files:
-      - values.yaml=authentik-secret
+      - values.yaml=secret.sops.yaml
