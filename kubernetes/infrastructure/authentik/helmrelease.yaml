@@ -67,6 +67,16 @@ spec:
           memory: 512Mi
         limits:
           memory: 1Gi
+          worker:
+      # # Should Remove the privelege warning
+      # containerSecurityContext:
+      #   allowPrivilegeEscalation: false
+      #   capabilities:
+      #     drop:
+      #       - ALL
+      #   runAsNonRoot: true
+      #   seccompProfile:
+      #     type: RuntimeDefault
 
     postgresql:
       enabled: false
