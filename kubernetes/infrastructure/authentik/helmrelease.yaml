@@ -45,9 +45,10 @@ spec:
           readOnly: true
       resources:
         requests:
-          cpu: 100m
+          cpu: 50m
           memory: 512Mi
         limits:
+          cpu: 1000m
           memory: 1Gi
 
     worker:
@@ -63,9 +64,10 @@ spec:
           readOnly: true
       resources:
         requests:
-          cpu: 100m
+          cpu: 50m
           memory: 512Mi
         limits:
+          cpu: 1000m
           memory: 1Gi
       # # Should Remove the privelege warning
       # containerSecurityContext:
