@@ -18,10 +18,6 @@ spec:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
-  valuesFrom:
-    - kind: Secret
-      name: authentik-smtp-values
-      valuesKey: values.yaml
   values:
     namespaceOverride: authentik
     global:
