@@ -6,7 +6,7 @@ metadata:
 spec:
     acme:
         server: https://acme-v02.api.letsencrypt.org/directory
-        email: ENC[AES256_GCM,data:veGwEgjozO7AwznnMBOq88LS27A4GXenhA==,iv:GuSOFOfTA48j4l7bIVWAbzy4C5Sv29lW5DvTtR/Yaq4=,tag:y7iUsb9wITIKBhPVx+MCkQ==,type:str]
+        email: ENC[AES256_GCM,data:HaRkgnn7m4lVdGTy3ltTvFFhEg51,iv:HeJtilfU4hEIKjvES+4MVVN7mJA+Js//yllfYPUFGGs=,tag:0n9P3UV2lLkdJ088i/iHKw==,type:str]
         privateKeySecretRef:
             name: cloudflare-issuer-account-key
         solvers:
@@ -35,7 +35,7 @@ sops:
             bkFDSW45d213cTZNdUs3Q2ZzM1RQVUUK/SHF88lX1YzV7edPyYok/yE+M+pZiMM7
             3HoSP17RCch4s+jTb7So1mDkChi1BGJBQUthTtkYo4lpp8k8LhSvkg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-04-27T11:22:34Z"
-    mac: ENC[AES256_GCM,data:OS6MhZBm7hvXogll8tY4dnvAsh/MkrUmg4544hjf2IN1ks+Q5cVJbGYavD48AlWkdv8/aaAuzZs4DHq+oryZoA86opPJgxKOV+yUbKZ2JW52ei8UPkM2J7Y1Ak5MmUKOW8TYWquJAKHtrc4IRyuJfW3GbM45lgq7tjBx45d0a5U=,iv:zt0wRSeonvXqqRs/S1WzwKVSb/royrMN6q4YXYsIz58=,tag:WYo5uT6vRXeEng2CA57ywQ==,type:str]
+    lastmodified: "2026-05-04T12:13:32Z"
+    mac: ENC[AES256_GCM,data:qmELS5NkYJp3kxUCzJN8KJOSfFttFnmUXe+upHY2H8jrC4nhvqUArqyOVQiHDcTY4HXuvHxP7jNeeAlLZCbW3ghvvdV0AM5LE0K+zsVc6SB1+mPXEirbkNhpAh1mvcm5SGmR7ma1PAnk+jZ72y2IP4D9Vm8H/2o3a+xDTN7eIAk=,iv:bVQCBJChQweh6KmCYVeYJVoJlzI78H1fo88PSUyuzTc=,tag:bXXmI8MXfuTnK0+zt0JzRg==,type:str]
     encrypted_regex: ^(data|stringData|email)$
     version: 3.12.2
