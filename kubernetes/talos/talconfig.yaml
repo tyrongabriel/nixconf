@@ -1,5 +1,5 @@
 clusterName: homelab
-talosVersion: v1.12.6
+talosVersion: v1.12.7
 kubernetesVersion: v1.35.4
 
 allowSchedulingOnControlPlanes: true
