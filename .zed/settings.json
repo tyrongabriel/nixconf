@@ -8,16 +8,6 @@
   },
 
   "lsp": {
-    "yaml-language-server": {
-      "settings": {
-        "yaml": {
-          "customTags": ["@scalar", "!secret scalar", "!include scalar"],
-          "schemas": {
-            "https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json": "talconfig.yaml",
-          },
-        },
-      },
-    },
     "nixd": {
       "settings": {
         "options": {
