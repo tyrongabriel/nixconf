@@ -1,8 +1,12 @@
-{ ... }:
+{ self, ... }:
 {
   flake.modules.homeManager.core =
     { pkgs, ... }:
     {
+      imports = [
+        self.modules.homeManager.cli
+        self.modules.homeManager.git
+      ];
       config = {
         # Base packages every home should have
         home.packages = with pkgs; [
@@ -21,6 +25,11 @@
           btop
           lnav
         ];
+
+        myHome = {
+          git.enable = true;
+          zsh.enable = true;
+        };
       };
     };
 }

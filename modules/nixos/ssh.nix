@@ -6,8 +6,22 @@
       lib,
       ...
     }:
+    let
+      cfg = config.myNixos.ssh;
+    in
+    with lib;
     {
-      config = {
+      options = {
+        myNixos.ssh = {
+          enable = mkEnableOption "Enable SSH server";
+          fail2ban = mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Whether to enable fail2ban for SSH";
+          };
+        };
+      };
+      config = mkIf cfg.enable {
         assertions = [
           {
             assertion = lib.any (
@@ -26,8 +40,7 @@
             PermitRootLogin = "no";
           };
         };
-
-        services.fail2ban.enable = true;
+        services.fail2ban.enable = if cfg.fail2ban then (mkDefault true) else mkDefault false;
       };
     };
 }

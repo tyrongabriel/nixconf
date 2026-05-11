@@ -6,6 +6,18 @@
   "file_types": {
     "Shell Script": [".envrc"],
   },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/clusterconfig/*",
+  ],
 
   "lsp": {
     "nixd": {

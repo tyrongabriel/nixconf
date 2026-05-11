@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.host_yoga =
+  flake.modules.nixos.host_legion =
     { lib, ... }:
     with lib;
     {
@@ -8,11 +8,12 @@
       #specialArgs = { inherit inputs; };
       imports = with self.modules.nixos; [
         core
+        desktop
         user_tyron
         user_deploy
       ];
       config = {
-        networking.hostName = "yoga";
+        networking.hostName = "legion";
         deployment = {
           targetHost = "localhost";
           targetUser = "deploy";
@@ -29,10 +30,11 @@
             enable = true;
             tags = [ "dev" ];
           };
+
         };
 
         hardware.facter.reportPath = ./facter.json;
-        system.stateVersion = "25.05";
+        system.stateVersion = "26.05";
       };
     };
 }

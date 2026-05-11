@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.core =
+  flake.modules.homeManager.git =
     {
       pkgs,
       lib,
@@ -14,6 +14,7 @@
     {
       imports = [ ];
       options.myHome.git = with lib; {
+        enable = mkEnableOption "Enable Git configuration";
         includes = lib.mkOption {
           description = "A list of included configurations for Git";
           type =

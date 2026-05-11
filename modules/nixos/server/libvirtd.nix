@@ -14,9 +14,9 @@
     {
       imports = [ ];
       options.myNixos.libvrt = with lib; {
-        #enable = mkEnableOption "Enable libvirtd";
+        enable = mkEnableOption "Enable libvirtd";
       };
-      config = {
+      config = mkIf cfg.enable {
         virtualisation.libvirtd = {
           enable = true;
           #onBoot = "start"; # start|ignore -> start lets all guests run no matter autostart

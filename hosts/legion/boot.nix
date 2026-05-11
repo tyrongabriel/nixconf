@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.modules.nixos.host_ncvps02 =
+  flake.modules.nixos.host_legion =
     { lib, ... }:
     {
       ## Boot Config ##

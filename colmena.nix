@@ -6,9 +6,12 @@
   ...
 }:
 let
+  unreadyHosts = [
+    "legion"
+  ];
   # List all directories in the hosts directory
   hostNames = builtins.attrNames (
-    lib.filterAttrs (n: type: type == "directory" && n != "template" && n != "yoga") (
+    lib.filterAttrs (n: type: type == "directory" && n != "template" && !(lib.elem n unreadyHosts)) (
       builtins.readDir ./hosts
     )
   );
