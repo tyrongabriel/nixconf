@@ -12,6 +12,7 @@
         user_tyron
         user_deploy
         k8s
+        server
       ];
       config = {
         networking.hostName = "ncvps02";
