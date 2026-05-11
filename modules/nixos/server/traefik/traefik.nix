@@ -18,10 +18,10 @@
       };
       config = lib.mkIf cfg.enable {
         sops.secrets."traefik/cf_api_email" = {
-          sopsFile = ../../../secrets/secrets.yaml;
+          sopsFile = ../../../../secrets/secrets.yaml;
         };
         sops.secrets."traefik/cf_api_token" = {
-          sopsFile = ../../../secrets/secrets.yaml;
+          sopsFile = ../../../../secrets/secrets.yaml;
         };
 
         systemd.services.traefik = {

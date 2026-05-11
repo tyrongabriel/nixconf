@@ -27,10 +27,10 @@
         # OVERLAY NETWORKS
         sops.secrets = {
           "tailscale_auth" = {
-            sopsFile = ../../secrets/secrets.yaml;
+            sopsFile = ../../../secrets/secrets.yaml;
           };
           "netbird_home_auth" = {
-            sopsFile = ../../secrets/secrets.yaml;
+            sopsFile = ../../../secrets/secrets.yaml;
           };
         };
         myNixos = {
