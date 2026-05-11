@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, inputs, ... }:
 {
   flake.modules.nixos.host_ncvps02 =
     { lib, config, ... }:
@@ -7,13 +7,16 @@
     in
     with lib;
     {
-      imports = with self.modules.nixos; [
-        core
-        user_tyron
-        user_deploy
-        k8s
-        server
-      ];
+      imports =
+        with self.modules.nixos;
+        [
+          core
+          user_tyron
+          user_deploy
+          k8s
+          server
+        ]
+        ++ [ inputs.nix-index-database.nixosModules.nix-index ];
       config = {
         networking.hostName = "ncvps02";
         deployment = {
@@ -25,6 +28,9 @@
           ];
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
+
+        # I like comma
+        programs.nix-index-database.comma.enable = true;
 
         myNixos = {
           users.tyron.homeManager = {

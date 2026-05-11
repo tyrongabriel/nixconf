@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, inputs, ... }:
 {
   flake.modules.nixos.desktop =
     {
@@ -12,12 +12,15 @@
     in
     with lib;
     {
-      imports = [ ];
+      imports = [
+        inputs.nix-index-database.nixosModules.nix-index
+      ];
       options.myNixos.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";
       };
       config = {
         # Your configuration here
+        programs.nix-index-database.comma.enable = true;
 
       };
     };
