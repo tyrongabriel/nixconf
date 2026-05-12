@@ -22,15 +22,14 @@
         time.timeZone = lib.mkDefault "Europe/Vienna";
 
         myNixos = {
-          ssh = {
-            enable = mkForce true;
-            fail2ban = mkForce true;
-          };
           users.tyron.homeManager = {
             enable = true;
             tags = [ "dev" ];
           };
-
+          ssh = {
+            enable = mkForce true;
+            fail2ban = mkForce true;
+          };
         };
 
         hardware.facter.reportPath = ./facter.json;

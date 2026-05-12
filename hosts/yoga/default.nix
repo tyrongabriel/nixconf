@@ -28,6 +28,7 @@
           users.tyron.homeManager = {
             enable = true;
             tags = [ "dev" ];
+            #extraImports = [ self.modules.homeManager.git ];
           };
         };
 
