@@ -6,7 +6,7 @@ in
   flake.modules.nixos.user_tyron =
     { lib, config, ... }:
     let
-      cfg = config.myNixos.users.${username};
+      cfg = config.myNixos.users.${username}.homeManager;
     in
     {
       options.myNixos.users.${username}.homeManager = {
@@ -16,9 +16,15 @@ in
           default = [ ];
           description = "List of tags to enable user-specific home manager modules";
         };
+        extraImports = lib.mkOption {
+          type = lib.types.listOf lib.types.deferredModule;
+          default = [ ];
+          example = [ self.modules.homeManager.dev ];
+          description = "Extra home manager modules to import for this user";
+        };
       };
 
-      config = lib.mkIf cfg.homeManager.enable {
+      config = lib.mkIf cfg.enable {
         home-manager.users.${username} =
           {
             osConfig,
@@ -44,7 +50,8 @@ in
             imports = [
               self.modules.homeManager.core
             ]
-            ++ (map (tag: (tagImport tag)) cfg.homeManager.tags);
+            ++ (map (tag: (tagImport tag)) cfg.tags)
+            ++ cfg.extraImports;
             # ++ lib.optionals (lib.elem "dev" cfg.tags) [
             #   self.modules.homeManager.dev
             # ];
