@@ -18,13 +18,19 @@
           targetHost = "localhost";
           targetUser = "deploy";
           allowLocalDeployment = true;
+          tags = [
+            "desktop"
+          ];
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
 
         myNixos = {
           users.tyron.homeManager = {
             enable = true;
-            tags = [ "dev" ];
+            tags = [
+              "dev"
+              "desktop"
+            ];
           };
           ssh = {
             enable = mkForce true;

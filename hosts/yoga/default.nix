@@ -8,6 +8,7 @@
       #specialArgs = { inherit inputs; };
       imports = with self.modules.nixos; [
         core
+        desktop
         user_tyron
         user_deploy
       ];

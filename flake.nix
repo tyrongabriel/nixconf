@@ -43,6 +43,16 @@
     # Nix index for comma
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Wrapping modules
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri-flake.url = "github:sodiboo/niri-flake";
   };
 
   nixConfig = {
