@@ -21,7 +21,6 @@
       config = {
         # Your configuration here
         programs.nix-index-database.comma.enable = true;
-
       };
     };
 }

@@ -13,22 +13,20 @@
           content = {
             type = "gpt";
             partitions = {
-              boot = {
-                name = "boot";
-                size = "1M";
-                type = "EF02";
-              };
               # Boot Partition
               ESP = {
                 label = "boot";
                 name = "ESP";
-                size = "1G";
+                size = "2G";
                 type = "EF00";
                 content = {
                   type = "filesystem";
                   format = "vfat";
                   mountpoint = "/boot";
-                  mountOptions = [ "defaults" ];
+                  mountOptions = [
+                    "defaults"
+                    "umask=0077"
+                  ];
                 };
               };
               # Root partition (In the future, impermanent!)
@@ -42,42 +40,42 @@
                     "-f"
                   ]; # Label it nixos
                   subvolumes = {
-                    "/root" = {
+                    "@" = {
                       mountpoint = "/";
                       mountOptions = [
-                        "subvol=root"
+                        "subvol=@" # This is the "root" part.
                         "compress=zstd"
                         "noatime"
                       ];
                     };
-                    "/home" = {
+                    "@home" = {
                       mountpoint = "/home";
                       mountOptions = [
-                        "subvol=home"
+                        "subvol=@home"
                         "compress=zstd"
                         "noatime"
                       ];
                     };
-                    "/nix" = {
+                    "@nix" = {
                       mountpoint = "/nix";
                       mountOptions = [
-                        "subvol=nix"
+                        "subvol=@nix"
                         "compress=zstd"
                         "noatime"
                       ];
                     };
-                    "/log" = {
+                    "@log" = {
                       mountpoint = "/var/log";
                       mountOptions = [
-                        "subvol=log"
+                        "subvol=@log"
                         "compress=zstd"
                         "noatime"
                       ];
                     };
-                    # "/swap" = {
-                    #   mountpoint = "/swap";
-                    #   swap.swapfile.size = "8G";
-                    # };
+                    "@swap" = {
+                      mountpoint = "/.swapvol";
+                      swap.swapfile.size = "8G";
+                    };
                   };
                 };
               };

@@ -28,7 +28,10 @@
                   type = "filesystem";
                   format = "vfat";
                   mountpoint = "/boot";
-                  mountOptions = [ "defaults" ];
+                  mountOptions = [
+                    "defaults"
+                    "umask=0077"
+                  ];
                 };
               };
               # Root partition (In the future, impermanent!)
@@ -74,10 +77,10 @@
                         "noatime"
                       ];
                     };
-                    # "/swap" = {
-                    #   mountpoint = "/swap";
-                    #   swap.swapfile.size = "8G";
-                    # };
+                    "/swap" = {
+                      mountpoint = "/.swapvol";
+                      swap.swapfile.size = "8G";
+                    };
                   };
                 };
               };
