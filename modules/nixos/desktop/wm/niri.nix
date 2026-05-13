@@ -35,6 +35,17 @@
         xdg.portal = {
           enable = true;
           xdgOpenUsePortal = true;
+          wlr.enable = true;
+          # wlr.settings = {
+          #   screencast = {
+          #     output_name = "HDMI-A-1";
+          #     max_fps = 30;
+          #     exec_before = "disable_notifications.sh";
+          #     exec_after = "enable_notifications.sh";
+          #     chooser_type = "simple";
+          #     chooser_cmd = "${pkgs.slurp}/bin/slurp -f 'Monitor: %o' -or";
+          #   };
+          # };
           extraPortals = [
             pkgs.xdg-desktop-portal-gtk
             pkgs.xdg-desktop-portal-gnome
@@ -42,9 +53,9 @@
           ];
           config = {
             common.default = [
+              "wlr"
               "gnome"
               "gtk"
-              "wlr"
             ];
           };
         };
