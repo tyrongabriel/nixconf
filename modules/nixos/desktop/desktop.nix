@@ -17,6 +17,7 @@
         self.modules.nixos.sddm
         self.modules.nixos.niri
         self.modules.nixos.greetd
+        self.modules.nixos.cosmic
       ];
       options.myNixos.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";
@@ -26,6 +27,7 @@
         programs.nix-index-database.comma.enable = true;
 
         myNixos.desktop = {
+          #cosmic.enable = true;
           greetd = {
             enable = mkDefault true;
           };

@@ -14,12 +14,17 @@
     {
       imports = [
         self.modules.homeManager.noctalia
+        self.modules.homeManager.cosmic
       ];
       options.myHome.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";
       };
       config = {
         # Your configuration here
+        myHome.desktop = {
+          noctalia.enable = true;
+        };
+
       };
     };
 }

@@ -37,7 +37,7 @@
         };
 
         programs.niri = {
-          package = niri;
+          package = pkgs.niri;
           settings = {
             # ...
             spawn-at-startup = [
@@ -54,7 +54,7 @@
         programs.noctalia-shell.settings = {
           binds = with config.lib.niri.actions; {
             # ...
-            "Mod+L".action.spawn = noctalia "lockScreen lock";
+            #"Mod+L".action.spawn = noctalia "lockScreen lock";
           };
           # configure noctalia here
           bar = {
