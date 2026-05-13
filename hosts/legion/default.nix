@@ -15,7 +15,7 @@
       config = {
         networking.hostName = "legion";
         deployment = {
-          targetHost = "192.168.8.172";
+          targetHost = "legion.netbird.cloud"; # "192.168.8.172";
           targetUser = "deploy";
           allowLocalDeployment = true;
           tags = [

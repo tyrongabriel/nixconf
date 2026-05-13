@@ -27,13 +27,17 @@
           imagemagick # Required for wallpaper/theming
         ];
 
-        home.file.".cache/noctalia/wallpapers.json" = {
-          text = builtins.toJSON {
-            defaultWallpaper = "../wallpapers/waterfall.png";
-            # wallpapers = {
-            #   "DP-1" = "/path/to/monitor/wallpaper.png";
-            # };
-          };
+        # home.file.".cache/noctalia/wallpapers.json" = {
+        #   text = builtins.toJSON {
+        #     defaultWallpaper = "../wallpapers/waterfall.png";
+        #     # wallpapers = {
+        #     #   "DP-1" = "/path/to/monitor/wallpaper.png";
+        #     # };
+        #   };
+        # };
+
+        home.file = {
+          ".face".source = ../images/catppuccin-pfp.png;
         };
 
         programs.niri = {
@@ -52,14 +56,14 @@
 
         programs.noctalia-shell.enable = true;
         programs.noctalia-shell.settings = {
-          binds = with config.lib.niri.actions; {
-            # ...
-            #"Mod+L".action.spawn = noctalia "lockScreen lock";
-          };
+          # binds = with config.lib.niri.actions; {
+          #   # ...
+          #   #"Mod+L".action.spawn = noctalia "lockScreen lock";
+          # };
           # configure noctalia here
           bar = {
             density = "compact";
-            position = "right";
+            position = "top";
             showCapsule = false;
             widgets = {
               left = [
@@ -83,7 +87,7 @@
               ];
               right = [
                 {
-                  alwaysShowPercentage = false;
+                  alwaysShowPercentage = true;
                   id = "Battery";
                   warningThreshold = 30;
                 }
@@ -97,14 +101,14 @@
               ];
             };
           };
-          colorSchemes.predefinedScheme = "Monochrome";
+          #colorSchemes.predefinedScheme = "Monochrome";
           general = {
-            avatarImage = "/home/drfoobar/.face";
+            avatarImage = "/home/${config.home.username}/.face";
             radiusRatio = 0.2;
           };
           location = {
-            monthBeforeDay = true;
-            name = "Marseille, France";
+            monthBeforeDay = false;
+            name = "Vienna, Austria";
           };
         };
         # this may also be a string or a path to a JSON file.

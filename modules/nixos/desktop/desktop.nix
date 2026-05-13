@@ -18,6 +18,7 @@
         self.modules.nixos.niri
         self.modules.nixos.greetd
         self.modules.nixos.cosmic
+        self.modules.nixos.stylix
       ];
       options.myNixos.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";

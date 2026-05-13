@@ -25,6 +25,11 @@
           noctalia.enable = true;
         };
 
+        home.packages = with pkgs; [
+          brave
+          discord
+        ];
+
       };
     };
 }
