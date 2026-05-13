@@ -14,6 +14,7 @@
     {
       imports = [
         self.modules.homeManager.noctalia
+        self.modules.homeManager.niri
         self.modules.homeManager.cosmic
       ];
       options.myHome.desktop = with lib; {
@@ -22,12 +23,15 @@
       config = {
         # Your configuration here
         myHome.desktop = {
+          niri.enable = true;
           noctalia.enable = true;
         };
 
         home.packages = with pkgs; [
           brave
           discord
+          wl-clipboard
+          cosmic-files
         ];
 
       };

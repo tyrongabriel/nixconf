@@ -102,19 +102,19 @@
         # };
 
         environment.variables = {
-          # Force Wayland for apps that support it
-          MOZ_ENABLE_WAYLAND = "1"; # For Firefox & Mozilla-based apps
-          #QT_QPA_PLATFORM = "wayland-egl"; # For Qt apps (Telegram, etc.)
-          GDK_BACKEND = "wayland"; # For GTK apps
-          SDL_VIDEODRIVER = "wayland"; # For SDL-based apps (Games, Emulators)
-          CLUTTER_BACKEND = "wayland"; # Clutter-based apps (e.g., some GNOME apps)
-          XDG_SESSION_TYPE = "wayland"; # Ensure session is Wayland
-          XDG_CURRENT_DESKTOP = "gnome"; # Set your desktop environment explicitly
+          # # Force Wayland for apps that support it
+          # MOZ_ENABLE_WAYLAND = "1"; # For Firefox & Mozilla-based apps
+          # #QT_QPA_PLATFORM = "wayland-egl"; # For Qt apps (Telegram, etc.)
+          # GDK_BACKEND = "wayland"; # For GTK apps
+          # SDL_VIDEODRIVER = "wayland"; # For SDL-based apps (Games, Emulators)
+          # CLUTTER_BACKEND = "wayland"; # Clutter-based apps (e.g., some GNOME apps)
+          # XDG_SESSION_TYPE = "wayland"; # Ensure session is Wayland
+          # XDG_CURRENT_DESKTOP = "gnome"; # Set your desktop environment explicitly
 
-          # Electron and Chromium apps (VSCode, Brave, Discord, etc.)
-          NIXOS_OZONE_WL = "1"; # Forces apps using XWayland to prefer Wayland
-          # Enables Wayland for Electron apps
-          ELECTRON_OZONE_PLATFORM_HINT = "auto"; # Ensures Electron apps use native Wayland
+          # # Electron and Chromium apps (VSCode, Brave, Discord, etc.)
+          # NIXOS_OZONE_WL = "1"; # Forces apps using XWayland to prefer Wayland
+          # # Enables Wayland for Electron apps
+          # ELECTRON_OZONE_PLATFORM_HINT = "auto"; # Ensures Electron apps use native Wayland
         };
       };
     };

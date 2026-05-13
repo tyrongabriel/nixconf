@@ -17,12 +17,15 @@
         enable = mkEnableOption "Enable greetd";
       };
       config = mkIf cfg.enable {
+        services.gnome.gnome-keyring.enable = true;
+        security.pam.services.greetd.enableGnomeKeyring = true;
+
         services.greetd = {
           enable = true;
           settings = {
             default_session = {
-              command = "${config.programs.niri.package}/bin/niri-session";
-              user = "tyron";
+              command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd ${config.programs.niri.package}/bin/niri-session";
+              user = "greeter";
             };
           };
         };

@@ -66,21 +66,21 @@
         package = config.boot.kernelPackages.nvidiaPackages.stable;
 
         ## Hybrid offload — Intel iGPU for desktop, NVIDIA on demand ##
-        # prime = {
-        #   offload = {
-        #     enable = true;
-        #     enableOffloadCmd = true;
-        #   };
-        #   # Verify on hardware: lspci | grep -E 'VGA|3D'
-        #   intelBusId = "PCI:0:2:0";
-        #   nvidiaBusId = "PCI:1:0:0";
-        # };
+        prime = {
+          offload = {
+            enable = true;
+            enableOffloadCmd = true;
+          };
+          # Verify on hardware: lspci | grep -E 'VGA|3D'
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:1:0:0";
+        };
 
-        # ## Power down dGPU when idle ##
-        # powerManagement = {
-        #   enable = true;
-        #   finegrained = true;
-        # };
+        ## Power down dGPU when idle ##
+        powerManagement = {
+          enable = true;
+          finegrained = true;
+        };
       };
 
       ## Unfree for NVIDIA proprietary driver ##

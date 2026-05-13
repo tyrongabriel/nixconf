@@ -26,6 +26,7 @@
       config = {
         # Your configuration here
         programs.nix-index-database.comma.enable = true;
+        #security.polkit.enable = true;
 
         myNixos.desktop = {
           #cosmic.enable = true;

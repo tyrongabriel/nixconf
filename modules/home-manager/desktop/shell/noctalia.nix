@@ -40,30 +40,12 @@
           ".face".source = ../images/catppuccin-pfp.png;
         };
 
-        programs.niri = {
-          package = pkgs.niri;
-          settings = {
-            # ...
-            spawn-at-startup = [
-              {
-                command = [
-                  "noctalia-shell"
-                ];
-              }
-            ];
-          };
-        };
-
         programs.noctalia-shell.enable = true;
         programs.noctalia-shell.settings = {
-          # binds = with config.lib.niri.actions; {
-          #   # ...
-          #   #"Mod+L".action.spawn = noctalia "lockScreen lock";
-          # };
-          # configure noctalia here
           bar = {
             density = "compact";
             position = "top";
+            barType = "floating";
             showCapsule = false;
             widgets = {
               left = [

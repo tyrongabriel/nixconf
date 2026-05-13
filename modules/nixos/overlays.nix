@@ -14,6 +14,13 @@
             config.allowUnfree = true;
           };
         })
+
+        (final: prev: {
+          unstable-small = import inputs.nixpkgs-unstable-small {
+            system = pkgs.stdenv.hostPlatform.system;
+            config.allowUnfree = true;
+          };
+        })
       ];
     };
 }
