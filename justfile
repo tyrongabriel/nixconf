@@ -177,9 +177,11 @@ install-nixos host ssh-host:
     echo "🔐 Extracting cluster private key for deployment..."
     mkdir -p "{{ bootstrap_dir }}/var/lib/sops-nix"
 
-    nix run nixpkgs#sops -- -d --extract '["cluster_private_key"]' secrets/secrets.yaml \
-        > "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
-    chmod 400 "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
+    if [[ ! -f "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt" ]]; then
+        nix run nixpkgs#sops -- -d --extract '["cluster_private_key"]' secrets/secrets.yaml \
+            > "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
+        chmod 400 "{{ bootstrap_dir }}/var/lib/sops-nix/cluster-key.txt"
+    fi
 
     # --- 5. Action: nixos-anywhere ---
     echo "🚀 Installing NixOS to {{ ssh-host }} (Flake attr: {{ host }})..."

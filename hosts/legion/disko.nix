@@ -7,7 +7,7 @@
     disko.devices.disk.main = {
       type = "disk";
       # The storage device
-      device = "/dev/disk/by-id/nvme-WD_PC_SN740_SDDPMQD-1T00-1101_2335QP404844";
+      device = "/dev/disk/by-id/nvme-eui.1845184226420001001b444a446ee5a2";
       content.type = "gpt";
       content.partitions.boot = {
         name = "boot";

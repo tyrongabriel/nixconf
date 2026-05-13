@@ -13,26 +13,12 @@ creation_rules:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - age17khcy56n07ffmt7l932cxgpjqgelmqpp8er8yqaqtv6xulyvvdlsm9drlz
 
-  # Rule 3: Node-Specific Secrets for hp01
-  - path_regex: ^hosts/hp01/secrets/secrets\.yaml$
+  # Rule 3: Node-Specific Secrets for legion
+  - path_regex: ^hosts/legion/secrets/secrets\.yaml$
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age14ajfue9u0xg2tyxlvvfez52d6xgeumtf8zd0fv9jsq60qgkw3yxqdg4qpz
-
-  # Rule 3: Node-Specific Secrets for ltc01
-  - path_regex: ^hosts/ltc01/secrets/secrets\.yaml$
-    key_groups:
-      - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1axa8hz7mmprv4z507n50jlggv2vnnnasa4ayaqltd50u3qhqldksn2wq0h
-
-  # Rule 3: Node-Specific Secrets for ncvps01
-  - path_regex: ^hosts/ncvps01/secrets/secrets\.yaml$
-    key_groups:
-      - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1hqrjqlm5vqmvwqg7nynskgvj3zlky5ygmn5gmces7x2l4xsnvq8sm7jefp
+        - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
 
   # Rule 3: Node-Specific Secrets for ncvps02
   - path_regex: ^hosts/ncvps02/secrets/secrets\.yaml$

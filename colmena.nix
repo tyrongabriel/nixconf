@@ -7,7 +7,7 @@
 }:
 let
   unreadyHosts = [
-    "legion"
+    #"legion"
   ];
   # List all directories in the hosts directory
   hostNames = builtins.attrNames (
