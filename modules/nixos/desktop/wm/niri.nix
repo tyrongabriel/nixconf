@@ -52,11 +52,15 @@
             pkgs.xdg-desktop-portal-wlr
           ];
           config = {
-            common.default = [
-              "wlr"
-              "gnome"
-              "gtk"
-            ];
+            common = {
+              "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+
+              default = [
+                "wlr"
+                "gnome"
+                "gtk"
+              ];
+            };
           };
         };
 
@@ -88,6 +92,7 @@
           XDG_CURRENT_DESKTOP = "niri";
           DISPLAY = ":0";
           NIXOS_OZONE_WL = "1"; # Hint for Electron/Chromium apps to use Wayland
+          GTK_USE_PORTAL = "1"; # Force GTK file dialogs through XDG portal
         };
         # Graphics drivers are crucial for Wayland compositors
         hardware.graphics.enable = true;

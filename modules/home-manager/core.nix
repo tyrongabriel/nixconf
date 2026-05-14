@@ -6,6 +6,7 @@
       imports = [
         self.modules.homeManager.cli
         self.modules.homeManager.git
+        self.modules.homeManager.ssh
       ];
       config = {
         # Base packages every home should have
