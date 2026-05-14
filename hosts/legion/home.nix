@@ -34,8 +34,8 @@
               vrr = true;
               scale = 1.0;
               mode = {
-                width = 2560;
-                height = 1440;
+                width = 1920;
+                height = 1080;
                 refresh = 144.001;
               };
             }

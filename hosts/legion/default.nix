@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.modules.nixos.host_legion =
-    { lib, ... }:
+    { lib, pkgs, ... }:
     with lib;
     {
       #system = "x86_64-linux";

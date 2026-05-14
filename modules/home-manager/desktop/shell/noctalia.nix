@@ -75,20 +75,6 @@
                   id = "VPN";
                   textColor = "none";
                 }
-                {
-                  defaultSettings = {
-                    compactMode = false;
-                    defaultPeerAction = "copy-ip";
-                    hideDisconnected = false;
-                    managementUrl = "";
-                    pingCount = 5;
-                    refreshInterval = 5000;
-                    showIpAddress = true;
-                    showPing = false;
-                    terminalCommand = "";
-                  };
-                  id = "plugin:netbird";
-                }
               ];
               center = [
                 {
