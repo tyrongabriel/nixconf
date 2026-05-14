@@ -107,6 +107,19 @@
                   pinned = [ ];
                 }
                 {
+                  defaultSettings = {
+                    activeColor = "primary";
+                    camFilterRegex = "";
+                    enableToast = true;
+                    hideInactive = false;
+                    iconSpacing = 4;
+                    inactiveColor = "none";
+                    micFilterRegex = "";
+                    removeMargins = false;
+                  };
+                  id = "plugin:privacy-indicator";
+                }
+                {
                   compactMode = true;
                   diskPath = "/";
                   iconColor = "none";
@@ -148,11 +161,54 @@
                   usePrimaryColor = true;
                 }
                 {
+                  defaultSettings = {
+                    ai = {
+                      apiKeys = { };
+                      maxHistoryLength = 100;
+                      model = "gemini-2.5-flash";
+                      openaiBaseUrl = "https://api.openai.com/v1/chat/completions";
+                      openaiLocal = false;
+                      provider = "google";
+                      systemPrompt = "You are a helpful assistant integrated into a Linux desktop shell. Be concise and helpful.";
+                      temperature = 0.7;
+                    };
+                    maxHistoryLength = 100;
+                    panelDetached = true;
+                    panelHeightRatio = 0.85;
+                    panelPosition = "right";
+                    panelWidth = 520;
+                    scale = 1;
+                    translator = {
+                      backend = "google";
+                      deeplApiKey = "";
+                      realTimeTranslation = true;
+                      sourceLanguage = "auto";
+                      targetLanguage = "en";
+                    };
+                  };
+                  id = "plugin:assistant-panel";
+                }
+                {
                   hideWhenZero = false;
                   hideWhenZeroUnread = false;
                   id = "NotificationHistory";
                   showUnreadBadge = true;
                   unreadBadgeColor = "primary";
+                }
+                {
+                  defaultSettings = {
+                    authMethod = "none";
+                    authPassword = "";
+                    authToken = "";
+                    authUsername = "";
+                    enableToasts = true;
+                    maxMessages = 100;
+                    pollInterval = 30;
+                    readMessageIds = [ ];
+                    serverUrl = "https://ntfy.sh";
+                    topics = "";
+                  };
+                  id = "plugin:ntfy-notifications";
                 }
               ];
             };
