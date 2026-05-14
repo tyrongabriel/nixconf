@@ -16,12 +16,15 @@
         self.modules.homeManager.noctalia
         self.modules.homeManager.niri
         self.modules.homeManager.cosmic
+        self.modules.homeManager.rio
+        self.modules.homeManager.alacritty
       ];
       options.myHome.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";
       };
       config = {
         # Your configuration here
+        myHome.alacritty.enable = true;
         myHome.desktop = {
           niri.enable = true;
           noctalia.enable = true;

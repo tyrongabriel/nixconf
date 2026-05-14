@@ -9,7 +9,12 @@
           niri = {
             startupCommands = [
               #"${pkgs.bitwarden-desktop}/bin/bitwarden"
-              "discord --start-minimized"
+              {
+                command = [
+                  "discord"
+                  "--start-minimized"
+                ];
+              }
             ];
           };
         };

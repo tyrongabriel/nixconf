@@ -11,7 +11,11 @@
       cfg = config.myHome.desktop.niri;
       apps = {
         browser = "brave";
-        terminal = "kitty";
+        browser-incognito = [
+          "brave"
+          "--incognito"
+        ];
+        terminal = "alacritty";
         fileManager = "cosmic-files";
         editor = "zeditor";
         #appLauncher = "${pkgs.walker}/bin/walker";
@@ -34,16 +38,24 @@
     with lib;
     {
       imports = [ ];
-      options.myHome.desktop.niri = with lib; {
+      options.myHome.desktop.niri = with lib.types; {
         enable = mkEnableOption "Enable niri";
         startupCommands = mkOption {
-          type = types.listOf types.submodule {
-            command = types.listOf types.str;
-          };
+          type = listOf (submodule {
+            options = {
+              command = mkOption {
+                type = listOf str;
+                description = "Command to run at startup, as a list of strings (e.g. [ \"discord\" \"--start-minimized\" ])";
+              };
+            };
+          });
           default = [ ];
           example = [
             {
-              command = [ "discord --start-minimized" ];
+              command = [
+                "discord"
+                "--start-minimized"
+              ];
             }
           ];
           description = "List of commands to run at startup, each command is a list of strings";
@@ -51,6 +63,7 @@
       };
       config = mkIf cfg.enable {
         # Your configuration here
+        programs.niri.settings.prefer-no-csd = true;
 
         #programs.niri.package = pkgs.niri;
         programs.niri.settings.spawn-at-startup = [
@@ -75,7 +88,8 @@
           }
           { command = [ "noctalia-shell" ]; }
           { command = [ "xwayland-satellite" ]; }
-        ];
+        ]
+        ++ cfg.startupCommands;
         # https://github.com/ctknightdev/nixos/blob/main/home/niri/keybinds.nix
         programs.niri.settings.binds = with config.lib.niri.actions; {
           "super+i".action.show-hotkey-overlay = [ ];
@@ -96,6 +110,7 @@
           "super+Space".action.spawn = noctalia "launcher toggle";
           "super+q".action = close-window;
           "super+b".action = spawn apps.browser;
+          "super+Control+B".action = spawn apps.browser-incognito;
           "super+Return".action = spawn apps.terminal;
           #    "super+Space".action = spawn apps.appLauncher;
           "super+Shift+E".action = spawn apps.fileManager;
