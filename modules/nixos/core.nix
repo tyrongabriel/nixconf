@@ -10,6 +10,7 @@
       config,
       ...
     }:
+    with lib;
     {
       imports = [
         self.modules.nixos.networking

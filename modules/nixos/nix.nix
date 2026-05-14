@@ -2,7 +2,8 @@
 
 {
   flake.modules.nixos.core =
-    { ... }:
+    { lib, ... }:
+    with lib;
     {
       nix.settings = {
         trusted-users = [ "@wheel" ];
@@ -15,6 +16,7 @@
         ];
         auto-optimise-store = true;
       };
+      nixpkgs.config.allowUnfree = mkDefault true;
 
       # 1. Make 'nix-shell -p' and 'nix shell' use the same nixpkgs as your flake
       nix.registry.nixpkgs.flake = inputs.nixpkgs;

@@ -31,6 +31,9 @@
               "dev"
               "desktop"
             ];
+            extraImports = [
+              self.modules.homeManager.legion_tyron
+            ];
           };
           ssh = {
             enable = mkForce true;

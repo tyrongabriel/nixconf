@@ -29,20 +29,19 @@
         #security.polkit.enable = true;
 
         myNixos.desktop = {
+          keyboard-vial.enable = true;
           #cosmic.enable = true;
-          greetd = {
-            enable = mkDefault true;
-          };
-          niri = {
-            enable = mkDefault true;
-          };
+          greetd.enable = mkDefault true;
+          niri.enable = mkDefault true;
         };
 
         environment.systemPackages = with pkgs; [
           # Add desktop-specific packages here
           kitty
+
         ];
 
       };
+
     };
 }

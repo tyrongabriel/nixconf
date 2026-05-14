@@ -32,8 +32,11 @@
           discord
           wl-clipboard
           cosmic-files
+          vial
         ];
 
+        # fix warnings stylix makes
+        gtk.gtk4.theme = config.gtk.theme;
       };
     };
 }

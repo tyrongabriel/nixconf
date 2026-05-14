@@ -28,7 +28,10 @@
           };
           users.tyron.homeManager = {
             enable = true;
-            tags = [ "dev" ];
+            tags = [
+              "dev"
+              "desktop"
+            ];
             #extraImports = [ self.modules.homeManager.git ];
           };
         };

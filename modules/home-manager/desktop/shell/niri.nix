@@ -13,6 +13,7 @@
         browser = "brave";
         terminal = "kitty";
         fileManager = "cosmic-files";
+        editor = "zeditor";
         #appLauncher = "${pkgs.walker}/bin/walker";
         #wayscrollshot = "${pkgs.waysc}/bin/wayscrollshot";
 
@@ -35,6 +36,18 @@
       imports = [ ];
       options.myHome.desktop.niri = with lib; {
         enable = mkEnableOption "Enable niri";
+        startupCommands = mkOption {
+          type = types.listOf types.submodule {
+            command = types.listOf types.str;
+          };
+          default = [ ];
+          example = [
+            {
+              command = [ "discord --start-minimized" ];
+            }
+          ];
+          description = "List of commands to run at startup, each command is a list of strings";
+        };
       };
       config = mkIf cfg.enable {
         # Your configuration here
@@ -85,7 +98,8 @@
           "super+b".action = spawn apps.browser;
           "super+Return".action = spawn apps.terminal;
           #    "super+Space".action = spawn apps.appLauncher;
-          "super+E".action = spawn apps.fileManager;
+          "super+Shift+E".action = spawn apps.fileManager;
+          "super+E".action = spawn apps.editor;
           "super+L".action.spawn = noctalia "lockScreen lock";
 
           # Tested with ghostty and kitty
@@ -128,8 +142,13 @@
           "super+Alt+Down".action = move-window-to-monitor-down;
           "super+Alt+Up".action = move-window-to-monitor-up;
 
-          "super+Control+Minus".action = set-column-width "-10%";
-          "super+Control+Plus".action = set-column-width "+10%";
+          "super+Minus".action = set-column-width "-10%";
+          "super+Plus".action = set-column-width "+10%";
+
+          "super+Control+Left".action = focus-monitor-left;
+          "super+Control+Right".action = focus-monitor-right;
+          "super+Control+Down".action = focus-monitor-down;
+          "super+Control+Up".action = focus-monitor-up;
 
           "super+1".action = focus-workspace "main";
           "super+2".action = focus-workspace "browser";
