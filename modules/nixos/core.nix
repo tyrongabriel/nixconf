@@ -16,6 +16,8 @@
       ];
 
       config = {
+        environment.variables.EDITOR = "nvim";
+
         environment.systemPackages = with pkgs; [
           git
           neovim

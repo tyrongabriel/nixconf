@@ -36,7 +36,6 @@ in
         };
 
         programs.zsh.enable = true;
-
         sops.secrets."tyron/password_hash" = {
           sopsFile = ../../secrets/secrets.yaml;
           key = "tyron/password_hash";

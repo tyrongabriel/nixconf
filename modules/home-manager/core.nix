@@ -12,7 +12,7 @@
         # Base packages every home should have
         home.packages = with pkgs; [
           git
-          vim
+          neovim
           ripgrep
           fd
           fzf

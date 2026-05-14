@@ -69,6 +69,8 @@
             };
             load_direnv = "shell_hook";
             agent = {
+              sidebar_side = "right";
+              dock = "right";
               favorite_models = [
                 {
                   provider = "openrouter";
@@ -84,6 +86,26 @@
                   provider = "openrouter";
                   model = "minimax/minimax-m2.7";
                   enable_thinking = false;
+                }
+                {
+                  provider = "opencode";
+                  model = "go/glm-5.1";
+                  enable_thinking = false;
+                }
+                {
+                  provider = "opencode";
+                  model = "go/minimax-m2.7";
+                  enable_thinking = false;
+                }
+                {
+                  provider = "openrouter";
+                  model = "google/gemini-3.1-flash-lite";
+                  enable_thinking = true;
+                }
+                {
+                  provider = "openrouter";
+                  model = "google/gemini-3.1-pro-preview";
+                  enable_thinking = true;
                 }
               ];
               profiles = {
@@ -106,11 +128,15 @@
               default_model = {
                 enable_thinking = false;
                 provider = "opencode";
-                model = "go/glm-5.1";
+                model = "go/minimax-m2.7";
               };
             };
 
             language_models = {
+              opencode = {
+                show_free_models = true;
+                show_zen_models = false;
+              };
               openai_compatible = {
                 Cerebras = {
                   api_url = "https://api.cerebras.ai/v1";
@@ -174,6 +200,15 @@
               mode = "system";
               light = "Catppuccin Latte";
               dark = "Catppuccin Mocha";
+            };
+
+            ui_font_family = "DejaVu Sans";
+            ui_font_size = 16.0;
+            buffer_font_family = "JetBrainsMono Nerd Font Mono";
+            buffer_font_size = 16.0;
+
+            project_panel = {
+              dock = "left";
             };
 
             vim_mode = false;

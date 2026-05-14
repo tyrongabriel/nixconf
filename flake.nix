@@ -101,6 +101,7 @@
         {
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
+              (writeShellScriptBin "apply-local" "colmena apply-local --sudo switch")
               (inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena)
               sops
               age

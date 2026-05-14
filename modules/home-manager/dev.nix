@@ -2,7 +2,7 @@
 {
   # Module aggregation for dev modules
   flake.modules.homeManager.dev =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       # import all dev-modules
       imports = [
@@ -16,6 +16,24 @@
         myHome = {
           zed-editor.enable = true;
         };
+
+
+        # Direnv
+        programs.direnv = {
+          enable = true;
+          enableZshIntegration = true;
+          silent = true;
+          nix-direnv = {
+            enable = true;
+          };
+        };
+
+        home.packages = with pkgs; [
+          devbox
+          nixd
+          nixfmt
+          alejandra
+        ];
       };
     };
 }

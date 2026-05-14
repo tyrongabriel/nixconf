@@ -39,6 +39,11 @@ in
               username = username;
               homeDirectory = "/home/${username}";
               stateVersion = osConfig.system.stateVersion;
+              sessionVariables = {
+                # SOPS_AGE_SSH_PRIVATE_KEY_FILE = "/home/tyron/.ssh/id_ed25519";
+                # SOPS_AGE_SSH_PRIVATE_KEY_CMD = "/home/tyron/.ssh/id_ed25519";
+                SOPS_AGE_KEY_FILE = "/home/tyron/.config/sops/age/key.txt";
+              };
             };
             programs.git.settings.user = {
               name = "tyrongabriel";
@@ -46,7 +51,6 @@ in
             };
 
             programs.home-manager.enable = true;
-
             imports = [
               self.modules.homeManager.core
             ]
