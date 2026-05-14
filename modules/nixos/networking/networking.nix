@@ -15,6 +15,7 @@
       imports = [
         self.modules.nixos.tailscale
         self.modules.nixos.netbird
+        self.modules.nixos.tuvpn
       ];
       options.myNixos.networking = with lib; {
         #enable = mkEnableOption "Enable networking";

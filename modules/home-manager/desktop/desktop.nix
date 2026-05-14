@@ -18,6 +18,7 @@
         self.modules.homeManager.cosmic
         self.modules.homeManager.rio
         self.modules.homeManager.alacritty
+        self.modules.homeManager.mullvad
       ];
       options.myHome.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";
@@ -86,6 +87,7 @@
       config = {
         # Your configuration here
         myHome.alacritty.enable = true;
+        myHome.mullvad.enable = true;
         myHome.desktop = {
           niri.enable = true;
           noctalia.enable = true;
@@ -102,7 +104,7 @@
           vlc
           spotify
           thunderbird
-          mullvad
+          mullvad-vpn
           vscode
         ];
 

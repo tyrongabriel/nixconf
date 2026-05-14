@@ -28,12 +28,19 @@
         programs.nix-index-database.comma.enable = true;
         #security.polkit.enable = true;
 
-        myNixos.desktop = {
-          keyboard-vial.enable = true;
-          #cosmic.enable = true;
-          greetd.enable = mkDefault true;
-          niri.enable = mkDefault true;
+        myNixos = {
+          tuvpn.enable = true;
+
+          desktop = {
+            keyboard-vial.enable = true;
+            #cosmic.enable = true;
+            greetd.enable = mkDefault true;
+            niri.enable = mkDefault true;
+          };
         };
+
+        # enabled for the daemon to run
+        services.mullvad-vpn.enable = true;
 
         environment.systemPackages = with pkgs; [
           # Add desktop-specific packages here

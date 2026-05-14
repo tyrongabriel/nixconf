@@ -42,7 +42,8 @@
           ];
           niri = {
             startupCommands = [
-              { command = [ "bitwarden" ]; }
+              { command = [ "${pkgs.bitwarden-desktop}/bin/bitwarden" ]; }
+              { command = [ "mullvad-vpn" ]; }
               # {
               #   command = [
               #     "discord"
