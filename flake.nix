@@ -101,6 +101,13 @@
         {
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
+              (writeShellScriptBin "json2nix" ''
+                #!/bin/sh
+                tmpfile=$(mktemp /tmp/json2nix.json.XXXXXX)
+                trap 'rm -f "$tmpfile"' EXIT
+                cat > "$tmpfile"
+                nix eval --impure --expr "builtins.fromJSON (builtins.readFile $tmpfile)"
+              '')
               (writeShellScriptBin "apply-local" "colmena apply-local --sudo switch")
               (inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena)
               sops

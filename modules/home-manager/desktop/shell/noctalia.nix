@@ -95,6 +95,23 @@
                   id = "Workspace";
                   labelMode = "none";
                 }
+                {
+                  compactMode = false;
+                  hideMode = "hidden";
+                  hideWhenIdle = false;
+                  id = "MediaMini";
+                  maxWidth = 500;
+                  panelShowAlbumArt = true;
+                  scrollingMode = "hover";
+                  showAlbumArt = true;
+                  showArtistFirst = true;
+                  showProgressRing = true;
+                  showVisualizer = true;
+                  textColor = "none";
+                  useFixedWidth = false;
+                  visualizerType = "linear";
+                }
+
               ];
               right = [
                 {
