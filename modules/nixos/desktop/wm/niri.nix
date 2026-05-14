@@ -57,8 +57,8 @@
 
               default = [
                 "wlr"
-                "gnome"
                 "gtk"
+                "gnome"
               ];
             };
           };

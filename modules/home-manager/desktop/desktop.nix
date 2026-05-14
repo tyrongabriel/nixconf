@@ -106,7 +106,18 @@
           thunderbird
           mullvad-vpn
           vscode
+          oculante # image viewer
         ];
+
+        xdg.mimeApps = {
+          enable = true;
+          defaultApplications = {
+            "image/png" = [ "oculante.desktop" ];
+            "image/jpeg" = [ "oculante.desktop" ];
+            "image/gif" = [ "oculante.desktop" ];
+            "image/webp" = [ "oculante.desktop" ];
+          };
+        };
 
         # fix warnings stylix makes
         gtk.gtk4.theme = config.gtk.theme;
