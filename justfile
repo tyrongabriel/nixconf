@@ -39,10 +39,10 @@ init-cluster:
     mkdir -p sops secrets
 
     # 1. Ask for maintainer key if not configured
-    if [[ ! -f "sops/keys.json" ]] || ! grep -q "maintainer" "sops/keys.json"; then
+    if [[ ! -f "sops/keys.json" ]] || ! grep -q "maintainers" "sops/keys.json"; then
         echo "🔑 Enter your personal Maintainer AGE Public Key (age1...):"
         read MAINTAINER_KEY
-        echo "{ \"maintainer\": \"$MAINTAINER_KEY\" }" > sops/keys.json
+        echo "{ \"maintainers\": [\"$MAINTAINER_KEY\"] }" > sops/keys.json
     else
         echo "✅ Maintainer key already exists."
     fi
@@ -85,7 +85,6 @@ regenerate-sops:
         exit 1
     fi
 
-    MAINTAINER=$(nix run nixpkgs#jq -- -r '.maintainer' sops/keys.json)
     CLUSTER=$(nix run nixpkgs#jq -- -r '.["cluster-key"]' sops/keys.json)
 
     echo "⚙️ Regenerating .sops.yaml..."
@@ -96,14 +95,18 @@ regenerate-sops:
     echo "  - path_regex: ^secrets/secrets\.yaml$" >> .sops.yaml
     echo "    key_groups:" >> .sops.yaml
     echo "      - age:" >> .sops.yaml
-    echo "        - $MAINTAINER" >> .sops.yaml
+    nix run nixpkgs#jq -- -r '.maintainers[]' sops/keys.json | while read -r MAINTAINER; do
+        echo "        - $MAINTAINER" >> .sops.yaml
+    done
     echo "        - $CLUSTER" >> .sops.yaml
     echo "" >> .sops.yaml
     echo "  # Rule 2: Shared Host Secrets" >> .sops.yaml
     echo "  - path_regex: ^hosts/[^/]+/secrets/shared\.secrets\.yaml$" >> .sops.yaml
     echo "    key_groups:" >> .sops.yaml
     echo "      - age:" >> .sops.yaml
-    echo "        - $MAINTAINER" >> .sops.yaml
+    nix run nixpkgs#jq -- -r '.maintainers[]' sops/keys.json | while read -r MAINTAINER; do
+        echo "        - $MAINTAINER" >> .sops.yaml
+    done
     echo "        - $CLUSTER" >> .sops.yaml
 
     # Write rules for specific hosts
@@ -118,17 +121,21 @@ regenerate-sops:
         echo "  - path_regex: ^hosts/$HOST/secrets/secrets\.yaml$" >> .sops.yaml
         echo "    key_groups:" >> .sops.yaml
         echo "      - age:" >> .sops.yaml
-        echo "        - $MAINTAINER" >> .sops.yaml
+        nix run nixpkgs#jq -- -r '.maintainers[]' sops/keys.json | while read -r MAINTAINER; do
+            echo "        - $MAINTAINER" >> .sops.yaml
+        done
         echo "        - $HOST_KEY" >> .sops.yaml
     done
 
     # Fallback Rule for uninitialized host secrets files
     echo "" >> .sops.yaml
-    echo "  # Rule 4: Fallback for any other secrets.yaml (Maintainer only)" >> .sops.yaml
+    echo "  # Rule 4: Fallback for any other secrets.yaml (Maintainers only)" >> .sops.yaml
     echo "  - path_regex: ^hosts/[^/]+/secrets/.*secrets\.yaml$" >> .sops.yaml
     echo "    key_groups:" >> .sops.yaml
     echo "      - age:" >> .sops.yaml
-    echo "        - $MAINTAINER" >> .sops.yaml
+    nix run nixpkgs#jq -- -r '.maintainers[]' sops/keys.json | while read -r MAINTAINER; do
+        echo "        - $MAINTAINER" >> .sops.yaml
+    done
 
     echo "✅ .sops.yaml successfully generated."
 

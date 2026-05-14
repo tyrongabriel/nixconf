@@ -4,6 +4,7 @@ creation_rules:
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age17khcy56n07ffmt7l932cxgpjqgelmqpp8er8yqaqtv6xulyvvdlsm9drlz
 
   # Rule 2: Shared Host Secrets
@@ -11,6 +12,7 @@ creation_rules:
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age17khcy56n07ffmt7l932cxgpjqgelmqpp8er8yqaqtv6xulyvvdlsm9drlz
 
   # Rule 3: Node-Specific Secrets for legion
@@ -18,6 +20,7 @@ creation_rules:
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
 
   # Rule 3: Node-Specific Secrets for ncvps02
@@ -25,6 +28,7 @@ creation_rules:
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
 
   # Rule 3: Node-Specific Secrets for yoga
@@ -32,10 +36,12 @@ creation_rules:
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
 
-  # Rule 4: Fallback for any other secrets.yaml (Maintainer only)
+  # Rule 4: Fallback for any other secrets.yaml (Maintainers only)
   - path_regex: ^hosts/[^/]+/secrets/.*secrets\.yaml$
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
