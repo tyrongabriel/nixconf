@@ -1,7 +1,12 @@
 { ... }:
 {
   flake.modules.homeManager.legion_tyron =
-    { config, lib, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     with lib;
     {
       myHome = {
@@ -37,7 +42,7 @@
           ];
           niri = {
             startupCommands = [
-              "${pkgs.bitwarden-desktop}/bin/bitwarden"
+              { command = [ "bitwarden" ]; }
               # {
               #   command = [
               #     "discord"
