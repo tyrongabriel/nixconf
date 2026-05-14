@@ -123,6 +123,14 @@
           "super+Shift+Down".action = move-column-to-workspace-down;
           "super+Shift+Up".action = move-column-to-workspace-up;
 
+          "super+Alt+Left".action = move-window-to-monitor-left;
+          "super+Alt+Right".action = move-window-to-monitor-right;
+          "super+Alt+Down".action = move-window-to-monitor-down;
+          "super+Alt+Up".action = move-window-to-monitor-up;
+
+          "super+Control+Minus".action = set-column-width "-10%";
+          "super+Control+Plus".action = set-column-width "+10%";
+
           "super+1".action = focus-workspace "main";
           "super+2".action = focus-workspace "browser";
           "super+3".action = focus-workspace "discord";
