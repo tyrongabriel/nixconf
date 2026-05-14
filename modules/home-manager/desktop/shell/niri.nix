@@ -63,8 +63,11 @@
       };
       config = mkIf cfg.enable {
         # Your configuration here
-        programs.niri.settings.prefer-no-csd = true;
-
+        programs.niri.settings = {
+          input.mouse.accel-profile = "flat";
+          input.mouse.accel-speed = 0.0;
+          prefer-no-csd = true;
+        };
         #programs.niri.package = pkgs.niri;
         programs.niri.settings.spawn-at-startup = [
           # 1. Sync DBus/Systemd environment (Fixes most Wayland-related crashes/hangs)
@@ -90,6 +93,7 @@
           { command = [ "xwayland-satellite" ]; }
         ]
         ++ cfg.startupCommands;
+
         # https://github.com/ctknightdev/nixos/blob/main/home/niri/keybinds.nix
         programs.niri.settings.binds = with config.lib.niri.actions; {
           "super+i".action.show-hotkey-overlay = [ ];
