@@ -36,6 +36,13 @@
           wl-clipboard
           cosmic-files
           vial
+          yaak
+          signal-desktop
+          vlc
+          spotify
+          thunderbird
+          mullvad
+          vscode
         ];
 
         # fix warnings stylix makes

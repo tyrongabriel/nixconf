@@ -17,7 +17,6 @@
           zed-editor.enable = true;
         };
 
-
         # Direnv
         programs.direnv = {
           enable = true;

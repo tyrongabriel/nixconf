@@ -42,6 +42,8 @@
           alacritty
         ];
 
+        services.printing.enable = true;
+
       };
 
     };

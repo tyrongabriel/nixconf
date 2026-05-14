@@ -40,7 +40,14 @@
           openssl
           yq
           busybox
+          wireguard-tools
+          wireshark
         ];
+
+        # Unpatched binaries
+        programs.nix-ld = {
+          enable = true;
+        };
       };
     };
 }

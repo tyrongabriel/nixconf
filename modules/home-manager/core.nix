@@ -25,6 +25,15 @@
           pass
           btop
           lnav
+          tmux
+          zellij
+          tldr
+          nmap
+          dig
+          btop
+          yazi
+          unzip
+          fastfetch
         ];
 
         myHome = {
