@@ -9,6 +9,7 @@
     }:
     let
       cfg = config.myHome.desktop.noctalia;
+      desktopCfg = config.myHome.desktop;
     in
     with lib;
     {
@@ -34,7 +35,7 @@
           bar = {
             barType = "floating";
             position = "top";
-            monitors = [ ];
+            monitors = lib.map (m: m.id) (lib.filter (m: m.bar == true) desktopCfg.monitors);
             density = "compact";
             showOutline = false;
             showCapsule = false;

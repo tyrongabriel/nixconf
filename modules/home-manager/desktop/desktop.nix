@@ -21,6 +21,67 @@
       ];
       options.myHome.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";
+        monitors = mkOption {
+          type = lib.types.listOf (
+            lib.types.submodule {
+              options = {
+                name = mkOption {
+                  type = lib.types.str;
+                  description = "Display name (e.g. 'Some cool name')";
+                };
+                id = mkOption {
+                  type = lib.types.str;
+                  description = "Output identifier (e.g. 'hdmi-1', 'eDP-1')";
+                };
+                primary = mkOption {
+                  type = lib.types.bool;
+                  default = false;
+                  description = "Whether this is the primary monitor";
+                };
+                vrr = mkOption {
+                  type = lib.types.bool;
+                  default = false;
+                  description = "Enable variable refresh rate (VRR)";
+                };
+                bar = mkOption {
+                  type = lib.types.bool;
+                  default = false;
+                  description = "Whether to show the bar on this monitor";
+                };
+                scale = mkOption {
+                  type = lib.types.float;
+                  default = 1.0;
+                  description = "Display scale";
+                };
+                mode = mkOption {
+                  type = lib.types.submodule {
+                    options = {
+                      height = mkOption {
+                        type = lib.types.nullOr lib.types.int;
+                        default = null;
+                        description = "Height in pixels";
+                      };
+                      width = mkOption {
+                        type = lib.types.nullOr lib.types.int;
+                        default = null;
+                        description = "Width in pixels";
+                      };
+                      refresh = mkOption {
+                        type = lib.types.nullOr lib.types.float;
+                        default = null;
+                        description = "Refresh rate in Hz";
+                      };
+                    };
+                  };
+                  default = { };
+                  description = "Display mode settings";
+                };
+              };
+            }
+          );
+          default = [ ];
+          description = "List of monitor configurations";
+        };
       };
       config = {
         # Your configuration here

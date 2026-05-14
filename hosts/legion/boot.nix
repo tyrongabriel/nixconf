@@ -4,6 +4,7 @@
     { config, lib, ... }:
     with lib;
     {
+      networking.dhcpcd.wait = "background"; # makes boot faster by not waiting for network
       ## Boot Config ##
       boot = {
         supportedFilesystems = lib.mkForce [ "btrfs" ];
