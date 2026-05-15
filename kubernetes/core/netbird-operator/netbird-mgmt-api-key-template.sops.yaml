@@ -1,32 +1,41 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: netbird-mgmt-api-key
-  namespace: netbird
+    name: netbird-mgmt-api-key
+    namespace: netbird
 type: Opaque
 stringData:
-  NB_API_KEY: ENC[AES256_GCM,data:gxaSYkvHgPTvjksoOvwf3tFfOJndq4/Vl7WtrhoqCPWrb2mqNednzg==,iv:LWQWnqk7s8vjMnGpLhSlUP0SoQsBjWdcdrP2i3GHKHQ=,tag:WjI4mzqDvFcT+BDQ5r+ayw==,type:str]
+    NB_API_KEY: ENC[AES256_GCM,data:gxaSYkvHgPTvjksoOvwf3tFfOJndq4/Vl7WtrhoqCPWrb2mqNednzg==,iv:LWQWnqk7s8vjMnGpLhSlUP0SoQsBjWdcdrP2i3GHKHQ=,tag:WjI4mzqDvFcT+BDQ5r+ayw==,type:str]
 sops:
-  age:
-    - recipient: age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-      enc: |
-        -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMMFZBaWxWaXNUZitsdHJV
-        VGU0SDAwcWJkdUtjNTFxSjRKcEw1TVR4MnhJCmVwMjA2UjczSlNvRzgzVmY5UGJ6
-        dUhucHcvK3Z3cElPUFQ3K2U1MHNLS00KLS0tIDFvc0FBZXo1alBOVmxudXdWOVhu
-        c1JsbkFFdTF1TndKbVZKcWN0NFcwWTQK35CIz14yN5GOBcG9tClgC/qdq8Kh4I1e
-        4714gldwgP4YSkGHMTFyzPcDWTP/5Mn7f6CBGYFO3B7e9Wstjj2Hpw==
-        -----END AGE ENCRYPTED FILE-----
-    - recipient: age14rr3w2m7egq0tx8l89fzd0d8ldgdfw6tmxpc4csjgtulwd949eesuuxslr
-      enc: |
-        -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3RlZ1UCtGRHVJbnRzdS96
-        cU9naFUzVWg5NnR3UjVwQW0wem5XS1hscmhRClVFZmIxQmhRaGd1b1pNbDJvNzQz
-        bXhKcXdRclJkOTJnZGtxYU5zcTFvSk0KLS0tIEcyTU1RYlFpZXcxcmw1RkF2REdi
-        V2t6ZFc5RG9uTW4zdlVFdEdnRGZTbGsKPnDPCEao0hXVCIluVXuJzEJTQ+lNCf8N
-        kUijFCKa852+tOH63Dcpm+FaBk9RnlX0sf0ZECXkmxvGmS7tfZqG4A==
-        -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-27T11:20:24Z"
-  mac: ENC[AES256_GCM,data:TBDE2nWiYoaOfv/tJ1ZmzwVi8qF44O++zjcyoO/tLEWIVMygIuNYnjfLJUJJnfpL3XR3QOZKsGLGJzfYbmutEqxk0WAiKfzLi275tPmavd/v951pwKsuqsI2GTNtlbDdUrWDDq1DXbqp/fGUJJH7x51+ri02GwCnTi22Qbxgj4U=,iv:+ZplqqCK1QFBBunIvyZQ7nIvyzqRHn3x0+ILXBjE4DA=,tag:QUAqYwuMvRguTxxHK1nggw==,type:str]
-  encrypted_regex: ^(data|stringData)$
-  version: 3.12.2
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYdXRDUnU4L2NnT2FpTTNi
+            QklNZW1KeHRQMmkyWHVzc1dGS0ZnYUk5c2cwCnVvb3hGZ0JpdnNnNUxoSzZQSDAw
+            aDBiM2M2MUdJSno0U085MzVYaUtlM3cKLS0tIHFlZFJHeFZIa3ErS25maVUvMHA5
+            dy95QnE1S0UyeFpHWUk2WklFTnNkL1kKA5gR4Ckb1UYr2v5qaVYHrDs8vc/poMnr
+            RHmBeotxam6G01xZk3ZwfoJNVnIGtw3IB4F1zNUEIWpqxye0TjpNTg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArWGNPSjVGWFVnQWwyMDZX
+            VmZtT0pvYk51ekJqdm5KdFFYUGxVaG5FbWtFCmN5a1NKMUpYbFJ5Rjd2Z24rQlk4
+            S1JYMy9XcHJDK1g2VmdpQ2tZckNLMzQKLS0tIEFlTndLZ21OaTQwWFRueWFKK0Iv
+            Rk8yd3NvOW1UNnlFcHlHNTYrVCtWODgKY0YDfIGRmKguR39cFvclvOoznqx4GZ1X
+            qQvzkuaO+9q7lviIbLmxpCVJhoVecpR06Aflody4V+xOdXtgGAH+qw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBodUtuOEkyMzA2dy81eUpv
+            a0ZFSFk4T3BYT05EdDBORGxJM3k3VTVvZTJrCjVQaGpMZFM0VVlSNjZQdE41NS9T
+            TFhRbUtyWVhCdCs5MjFnREhaZEI2bDQKLS0tIHFPSkVjc3JRYUxjL2lKQ0ZyZHMw
+            dVpBd1NMSXZ6WnNCOEpINWZkbHRiZ2sKfRmN+D84EPCiilYSvqKkIhnlEPMg2iS1
+            BSyTX8/eAAqmSyxz5qJUN778xpf0ga2Gd15vHy5Mur+Mm3ECy6/N5w==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age14rr3w2m7egq0tx8l89fzd0d8ldgdfw6tmxpc4csjgtulwd949eesuuxslr
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-04-27T11:20:24Z"
+    mac: ENC[AES256_GCM,data:TBDE2nWiYoaOfv/tJ1ZmzwVi8qF44O++zjcyoO/tLEWIVMygIuNYnjfLJUJJnfpL3XR3QOZKsGLGJzfYbmutEqxk0WAiKfzLi275tPmavd/v951pwKsuqsI2GTNtlbDdUrWDDq1DXbqp/fGUJJH7x51+ri02GwCnTi22Qbxgj4U=,iv:+ZplqqCK1QFBBunIvyZQ7nIvyzqRHn3x0+ILXBjE4DA=,tag:QUAqYwuMvRguTxxHK1nggw==,type:str]
+    version: 3.12.2

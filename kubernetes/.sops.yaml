@@ -1,5 +1,6 @@
 keys:
   - &maintainer "age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f"
+  - &maintainer_legion "age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r"
   - &cluster "age14rr3w2m7egq0tx8l89fzd0d8ldgdfw6tmxpc4csjgtulwd949eesuuxslr"
 
 creation_rules:
@@ -8,6 +9,7 @@ creation_rules:
     key_groups:
       - age:
           - *maintainer
+          - *maintainer_legion
 
   # 2. General rule for all other directories (Maintainer + Cluster)
   - path_regex: ^.*(secrets|\.secrets|\.sops|\.enc)\.yaml$
@@ -15,4 +17,5 @@ creation_rules:
     key_groups:
       - age:
           - *maintainer
+          - *maintainer_legion
           - *cluster
