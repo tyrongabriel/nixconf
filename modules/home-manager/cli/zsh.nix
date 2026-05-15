@@ -68,6 +68,9 @@
             lah = "eza -lahg --icons";
             fzfb = "fzf --preview='bat --color=always {}'";
             cd = "z";
+            zj = "zellij";
+            zja = "zellij attach";
+            zjl = "zellij list-sessions";
             # Git
             g = "git";
             ga = "git add";

@@ -22,7 +22,23 @@
         programs.alacritty = {
           enable = true;
           package = pkgs.alacritty;
+          settings = {
+            env.TERM = "xterm-256color";
+            window.opacity = lib.mkForce 0.9;
+          };
         };
+
+        home.packages = with pkgs; [
+          ffmpegthumbnailer # For video previews
+          unzip # For archive previews
+          jq # For JSON previews
+          poppler # For PDF previews
+          fd # Better file searching
+          ripgrep # Better content searching
+          fzf # Fuzzy finding
+          imagemagick # For image manipulation/previews
+          ueberzugpp
+        ];
       };
     };
 }

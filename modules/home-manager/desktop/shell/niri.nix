@@ -111,7 +111,7 @@
             "XF86AudioPrev".action.spawn = noctalia "media previous";
 
             "super+Space".action.spawn = noctalia "launcher toggle";
-            "super+q".action = close-window;
+            "super+w".action = close-window;
             "super+b".action = spawn apps.browser;
             "super+Control+B".action = spawn apps.browser-incognito;
             "super+Return".action = spawn apps.terminal;
@@ -137,7 +137,7 @@
             "super+shift+f".action = maximize-column;
             "super+t".action = toggle-window-floating;
 
-            "super+shift+w".action.screenshot = [ ];
+            "super+shift+control+s".action.screenshot = [ ];
             "super+shift+s".action.screenshot-window = [ ];
             # The "Infinite Canvas" Screenshot
             #"super+shift+control+s".action.spawn = [
