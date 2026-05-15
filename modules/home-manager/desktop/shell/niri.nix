@@ -19,6 +19,7 @@
         terminal = "ghostty";
         fileManager = "cosmic-files";
         editor = "zeditor";
+        discord = "discord";
         #appLauncher = "${pkgs.walker}/bin/walker";
         #wayscrollshot = "${pkgs.waysc}/bin/wayscrollshot";
 
@@ -113,6 +114,7 @@
             "super+Space".action.spawn = noctalia "launcher toggle";
             "super+w".action = close-window;
             "super+b".action = spawn apps.browser;
+            "super+d".action = spawn apps.discord;
             "super+Control+B".action = spawn apps.browser-incognito;
             "super+Return".action = spawn apps.terminal;
             #    "super+Space".action = spawn apps.appLauncher;

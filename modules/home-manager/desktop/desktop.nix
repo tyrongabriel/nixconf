@@ -17,7 +17,6 @@
         self.modules.homeManager.niri
         self.modules.homeManager.cosmic
         self.modules.homeManager.terminal
-        self.modules.homeManager.mullvad
       ];
       options.myHome.desktop = with lib; {
         #enable = mkEnableOption "Enable desktop";
@@ -87,10 +86,10 @@
         # Your configuration here
         myHome = {
           spotify.enable = true;
+          nixcord.enable = true;
           zed-editor.enable = true;
           alacritty.enable = true;
           ghostty.enable = true;
-          mullvad.enable = true;
           desktop = {
             niri.enable = true;
             noctalia.enable = true;
@@ -99,7 +98,7 @@
 
         home.packages = with pkgs; [
           brave
-          discord
+          #discord # do not install if using nixcord
           wl-clipboard
           cosmic-files
           vial

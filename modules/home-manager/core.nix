@@ -7,8 +7,10 @@
         self.modules.homeManager.cli
         self.modules.homeManager.git
         self.modules.homeManager.ssh
+        self.modules.homeManager.mullvad
       ];
       config = {
+        myHome.mullvad.enable = true;
         # Base packages every home should have
         home.packages = with pkgs; [
           git

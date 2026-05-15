@@ -42,6 +42,7 @@
     };
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    nixcord.url = "github:FlameFlag/nixcord";
 
     talhelper = {
       url = "github:budimanjojo/talhelper";
