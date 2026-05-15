@@ -195,7 +195,7 @@
               metrics = false;
             };
 
-            theme = lib.mkForce "Catppuccin Mocha";
+            #theme = lib.mkForce "Catppuccin Mocha";
             icon_theme = {
               mode = "system";
               light = "Catppuccin Latte";
