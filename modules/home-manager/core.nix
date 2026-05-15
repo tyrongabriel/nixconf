@@ -45,8 +45,6 @@
           neovim.enable = true;
         };
 
-        stylix.targets.neovim.enable = false;
-
         myHome = {
           git.enable = true;
           zsh.enable = true;
