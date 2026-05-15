@@ -7,7 +7,6 @@
       # import all dev-modules
       imports = [
         self.modules.homeManager.zed-editor
-        self.modules.homeManager.zellij
         #self.modules.homeManager.git
       ];
       config = {

@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.zellij =
+  flake.modules.homeManager.cli =
     {
       config,
       pkgs,
