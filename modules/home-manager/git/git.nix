@@ -67,13 +67,9 @@
 
         # Configure ssh to use the right keys
         programs.ssh = {
-          enableDefaultConfig = false;
           includes = [ "~/.ssh/config_custom" ];
           enable = true;
           matchBlocks = {
-            "*" = {
-              identityFile = "~/.ssh/id_ed25519";
-            };
             "github.com" = {
               identityFile = "~/.ssh/id_ed25519";
               user = "git";

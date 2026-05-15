@@ -26,6 +26,9 @@
         # Stylix imported as flake
         stylix = {
           enable = lib.mkDefault true;
+          opacity = {
+            terminal = 0.5;
+          };
 
           # The whole nixpkgs.config while using useGlobalPkgs:
           # https://github.com/danth/stylix/issues/865

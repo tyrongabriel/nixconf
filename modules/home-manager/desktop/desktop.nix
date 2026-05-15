@@ -16,8 +16,7 @@
         self.modules.homeManager.noctalia
         self.modules.homeManager.niri
         self.modules.homeManager.cosmic
-        self.modules.homeManager.rio
-        self.modules.homeManager.alacritty
+        self.modules.homeManager.terminal
         self.modules.homeManager.mullvad
       ];
       options.myHome.desktop = with lib; {
@@ -86,11 +85,14 @@
       };
       config = {
         # Your configuration here
-        myHome.alacritty.enable = true;
-        myHome.mullvad.enable = true;
-        myHome.desktop = {
-          niri.enable = true;
-          noctalia.enable = true;
+        myHome = {
+          alacritty.enable = true;
+          ghostty.enable = true;
+          mullvad.enable = true;
+          desktop = {
+            niri.enable = true;
+            noctalia.enable = true;
+          };
         };
 
         home.packages = with pkgs; [

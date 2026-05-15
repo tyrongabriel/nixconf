@@ -39,6 +39,8 @@
           enableZshIntegration = true;
         };
 
+        programs.fastfetch.enable = true;
+
         programs.starship = {
           enable = true;
           enableZshIntegration = true;

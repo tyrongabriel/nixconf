@@ -23,6 +23,19 @@
       config = {
         # Your configuration here
         home.file.".ssh/config_custom".text = cfg.customConfig;
+        programs.ssh = {
+          enable = true;
+          enableDefaultConfig = false;
+          includes = [ "~/.ssh/config_custom" ];
+          matchBlocks = {
+            "*" = {
+              identityFile = "~/.ssh/id_ed25519";
+              setEnv = {
+                TERM = "xterm-256color";
+              };
+            };
+          };
+        };
 
       };
     };

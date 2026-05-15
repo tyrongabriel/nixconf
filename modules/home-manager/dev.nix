@@ -7,6 +7,7 @@
       # import all dev-modules
       imports = [
         self.modules.homeManager.zed-editor
+        self.modules.homeManager.zellij
         #self.modules.homeManager.git
       ];
       config = {
@@ -15,6 +16,7 @@
         #
         myHome = {
           zed-editor.enable = true;
+          zellij.enable = true;
         };
 
         # Direnv

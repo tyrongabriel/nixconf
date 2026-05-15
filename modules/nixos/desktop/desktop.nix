@@ -45,7 +45,6 @@
         environment.systemPackages = with pkgs; [
           # Add desktop-specific packages here
           kitty
-          rio
           alacritty
         ];
 

@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.alacritty =
+  flake.modules.homeManager.terminal =
     {
       config,
       pkgs,
@@ -24,7 +24,7 @@
           package = pkgs.alacritty;
           settings = {
             env.TERM = "xterm-256color";
-            window.opacity = lib.mkForce 0.9;
+            #window.opacity = lib.mkForce 0.9;
           };
         };
 

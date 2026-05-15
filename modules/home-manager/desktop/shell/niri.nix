@@ -16,7 +16,7 @@
           "brave"
           "--incognito"
         ];
-        terminal = "alacritty";
+        terminal = "ghostty";
         fileManager = "cosmic-files";
         editor = "zeditor";
         #appLauncher = "${pkgs.walker}/bin/walker";

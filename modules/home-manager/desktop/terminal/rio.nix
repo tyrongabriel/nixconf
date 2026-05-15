@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.rio =
+  flake.modules.homeManager.terminal =
     {
       config,
       pkgs,
