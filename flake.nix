@@ -41,6 +41,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
     talhelper = {
       url = "github:budimanjojo/talhelper";
       inputs.nixpkgs.follows = "nixpkgs";

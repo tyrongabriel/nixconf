@@ -24,6 +24,23 @@
           noctalia-qs
           brightnessctl
           imagemagick
+
+          # screen toolkit deps https://noctalia.dev/plugins/screen-toolkit
+          grim
+          slurp
+          wl-clipboard
+          tesseract
+          imagemagick
+          zbar
+          curl
+          ffmpeg
+          jq
+          wl-screenrec
+          python3
+          hyprpicker
+          translate-shell
+          gifski
+          zenity
         ];
 
         home.file = {

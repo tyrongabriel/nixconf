@@ -86,6 +86,8 @@
       config = {
         # Your configuration here
         myHome = {
+          spotify.enable = true;
+          zed-editor.enable = true;
           alacritty.enable = true;
           ghostty.enable = true;
           mullvad.enable = true;
@@ -104,7 +106,7 @@
           yaak
           signal-desktop
           vlc
-          spotify
+          #spotify # do not install if using spicetify
           thunderbird
           mullvad-vpn
           vscode

@@ -6,7 +6,6 @@
     {
       # import all dev-modules
       imports = [
-        self.modules.homeManager.zed-editor
         #self.modules.homeManager.git
       ];
       config = {
@@ -14,7 +13,6 @@
         #programs.zed-editor.enable = true;
         #
         myHome = {
-          zed-editor.enable = true;
           zellij.enable = true;
         };
 

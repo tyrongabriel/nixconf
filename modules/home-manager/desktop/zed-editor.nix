@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.zed-editor =
+  flake.modules.homeManager.desktop =
     {
       config,
       pkgs,
