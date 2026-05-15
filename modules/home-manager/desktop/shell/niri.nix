@@ -133,8 +133,8 @@
               #"--quick-access"
             ];
 
-            "super+f".action = fullscreen-window;
-            "super+shift+f".action = maximize-column;
+            "super+shift+f".action = fullscreen-window;
+            "super+f".action = maximize-column;
             "super+t".action = toggle-window-floating;
 
             "super+shift+s".action.screenshot = [ ];
