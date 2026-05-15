@@ -19,6 +19,13 @@
       config = {
         environment.variables.EDITOR = "nvim";
 
+        boot.tmp.cleanOnBoot = true;
+
+        programs = {
+          zsh.enable = true;
+          fish.enable = true;
+        };
+
         environment.systemPackages = with pkgs; [
           git
           neovim

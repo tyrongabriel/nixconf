@@ -14,7 +14,6 @@
         # Base packages every home should have
         home.packages = with pkgs; [
           git
-          neovim
           ripgrep
           fd
           fzf
@@ -37,6 +36,16 @@
           unzip
           fastfetch
         ];
+
+        programs = {
+          bat.enable = true;
+          fzf.enable = true;
+          btop.enable = true;
+          lazygit.enable = true;
+          neovim.enable = true;
+        };
+
+        stylix.targets.neovim.enable = false;
 
         myHome = {
           git.enable = true;
