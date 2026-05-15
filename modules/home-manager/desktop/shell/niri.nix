@@ -118,7 +118,7 @@
             #    "super+Space".action = spawn apps.appLauncher;
             "super+Shift+E".action = spawn apps.fileManager;
             "super+E".action = spawn apps.editor;
-            "super+L".action.spawn = noctalia "lockScreen lock";
+            "super+Escape".action.spawn = noctalia "lockScreen lock";
 
             # Tested with ghostty and kitty
             # "super+m".action = spawn apps.terminal [
@@ -137,36 +137,57 @@
             "super+shift+f".action = maximize-column;
             "super+t".action = toggle-window-floating;
 
-            "super+shift+control+s".action.screenshot = [ ];
-            "super+shift+s".action.screenshot-window = [ ];
+            "super+shift+s".action.screenshot = [ ];
+            "super+shift+control+s".action.screenshot-window = [ ];
             # The "Infinite Canvas" Screenshot
             #"super+shift+control+s".action.spawn = [
             #  "${apps.wayscrollshot}"
             #  "-c"
             #]; # -c copies to clipboard
 
-            "super+Left".action = focus-column-left;
-            "super+Right".action = focus-column-right;
-            "super+Down".action = focus-workspace-down;
-            "super+Up".action = focus-workspace-up;
+            # Vim-style navigation
+            "super+h".action = focus-window-up-or-column-left;
+            "super+l".action = focus-window-down-or-column-right;
+            #"super+j".action = focus-window-down;
+            #"super+k".action = focus-window-up;
 
-            "super+Shift+Left".action = move-column-left;
-            "super+Shift+Right".action = move-column-right;
-            "super+Shift+Down".action = move-column-to-workspace-down;
-            "super+Shift+Up".action = move-column-to-workspace-up;
+            "super+Shift+h".action = move-column-left;
+            "super+Shift+l".action = move-column-right;
+            "super+Shift+j".action = move-window-down-or-to-workspace-down;
+            "super+Shift+k".action = move-window-up-or-to-workspace-up;
 
-            "super+Alt+Left".action = move-window-to-monitor-left;
-            "super+Alt+Right".action = move-window-to-monitor-right;
-            "super+Alt+Down".action = move-window-to-monitor-down;
-            "super+Alt+Up".action = move-window-to-monitor-up;
+            # Monitor navigation
+            "super+Alt+h".action = focus-monitor-left;
+            "super+Alt+l".action = focus-monitor-right;
+            "super+Alt+j".action = focus-monitor-down;
+            "super+Alt+k".action = focus-monitor-up;
 
-            "super+Minus".action = set-column-width "-10%";
-            "super+Plus".action = set-column-width "+10%";
+            # Move column to monitor
+            "super+Shift+Alt+h".action = move-column-to-monitor-left;
+            "super+Shift+Alt+l".action = move-column-to-monitor-right;
+            "super+Shift+Alt+j".action = move-column-to-monitor-down;
+            "super+Shift+Alt+k".action = move-column-to-monitor-up;
 
-            "super+Control+Left".action = focus-monitor-left;
-            "super+Control+Right".action = focus-monitor-right;
-            "super+Control+Down".action = focus-monitor-down;
-            "super+Control+Up".action = focus-monitor-up;
+            # Consume/expel windows
+            "super+Shift+Alt+Ctrl+h".action = consume-or-expel-window-left;
+            "super+Shift+Alt+Ctrl+l".action = consume-or-expel-window-right;
+
+            # Workspace navigation
+            "super+j".action = focus-workspace-down;
+            "super+k".action = focus-workspace-up;
+
+            # Move column to workspace
+            #"super+Shift+j".action = move-column-to-workspace-down;
+            #"super+Shift+k".action = move-column-to-workspace-up;
+
+            # Resize
+            "super+minus".action = set-column-width "-5%";
+            "super+plus".action = set-column-width "+5%";
+            "super+Control+minus".action = set-window-height "-5%";
+            "super+Control+plus".action = set-window-height "+5%";
+
+            # Overview
+            "super+Tab".action = toggle-overview;
 
             "super+1".action = focus-workspace "main";
             "super+2".action = focus-workspace "browser";
