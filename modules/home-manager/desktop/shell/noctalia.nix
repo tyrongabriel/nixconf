@@ -390,11 +390,11 @@
             position = "center";
             pinnedApps = [ ];
             sortByMostUsed = true;
-            terminalCommand = "kitty -e";
+            terminalCommand = "ghostty -e";
             customLaunchPrefixEnabled = false;
             customLaunchPrefix = "";
             viewMode = "list";
-            showCategories = true;
+            showCategories = false;
             iconMode = "tabler";
             showIconBackground = false;
             enableSettingsSearch = true;
