@@ -68,7 +68,22 @@
           input.mouse.accel-profile = "flat";
           input.mouse.accel-speed = 0.0;
           layout.gaps = 8;
+
           prefer-no-csd = true;
+          # Define a global window rule for the geometry
+          window-rules = [
+            {
+              # Omitting the 'match' block entirely makes this apply globally to all windows
+              geometry-corner-radius = {
+                top-left = 12.0;
+                top-right = 12.0;
+                bottom-right = 12.0;
+                bottom-left = 12.0;
+              }; # Adjust this number to perfectly match your window radius
+              clip-to-geometry = true;
+            }
+          ];
+
           spawn-at-startup = [
             # 1. Sync DBus/Systemd environment (Fixes most Wayland-related crashes/hangs)
             {
