@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.fish;
+      cfg = config.myHome.cli.fish;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.fish = with lib; {
+      options.myHome.cli.fish = with lib; {
         enable = mkEnableOption "Enable fish";
       };
       config = mkIf cfg.enable {

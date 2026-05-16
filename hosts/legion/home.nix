@@ -11,6 +11,7 @@
     {
       myHome = {
         desktop = {
+          enable = true;
           # niri msg outputs
           monitors = [
             {

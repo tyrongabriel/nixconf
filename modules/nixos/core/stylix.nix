@@ -20,9 +20,6 @@
         #enable = mkEnableOption "Enable stylix";
       };
       config = {
-        # SILENCING WARNINGS!
-        #gtk.gtk4.theme = config.gtk.theme; # Doesnt exist for some reason?
-
         # Stylix imported as flake
         stylix = {
           enable = lib.mkDefault true;
@@ -37,7 +34,7 @@
           # This will soon enable:
           # overlays.enable = false;
           polarity = "dark";
-          image = ../home-manager/desktop/wallpapers/waterfall.png;
+          image = ../../home-manager/desktop/assets/wallpapers/waterfall.png;
           base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
           # base16Scheme = {
           #   # https://github.com/catppuccin/catppuccin mocha flavor

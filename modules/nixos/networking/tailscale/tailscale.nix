@@ -8,10 +8,10 @@
       ...
     }:
     let
-      cfg = config.myNixos.tailscale;
+      cfg = config.myNixos.networking.tailscale;
     in
     {
-      options.myNixos.tailscale = with lib; {
+      options.myNixos.networking.tailscale = with lib; {
         enable = mkEnableOption "Tailscale VPN";
 
         authKeyFile = mkOption {

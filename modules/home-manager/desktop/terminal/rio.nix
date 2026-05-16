@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.rio;
+      cfg = config.myHome.desktop.terminal.rio;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.rio = with lib; {
+      options.myHome.desktop.terminal.rio = with lib; {
         enable = mkEnableOption "Enable rio";
       };
       config = mkIf cfg.enable {

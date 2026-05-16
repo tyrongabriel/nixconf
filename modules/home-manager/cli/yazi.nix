@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.yazi;
+      cfg = config.myHome.cli.yazi;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.yazi = with lib; {
+      options.myHome.cli.yazi = with lib; {
         enable = mkEnableOption "Enable yazi";
       };
       config = mkIf cfg.enable {

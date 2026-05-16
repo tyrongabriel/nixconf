@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.zsh;
+      cfg = config.myHome.cli.zsh;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.zsh = with lib; {
+      options.myHome.cli.zsh = with lib; {
         enable = mkEnableOption "Enable zsh configuration";
       };
       config = mkIf cfg.enable {

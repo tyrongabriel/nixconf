@@ -88,9 +88,14 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        (inputs.import-tree ./modules)
-        (inputs.import-tree ./users)
-        (inputs.import-tree ./hosts)
+        (inputs.import-tree.filterNot (inputs.nixpkgs.lib.hasInfix ".mod.") [
+          ./modules
+          ./users
+          ./hosts
+        ])
+        # (inputs.import-tree ./modules)
+        # (inputs.import-tree ./users)
+        # (inputs.import-tree ./hosts)
         ./colmena.nix
       ];
 

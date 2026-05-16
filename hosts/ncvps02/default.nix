@@ -20,14 +20,13 @@
       config = {
         networking.hostName = "ncvps02";
         deployment = {
-          targetHost = "ncvps02.netbird.cloud";
+          targetHost = "159.195.9.89";
           targetUser = "deploy";
           tags = [
             "vps"
             "server"
           ];
         };
-        time.timeZone = lib.mkDefault "Europe/Vienna";
 
         # I like comma
         programs.nix-index-database.comma.enable = true;
@@ -35,7 +34,9 @@
         myNixos = {
           users.tyron.homeManager = {
             enable = true;
-            tags = [ ];
+            tags = [
+              "dev"
+            ];
           };
           k8s.lb = {
             enable = true;

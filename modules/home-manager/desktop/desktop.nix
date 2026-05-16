@@ -14,12 +14,16 @@
     {
       imports = [
         self.modules.homeManager.noctalia
-        self.modules.homeManager.niri
         self.modules.homeManager.cosmic
         self.modules.homeManager.terminal
+        self.modules.homeManager.apps
       ];
       options.myHome.desktop = with lib; {
-        #enable = mkEnableOption "Enable desktop";
+        enable = mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable desktop configuration";
+        };
         monitors = mkOption {
           type = lib.types.listOf (
             lib.types.submodule {
@@ -82,18 +86,20 @@
           description = "List of monitor configurations";
         };
       };
-      config = {
+      config = mkIf cfg.enable {
         # Your configuration here
-        myHome = {
+        myHome.desktop.apps = {
           spotify.enable = true;
           nixcord.enable = true;
           zed-editor.enable = true;
+        };
+        myHome.desktop.terminal = {
           alacritty.enable = true;
           ghostty.enable = true;
-          desktop = {
-            niri.enable = true;
-            noctalia.enable = true;
-          };
+        };
+        myHome.desktop = {
+          niri.enable = true;
+          noctalia.enable = true;
         };
 
         home.packages = with pkgs; [

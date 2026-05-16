@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.desktop =
+  flake.modules.homeManager.apps =
     {
       config,
       pkgs,
@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.zed-editor;
+      cfg = config.myHome.desktop.apps.zed-editor;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.zed-editor = with lib; {
+      options.myHome.desktop.apps.zed-editor = with lib; {
         enable = mkEnableOption "Enable zed-editor";
       };
       config = mkIf cfg.enable {
@@ -198,7 +198,7 @@
             #theme = lib.mkForce "Catppuccin Mocha";
             icon_theme = {
               mode = "system";
-              light = "Catppuccin Latte";
+              light = "Catppuccin Mocha";
               dark = "Catppuccin Mocha";
             };
 

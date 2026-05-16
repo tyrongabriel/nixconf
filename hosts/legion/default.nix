@@ -2,6 +2,16 @@
 {
   flake.modules.nixos.host_legion =
     { lib, pkgs, ... }:
+    let
+      deployTags = [
+        "dev"
+        "desktop"
+      ];
+      tags = [
+        "dev"
+        "desktop"
+      ];
+    in
     with lib;
     {
       #system = "x86_64-linux";
@@ -13,32 +23,27 @@
         user_deploy
       ];
       config = {
+        # Deployment
         networking.hostName = "legion";
         deployment = {
           targetHost = "legion.netbird.cloud"; # "192.168.8.172";
           targetUser = "deploy";
           allowLocalDeployment = true;
-          tags = [
-            "desktop"
+          tags = [ ] ++ deployTags;
+        };
+
+        # Config
+        myNixos.users.tyron.homeManager = {
+          enable = true;
+          tags = [ ] ++ tags;
+          extraImports = [
+            self.modules.homeManager.legion_tyron
           ];
         };
-        time.timeZone = lib.mkDefault "Europe/Vienna";
 
-        myNixos = {
-          users.tyron.homeManager = {
-            enable = true;
-            tags = [
-              "dev"
-              "desktop"
-            ];
-            extraImports = [
-              self.modules.homeManager.legion_tyron
-            ];
-          };
-          ssh = {
-            enable = mkForce true;
-            fail2ban = mkForce true;
-          };
+        myNixos.ssh = {
+          enable = mkForce true;
+          fail2ban = mkForce true;
         };
 
         hardware.facter.reportPath = ./facter.json;

@@ -18,9 +18,13 @@
         self.modules.nixos.tuvpn
       ];
       options.myNixos.networking = with lib; {
-        #enable = mkEnableOption "Enable networking";
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Enable networking configuration";
+        };
       };
-      config = {
+      config = mkIf cfg.enable {
         # DNS Settings
         services.resolved.enable = true;
         networking.networkmanager.dns = "systemd-resolved";
@@ -34,7 +38,7 @@
             sopsFile = ../../../secrets/secrets.yaml;
           };
         };
-        myNixos = {
+        myNixos.networking = {
           tailscale = {
             enable = mkDefault false;
             tailnetName = "tail1c2108.ts.net";

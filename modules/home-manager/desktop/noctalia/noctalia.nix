@@ -44,7 +44,7 @@
         ];
 
         home.file = {
-          ".face".source = ../images/catppuccin-pfp.png;
+          ".face".source = ../assets/catppuccin-pfp.png;
         };
 
         programs.noctalia-shell.enable = true;

@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.nixos.desktop =
+  flake.modules.nixos.apps =
     {
       config,
       pkgs,
@@ -8,13 +8,13 @@
       ...
     }:
     let
-      cfg = config.myNixos.desktop.keyboard-vial;
+      cfg = config.myNixos.desktop.apps.vial;
     in
     with lib;
     {
       imports = [ ];
-      options.myNixos.desktop.keyboard-vial = with lib; {
-        enable = mkEnableOption "Enable desktop";
+      options.myNixos.desktop.apps.vial = with lib; {
+        enable = mkEnableOption "Enable vial keyboard configurator";
       };
       config = mkIf cfg.enable {
         environment.systemPackages = with pkgs; [

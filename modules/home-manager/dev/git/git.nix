@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.git;
+      cfg = config.myHome.development.git;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.git = with lib; {
+      options.myHome.development.git = with lib; {
         enable = mkEnableOption "Enable Git configuration";
         includes = lib.mkOption {
           description = "A list of included configurations for Git";
@@ -35,7 +35,7 @@
         };
       };
 
-      config = {
+      config = mkIf cfg.enable {
         # Configure Git
         programs.git = {
           enable = lib.mkDefault true;
@@ -65,10 +65,9 @@
 
         };
 
+        programs.lazygit.enable = true;
         # Configure ssh to use the right keys
-        programs.ssh = {
-          includes = [ "~/.ssh/config_custom" ];
-          enable = true;
+        myHome.ssh = {
           matchBlocks = {
             "github.com" = {
               identityFile = "~/.ssh/id_ed25519";

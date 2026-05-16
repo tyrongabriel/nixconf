@@ -1,16 +1,29 @@
 { self, ... }:
 {
   flake.modules.homeManager.core =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
+    with lib;
     {
       imports = [
         self.modules.homeManager.cli
-        self.modules.homeManager.git
-        self.modules.homeManager.ssh
-        self.modules.homeManager.mullvad
       ];
       config = {
-        myHome.mullvad.enable = true;
+        myHome = {
+          cli = {
+            zsh.enable = mkDefault true;
+            zellij.enable = mkDefault true;
+          };
+          ssh.enable = mkDefault true;
+          mullvad.enable = mkDefault true;
+        };
+
+        programs = {
+          bat.enable = true;
+          fzf.enable = true;
+          btop.enable = true;
+          neovim.enable = true;
+        };
+
         # Base packages every home should have
         home.packages = with pkgs; [
           git
@@ -37,18 +50,6 @@
           fastfetch
         ];
 
-        programs = {
-          bat.enable = true;
-          fzf.enable = true;
-          btop.enable = true;
-          lazygit.enable = true;
-          neovim.enable = true;
-        };
-
-        myHome = {
-          git.enable = true;
-          zsh.enable = true;
-        };
       };
     };
 }

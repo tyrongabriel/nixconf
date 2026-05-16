@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.ghostty;
+      cfg = config.myHome.desktop.terminal.ghostty;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.ghostty = with lib; {
+      options.myHome.desktop.terminal.ghostty = with lib; {
         enable = mkEnableOption "Enable ghostty";
       };
       config = mkIf cfg.enable {

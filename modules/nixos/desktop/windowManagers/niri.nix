@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.nixos.niri =
+  flake.modules.nixos.windowManagers =
     {
       config,
       pkgs,
@@ -8,14 +8,14 @@
       ...
     }:
     let
-      cfg = config.myNixos.desktop.niri;
+      cfg = config.myNixos.desktop.windowManager.niri;
     in
     with lib;
     {
       imports = [
         inputs.niri-flake.nixosModules.niri # Also imports home-manager for all users! https://github.com/sodiboo/niri-flake/blob/main/docs.md
       ];
-      options.myNixos.desktop.niri = with lib; {
+      options.myNixos.desktop.windowManager.niri = with lib; {
         enable = mkEnableOption "Enable niri";
       };
       config = mkIf cfg.enable {

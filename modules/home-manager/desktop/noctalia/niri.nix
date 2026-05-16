@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.niri =
+  flake.modules.homeManager.noctalia =
     {
       config,
       pkgs,

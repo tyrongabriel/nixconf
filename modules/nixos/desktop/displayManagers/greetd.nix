@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.greetd =
+  flake.modules.nixos.displayManagers =
     {
       config,
       pkgs,
@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myNixos.desktop.greetd;
+      cfg = config.myNixos.desktop.displayManager.greetd;
     in
     with lib;
     {
       imports = [ ];
-      options.myNixos.desktop.greetd = with lib; {
+      options.myNixos.desktop.displayManager.greetd = with lib; {
         enable = mkEnableOption "Enable greetd";
       };
       config = mkIf cfg.enable {

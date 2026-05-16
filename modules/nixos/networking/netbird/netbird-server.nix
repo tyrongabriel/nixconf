@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myNixos.netbird.server;
+      cfg = config.myNixos.networking.netbird.server;
     in
     with lib;
     {
       imports = [ ];
-      options.myNixos.netbird.server = with lib; {
+      options.myNixos.networking.netbird.server = with lib; {
         enable = mkEnableOption "NetBird for Homelab nodes";
         authFile = mkOption {
           type = types.path;

@@ -8,11 +8,11 @@
       ...
     }:
     let
-      cfg = config.myNixos.netbird.home;
+      cfg = config.myNixos.networking.netbird.home;
     in
     with lib;
     {
-      options.myNixos.netbird.home = {
+      options.myNixos.networking.netbird.home = {
         enable = mkEnableOption "NetBird for Homelab nodes";
         authFile = mkOption {
           type = types.path;
@@ -22,7 +22,7 @@
 
       config = mkIf cfg.enable {
         # DNS is fucked otherwisee
-        security.polkit.enable = true;
+        #security.polkit.enable = true;
         environment.systemPackages = [ pkgs.openresolv ];
         services.resolved.enable = true;
         services.netbird = {

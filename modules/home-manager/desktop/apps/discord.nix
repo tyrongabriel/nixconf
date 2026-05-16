@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.homeManager.desktop =
+  flake.modules.homeManager.apps =
     {
       config,
       pkgs,
@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.nixcord;
+      cfg = config.myHome.desktop.apps.nixcord;
     in
     with lib;
     {
       imports = [ inputs.nixcord.homeModules.nixcord ];
-      options.myHome.nixcord = with lib; {
+      options.myHome.desktop.apps.nixcord = with lib; {
         enable = mkEnableOption "Enable discord";
       };
       config = mkIf cfg.enable {

@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.nushell;
+      cfg = config.myHome.cli.nushell;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.nushell = with lib; {
+      options.myHome.cli.nushell = with lib; {
         enable = mkEnableOption "Enable nushell";
       };
       config = mkIf cfg.enable {

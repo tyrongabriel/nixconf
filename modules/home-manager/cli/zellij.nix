@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.zellij;
+      cfg = config.myHome.cli.zellij;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.zellij = with lib; {
+      options.myHome.cli.zellij = with lib; {
         enable = mkEnableOption "Enable zellij";
       };
       config = mkIf cfg.enable {

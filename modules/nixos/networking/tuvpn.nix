@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myNixos.tuvpn;
+      cfg = config.myNixos.networking.tuvpn;
     in
     with lib;
     {
       imports = [ ];
-      options.myNixos.tuvpn = with lib; {
+      options.myNixos.networking.tuvpn = with lib; {
         enable = mkEnableOption "Enable tuvpn";
       };
       config = mkIf cfg.enable {

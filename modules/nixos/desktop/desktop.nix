@@ -14,33 +14,36 @@
     {
       imports = [
         inputs.nix-index-database.nixosModules.nix-index
-        self.modules.nixos.sddm
-        self.modules.nixos.niri
-        self.modules.nixos.greetd
-        self.modules.nixos.cosmic
-        self.modules.nixos.stylix
+        self.modules.nixos.desktopEnvironments
+        self.modules.nixos.displayManagers
+        self.modules.nixos.windowManagers
+        self.modules.nixos.apps
       ];
       options.myNixos.desktop = with lib; {
-        #enable = mkEnableOption "Enable desktop";
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Enable desktop environment features";
+        };
       };
-      config = {
+      config = mkIf cfg.enable {
         # Your configuration here
         programs.nix-index-database.comma.enable = true;
         #security.polkit.enable = true;
 
         myNixos = {
-          tuvpn.enable = true;
+          networking.tuvpn.enable = true;
 
           desktop = {
-            keyboard-vial.enable = true;
-            #cosmic.enable = true;
-            greetd.enable = mkDefault true;
-            niri.enable = mkDefault true;
+            displayManager.greetd.enable = mkDefault true;
+            windowManager.niri.enable = mkDefault true;
+          };
+
+          desktop.apps = {
+            # Enable desktop-specific applications here
+            vial.enable = mkDefault true;
           };
         };
-
-        # enabled for the daemon to run
-        services.mullvad-vpn.enable = true;
 
         environment.systemPackages = with pkgs; [
           # Add desktop-specific packages here
@@ -49,7 +52,6 @@
         ];
 
         services.printing.enable = true;
-
       };
 
     };

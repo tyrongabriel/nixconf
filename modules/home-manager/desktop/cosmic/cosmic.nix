@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.cosmic;
+      cfg = config.myHome.desktop.cosmic;
     in
     with lib;
     {
       imports = [ inputs.cosmic-manager.homeManagerModules.cosmic-manager ];
-      options.myHome.cosmic = with lib; {
+      options.myHome.desktop.cosmic = with lib; {
         enable = mkEnableOption "Enable cosmic";
       };
       config = mkIf cfg.enable {

@@ -14,6 +14,7 @@
     {
       imports = [
         self.modules.nixos.networking
+        self.modules.nixos.stylix
       ];
 
       config = {
@@ -25,6 +26,9 @@
           zsh.enable = true;
           fish.enable = true;
         };
+
+        # enabled for the daemon to run
+        services.mullvad-vpn.enable = true;
 
         environment.systemPackages = with pkgs; [
           git

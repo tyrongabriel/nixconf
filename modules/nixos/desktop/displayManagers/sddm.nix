@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.sddm =
+  flake.modules.nixos.displayManagers =
     {
       config,
       pkgs,
@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myNixos.desktop.sddm;
+      cfg = config.myNixos.desktop.displayManager.sddm;
     in
     with lib;
     {
       imports = [ ];
-      options.myNixos.desktop.sddm = {
+      options.myNixos.desktop.displayManager.sddm = {
         enable = mkEnableOption "Enable sddm displayManager";
         wayland = mkOption {
           type = types.bool;

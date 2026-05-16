@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.mullvad =
+  flake.modules.homeManager.core =
     {
       config,
       pkgs,
@@ -22,7 +22,7 @@
           enable = true;
           settings = {
             animateMap = true;
-            autoConnect = true;
+            autoConnect = false;
             browsedForSplitTunnelingApplications = [ ];
             changelogDisplayedForVersion = "";
             enableSystemNotifications = true;

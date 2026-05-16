@@ -8,11 +8,11 @@
       ...
     }:
     let
-      cfg = config.myNixos.tailscale;
+      cfg = config.myNixos.networking.tailscale;
     in
     with lib;
     {
-      options.myNixos.tailscale = {
+      options.myNixos.networking.tailscale = {
         enableHostSync = mkOption {
           type = types.bool;
           default = true;

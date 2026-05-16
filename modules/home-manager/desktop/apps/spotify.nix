@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.homeManager.desktop =
+  flake.modules.homeManager.apps =
     {
       config,
       pkgs,
@@ -8,14 +8,14 @@
       ...
     }:
     let
-      cfg = config.myHome.spotify;
+      cfg = config.myHome.desktop.apps.spotify;
     in
     with lib;
     {
       imports = [
         inputs.spicetify-nix.homeManagerModules.spicetify
       ];
-      options.myHome.spotify = with lib; {
+      options.myHome.desktop.apps.spotify = with lib; {
         enable = mkEnableOption "Enable module";
       };
       config = mkIf cfg.enable {

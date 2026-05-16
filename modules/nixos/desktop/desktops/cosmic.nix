@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.cosmic =
+  flake.modules.nixos.desktopEnvironments =
     {
       config,
       pkgs,
@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myNixos.desktop.cosmic;
+      cfg = config.myNixos.desktop.desktopEnvironments.cosmic;
     in
     with lib;
     {
       imports = [ ];
-      options.myNixos.desktop.cosmic = with lib; {
+      options.myNixos.desktop.desktopEnvironments.cosmic = with lib; {
         enable = mkEnableOption "Enable desktop.cosmic";
       };
       config = mkIf cfg.enable {

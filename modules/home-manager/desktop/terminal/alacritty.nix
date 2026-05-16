@@ -8,12 +8,12 @@
       ...
     }:
     let
-      cfg = config.myHome.alacritty;
+      cfg = config.myHome.desktop.terminal.alacritty;
     in
     with lib;
     {
       imports = [ ];
-      options.myHome.alacritty = with lib; {
+      options.myHome.desktop.terminal.alacritty = with lib; {
         enable = mkEnableOption "Enable rio";
       };
       config = mkIf cfg.enable {
