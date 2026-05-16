@@ -19,11 +19,14 @@
       config = mkIf cfg.enable {
         programs.zellij = {
           enable = true;
-          enableZshIntegration = true;
-          settings = {
-            theme = "catppuccin-macchiato";
-          };
+
+          #enableZshIntegration = true;
+          # settings = {
+          #   theme = "catppuccin-macchiato";
+          # };
           extraConfig = ''
+            show_startup_tips false
+            default_layout "compact"
             keybinds clear-defaults=true {
                 locked {
                     bind "Ctrl g" { SwitchToMode "Normal"; }
@@ -186,6 +189,15 @@
                     bind "Alt f" { ToggleFloatingPanes; }
                     bind "Alt e" { TogglePaneEmbedOrFloating; }
 
+                    // --- Session management ---
+                    bind "Alt s" {
+                        LaunchOrFocusPlugin "session-manager" {
+                            floating true
+                            move_to_focused_tab true
+                        }
+                        SwitchToMode "Normal"
+                    }
+
                     // --- Mode entries (remapped to avoid Ctrl+h/n conflicts) ---
                     bind "Ctrl g" { SwitchToMode "Locked"; }
                     bind "Ctrl p" { SwitchToMode "Pane"; }
@@ -197,6 +209,7 @@
 
                     // --- Quit ---
                     bind "Ctrl q" { Quit; }
+                    bind "Ctrl d" { Detach; }
                 }
 
                 // Esc / Enter return to Normal from any sub-mode
