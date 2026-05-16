@@ -10,6 +10,7 @@
     let
       cfg = config.myHome.desktop.noctalia;
       desktopCfg = config.myHome.desktop;
+      noctaliaConf = builtins.fromJSON (builtins.readFile ./noctalia.json);
     in
     with lib;
     {
@@ -52,7 +53,9 @@
           general = {
             avatarImage = mkForce "/home/${config.home.username}/.face";
           };
-        };
+          bar.monitors = mkForce (lib.map (m: m.id) (lib.filter (m: m.bar == true) desktopCfg.monitors));
+        }
+        // mkDefault noctaliaConf;
 
       };
     };
