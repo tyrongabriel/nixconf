@@ -40,8 +40,10 @@
 
             home.packages = with pkgs; [
               nixd
+              nil
               nixfmt
               alejandra
+              deadnix
             ];
           }
 
