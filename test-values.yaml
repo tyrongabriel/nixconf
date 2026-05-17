@@ -1,7 +1,0 @@
-gitea:
-  additionalConfigFromEnvs:
-    - name: GITEA__database__PASSWD
-      valueFrom:
-        secretKeyRef:
-          name: gitea-db-app
-          key: password
