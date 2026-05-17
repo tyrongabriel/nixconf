@@ -1,9 +1,8 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 {
   flake.modules.homeManager.apps =
     {
       config,
-      pkgs,
       lib,
       ...
     }:

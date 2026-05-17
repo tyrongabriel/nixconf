@@ -1,9 +1,8 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.desktopEnvironments =
     {
       config,
-      pkgs,
       lib,
       ...
     }:

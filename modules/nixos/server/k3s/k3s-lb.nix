@@ -4,7 +4,6 @@
     {
       config,
       lib,
-      pkgs,
       nodes,
       ...
     }:
@@ -15,7 +14,7 @@
 
       # Find all servers in the same cluster
       clusterServers = lib.filterAttrs (
-        name: nodeConfig:
+        _name: nodeConfig:
         let
           k3sConfig = nodeConfig.config.myNixos.k3s or { };
           nodeCfg = k3sConfig.node or { };

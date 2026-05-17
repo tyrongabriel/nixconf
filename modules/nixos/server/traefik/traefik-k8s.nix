@@ -4,7 +4,6 @@
     {
       config,
       lib,
-      pkgs,
       ...
     }:
     let
@@ -12,9 +11,9 @@
 
       # Map the list of strings into Traefik server configurations for TCP load balancing
       # Input: ["host1.tailnet:6443"] -> Output: { address = "host1.tailnet:6443"; }
-      k8sApiServers = lib.imap0 (i: hostStr: { address = hostStr; }) lbCfg.k8sApi.hosts;
+      k8sApiServers = lib.imap0 (_i: hostStr: { address = hostStr; }) lbCfg.k8sApi.hosts;
 
-      talosApiServers = lib.imap0 (i: hostStr: { address = hostStr; }) lbCfg.talosApi.hosts;
+      talosApiServers = lib.imap0 (_i: hostStr: { address = hostStr; }) lbCfg.talosApi.hosts;
 
     in
     with lib;

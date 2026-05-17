@@ -9,7 +9,6 @@
     }:
     let
       cfg = config.myNixos.k3s;
-      wrapIpv6 = (ip: if lib.hasInfix ":" ip then "[${ip}]" else ip);
 
       # Whether this node actually runs the K3s daemon (server or agent).
       # A pure "lb" node does NOT run K3s — it only load-balances via HAProxy.

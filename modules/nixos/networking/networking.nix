@@ -3,7 +3,6 @@
   flake.modules.nixos.networking =
     {
       config,
-      pkgs,
       lib,
       ...
     }:

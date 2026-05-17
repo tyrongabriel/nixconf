@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.modules.nixos.host_legion =
-    { lib, pkgs, ... }:
+    { lib, ... }:
     let
       deployTags = [
         "dev"

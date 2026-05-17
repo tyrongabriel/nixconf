@@ -1,15 +1,11 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.stylix =
     {
-      config,
       pkgs,
       lib,
       ...
     }:
-    let
-      cfg = config.myNixos.stylix;
-    in
     with lib;
     {
       imports = [

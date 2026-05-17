@@ -1,9 +1,8 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.displayManagers =
     {
       config,
-      pkgs,
       lib,
       ...
     }:

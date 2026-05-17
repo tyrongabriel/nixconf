@@ -1,15 +1,10 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.netbird =
     {
-      config,
-      pkgs,
       lib,
       ...
     }:
-    let
-      cfg = config.myNixos.networking.netbird.server;
-    in
     with lib;
     {
       imports = [ ];

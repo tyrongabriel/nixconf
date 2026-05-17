@@ -1,9 +1,8 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.adguard =
     {
       config,
-      pkgs,
       lib,
       ...
     }:

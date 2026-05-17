@@ -1,4 +1,4 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.homeManager.dev_env =
     {

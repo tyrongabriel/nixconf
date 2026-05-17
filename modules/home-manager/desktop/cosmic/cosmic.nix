@@ -1,9 +1,8 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 {
   flake.modules.homeManager.cosmic =
     {
       config,
-      pkgs,
       lib,
       ...
     }:

@@ -1,7 +1,7 @@
 { self, inputs, ... }:
 {
   flake.modules.nixos.host_ncvps02 =
-    { lib, config, ... }:
+    { lib, ... }:
     let
       ncvps02 = "152.53.149.109";
     in

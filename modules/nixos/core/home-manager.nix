@@ -1,15 +1,10 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.core =
     {
-      config,
-      pkgs,
       lib,
       ...
     }:
-    let
-      cfg = config.myNixos.home-manager;
-    in
     with lib;
     {
       imports = [ ];

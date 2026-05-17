@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 {
   flake.modules.homeManager.noctalia =
     {
@@ -55,7 +55,7 @@
 
         programs.noctalia-shell.enable = true;
         programs.noctalia-shell.settings = lib.mkMerge [
-          (lib.mapAttrsRecursive (path: value: lib.mkOverride 2000 value) noctaliaConf)
+          (lib.mapAttrsRecursive (_path: value: lib.mkOverride 2000 value) noctaliaConf)
           {
             general = {
               avatarImage = lib.mkForce "/home/${config.home.username}/.face";

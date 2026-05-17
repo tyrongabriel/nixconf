@@ -2,7 +2,6 @@
 {
   flake.modules.homeManager.legion_tyron =
     {
-      config,
       lib,
       pkgs,
       ...

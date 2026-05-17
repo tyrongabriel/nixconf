@@ -1,9 +1,8 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.tuvpn =
     {
       config,
-      pkgs,
       lib,
       ...
     }:

@@ -1,15 +1,10 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.server =
     {
-      config,
-      pkgs,
       lib,
       ...
     }:
-    let
-      cfg = config.myNixos.server;
-    in
     with lib;
     {
       imports = [

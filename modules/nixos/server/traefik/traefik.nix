@@ -1,9 +1,8 @@
-{ self, ... }:
+{ ... }:
 {
   flake.modules.nixos.traefik =
     {
       config,
-      pkgs,
       lib,
       ...
     }:
