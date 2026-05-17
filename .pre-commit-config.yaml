@@ -26,3 +26,14 @@ repos:
     rev: v1.2.0 # Use the latest stable version or commit hash
     hooks:
       - id: nixfmt-nix
+
+  - repo: local
+    hooks:
+      - id: nix-flake-check
+        name: Nix Flake Check
+        entry: nix flake check
+        args:
+          - "--no-build"
+        language: system
+        pass_filenames: false # Prevents passing modified file names to the command
+        always_run: true # Ensures it runs even if no nix files were modified
