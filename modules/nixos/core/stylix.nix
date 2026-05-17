@@ -21,6 +21,7 @@
       };
       config = {
         # Stylix imported as flake
+
         stylix = {
           enable = lib.mkDefault true;
           opacity = {

@@ -102,6 +102,8 @@
           noctalia.enable = true;
         };
 
+        myHome.cli.nvf.enable = true; # enable nvf for desktop
+
         home.packages = with pkgs; [
           brave
           #discord # do not install if using nixcord
@@ -128,8 +130,6 @@
           };
         };
 
-        # fix warnings stylix makes
-        gtk.gtk4.theme = config.gtk.theme;
       };
     };
 }

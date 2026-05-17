@@ -19,6 +19,11 @@
       ];
       options.myHome.desktop.noctalia = with lib; {
         enable = mkEnableOption "Enable noctalia shell for wayland";
+        location.name = mkOption {
+          type = types.str;
+          default = "Vienna";
+          description = "Set the location name for weather and time display in the bar (e.g. 'Vienna', 'New York')";
+        };
       };
       config = mkIf cfg.enable {
         home.packages = with pkgs; [
@@ -49,13 +54,16 @@
         };
 
         programs.noctalia-shell.enable = true;
-        programs.noctalia-shell.settings = {
-          general = {
-            avatarImage = mkForce "/home/${config.home.username}/.face";
-          };
-          bar.monitors = mkForce (lib.map (m: m.id) (lib.filter (m: m.bar == true) desktopCfg.monitors));
-        }
-        // mkDefault noctaliaConf;
+        programs.noctalia-shell.settings = lib.mkMerge [
+          (lib.mapAttrsRecursive (path: value: lib.mkOverride 2000 value) noctaliaConf)
+          {
+            general = {
+              avatarImage = lib.mkForce "/home/${config.home.username}/.face";
+            };
+            bar.monitors = lib.mkForce (lib.map (m: m.id) (lib.filter (m: m.bar == true) desktopCfg.monitors));
+            location.name = mkForce "${cfg.location.name}";
+          }
+        ];
 
       };
     };
