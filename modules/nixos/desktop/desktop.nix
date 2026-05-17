@@ -49,6 +49,8 @@
           # Add desktop-specific packages here
           kitty
           alacritty
+          adwaita-icon-theme
+          hicolor-icon-theme
         ];
 
         services.printing.enable = true;

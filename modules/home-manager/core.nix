@@ -18,6 +18,7 @@
             zsh.enable = mkDefault true;
             zellij.enable = mkDefault true;
             nvf.enable = mkDefault false; # heavy for servers, desktop enables
+            nh.enable = mkDefault true;
           };
           ssh.enable = mkDefault true;
           mullvad.enable = mkDefault true;
@@ -31,6 +32,7 @@
 
         # Base packages every home should have
         home.packages = with pkgs; [
+          croc # fileshare
           ouch # compression
           borgbackup # backup
           git

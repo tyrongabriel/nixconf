@@ -22,6 +22,8 @@
           enable = lib.mkDefault true;
           opacity = {
             terminal = 0.5;
+            applications = 0.9;
+            popups = 0.7;
           };
 
           # The whole nixpkgs.config while using useGlobalPkgs:

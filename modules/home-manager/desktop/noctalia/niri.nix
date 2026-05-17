@@ -20,7 +20,7 @@
         fileManager = "cosmic-files";
         editor = "zeditor";
         discord = "discord";
-        #appLauncher = "${pkgs.walker}/bin/walker";
+        appLauncher = "fuzzel";
         #wayscrollshot = "${pkgs.waysc}/bin/wayscrollshot";
 
         screenshotArea = "${pkgs.bash}/bin/bash -c '${pkgs.grim}/bin/grim -g \"\\\$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy'";
@@ -64,6 +64,7 @@
         };
       };
       config = mkIf cfg.enable {
+
         programs.niri.settings = {
           input.mouse.accel-profile = "flat";
           input.mouse.accel-speed = 0.0;
@@ -126,7 +127,7 @@
             "XF86AudioNext".action.spawn = noctalia "media next";
             "XF86AudioPrev".action.spawn = noctalia "media previous";
 
-            "super+Space".action.spawn = noctalia "launcher toggle";
+            "super+Space".action.spawn = apps.appLauncher;
             "super+w".action = close-window;
             "super+b".action = spawn apps.browser;
             "super+d".action = spawn apps.discord;

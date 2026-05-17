@@ -102,10 +102,19 @@
           noctalia.enable = true;
         };
 
-        myHome.cli.nvf.enable = true; # enable nvf for desktop
+        programs.fuzzel = {
+          enable = true;
+        };
 
+        myHome.cli.nvf.enable = true; # enable nvf for desktop
         home.packages = with pkgs; [
+          localsend
+          blanket # ambient sounds
           brave
+          audacity
+          switcheroo
+          vlc
+          mpv
           #discord # do not install if using nixcord
           wl-clipboard
           cosmic-files
@@ -127,6 +136,8 @@
             "image/jpeg" = [ "oculante.desktop" ];
             "image/gif" = [ "oculante.desktop" ];
             "image/webp" = [ "oculante.desktop" ];
+            "video/mp4" = [ "mpv.desktop" ];
+            "video/x-matroska" = [ "mpv.desktop" ];
           };
         };
 
