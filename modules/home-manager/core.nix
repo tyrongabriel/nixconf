@@ -31,6 +31,8 @@
 
         # Base packages every home should have
         home.packages = with pkgs; [
+          ouch # compression
+          borgbackup # backup
           git
           ripgrep
           fd

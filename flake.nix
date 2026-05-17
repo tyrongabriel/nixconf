@@ -90,11 +90,13 @@
   nixConfig = {
     extra-substituters = [
       "https://colmena.cachix.org"
+      "https://nvf.cachix.org"
       "https://nix-community.cachix.org"
       "https://cache.nixos.org/"
     ];
     extra-trusted-public-keys = [
       "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
+      "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
