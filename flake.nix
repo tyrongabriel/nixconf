@@ -148,6 +148,10 @@
               cilium-cli
               gitleaks
               pre-commit
+              deadnix
+              nil
+              nixd
+              nixfmt
             ];
           };
         };

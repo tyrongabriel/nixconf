@@ -22,24 +22,10 @@
   "lsp": {
     "nixd": {
       "settings": {
+        "nixpkgs": {
+          "expr": "import (builtins.getFlake ./.).inputs.nixpkgs { }   ",
+        },
         "options": {
-          // "home-manager": {
-          //   //"expr": "(let pkgs = import <nixpkgs> { }; in (pkgs.lib.evalModules { modules =  (import <nixpkgs/nixos/modules/module-list.nix>) ++ [ ({...}: { nixpkgs.hostPlatform = builtins.currentSystem;} ) ] ; })).options"
-          //   //"expr": "(myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.homeConfigurations.\"${cfgName}\".options or {})) {} (builtins.attrNames myFlake.homeConfigurations)) (builtins.getFlake (toString ./.))"
-          // },
-          // "nixos": {
-          //   //"expr": "(myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.nixosConfigurations.\"${cfgName}\".options or {})) {} (builtins.attrNames myFlake.nixosConfigurations)) (builtins.getFlake (toString ./.))"
-          //   "expr": "(let pkgs = import <nixpkgs> { }; in (pkgs.lib.evalModules { modules =  (import <nixpkgs/nixos/modules/module-list.nix>) ++ [ ({...}: { nixpkgs.hostPlatform = builtins.currentSystem;} ) ] ; })).options",
-          // },
-          // "home-manager": {
-          //   "expr": "((myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.colmenaHive.nodes.\"${cfgName}\".options.home-manager.users.type.getSubOptions [])) {} (builtins.attrNames myFlake.colmenaHive.nodes)) (builtins.getFlake (toString ./.)))",
-          // },
-          // "nixos": {
-          //   "expr": "((myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.colmenaHive.nodes.\"${cfgName}\".options or {})) {} (builtins.attrNames myFlake.colmenaHive.nodes)) (builtins.getFlake (toString ./.)))",
-          // },
-          // "nix": {
-          //   "expr": "((myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.colmenaHive.nodes.\"${cfgName}\".options or {})) {} (builtins.attrNames myFlake.colmenaHive.nodes)) (builtins.getFlake (toString ./.)))",
-          // },
           "nix": {
             "expr": "((myFlake: builtins.foldl' (acc: cfgName: acc // (myFlake.colmenaHive.nodes.\"${cfgName}\".options or {})) {} (builtins.attrNames myFlake.colmenaHive.nodes)) (builtins.getFlake (toString ./.)))",
           },
