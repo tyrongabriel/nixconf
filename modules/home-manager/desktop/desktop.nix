@@ -108,6 +108,7 @@
 
         myHome.cli.nvf.enable = true; # enable nvf for desktop
         home.packages = with pkgs; [
+          mission-center
           localsend
           blanket # ambient sounds
           brave

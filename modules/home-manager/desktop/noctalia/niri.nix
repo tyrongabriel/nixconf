@@ -92,7 +92,10 @@
         programs.niri.settings = {
           input.mouse.accel-profile = "flat";
           input.mouse.accel-speed = 0.0;
-          layout.gaps = 8;
+          layout = {
+            gaps = 8;
+            background-color = "#${config.lib.stylix.colors.base00}";
+          };
 
           prefer-no-csd = true;
           # Define a global window rule for the geometry
@@ -133,6 +136,8 @@
             { command = [ "xwayland-satellite" ]; }
           ]
           ++ cfg.startupCommands;
+
+          hotkey-overlay.skip-at-startup = true;
 
           # https://github.com/ctknightdev/nixos/blob/main/home/niri/keybinds.nix
           binds = with config.lib.niri.actions; {

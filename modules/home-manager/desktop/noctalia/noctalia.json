@@ -306,7 +306,7 @@
       "pixelate",
       "honeycomb"
     ],
-    "skipStartupTransition": false,
+    "skipStartupTransition": true,
     "transitionEdgeSmoothness": 0.05,
     "panelPosition": "follow_bar",
     "hideWallpaperFilenames": false,
@@ -438,7 +438,7 @@
     "useCustomColors": false,
     "warningColor": "",
     "criticalColor": "",
-    "externalMonitor": "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor"
+    "externalMonitor": "missioncenter || ghostty -e btop || resources || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor"
   },
   "noctaliaPerformance": {
     "disableWallpaper": true,
