@@ -399,7 +399,7 @@
         # The file created by home-manager is placed at ~/.config/zed/settings.json.
         # Activation hook: adjust the zed settings file so that it's not a symlink.
         # This block runs after the writeBoundary and uses the provided run and verboseEcho functions.
-        home.activation.testScript = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        home.activation.makeZedWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           echo "Starting to move the settings.json file to a writable file"
           ls -l $HOME/.config/zed/
           echo "Now copying the settings.json file to a writable file"

@@ -76,6 +76,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nirimod = {
+      url = "github:srinivasr/nirimod";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    monique.url = "github:ToRvaLDz/monique";
+
     niri-flake.url = "github:sodiboo/niri-flake";
 
     cosmic-manager = {

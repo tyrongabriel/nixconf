@@ -14,6 +14,7 @@
     {
       imports = [
         inputs.niri-flake.nixosModules.niri # Also imports home-manager for all users! https://github.com/sodiboo/niri-flake/blob/main/docs.md
+        inputs.monique.nixosModules.default
       ];
       options.myNixos.desktop.windowManager.niri = with lib; {
         enable = mkEnableOption "Enable niri";
@@ -23,7 +24,10 @@
         # Enables niri in my DM
         programs.niri = {
           enable = true;
+          package = pkgs.niri;
         };
+
+        programs.monique.enable = true;
 
         services.pipewire = {
           enable = true;

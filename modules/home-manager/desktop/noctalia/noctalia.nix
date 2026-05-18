@@ -53,6 +53,19 @@
           ".face".source = ../assets/catppuccin-pfp.png;
         };
 
+        # Manages idle behavior, to lock when idle
+        # services.swayidle = {
+        #   enable = true;
+        #   systemdTarget = "graphical-session.target"; # Tells systemd to start this when Niri starts
+        #   events = [
+        #     {
+        #       event = "before-sleep";
+        #       # Instructs Noctalia to lock the screen right before suspend
+        #       command = "qs -c noctalia-shell ipc call lockScreen lock";
+        #     }
+        #   ];
+        # };
+
         programs.noctalia-shell.enable = true;
         programs.noctalia-shell.settings = lib.mkMerge [
           (lib.mapAttrsRecursive (_path: value: lib.mkOverride 2000 value) noctaliaConf)

@@ -21,6 +21,11 @@
 
   "lsp": {
     "nixd": {
+      "initialization_options": {
+        "formatting": {
+          "command": ["nixfmt"],
+        },
+      },
       "settings": {
         "nixpkgs": {
           "expr": "import (builtins.getFlake ./.).inputs.nixpkgs { }   ",

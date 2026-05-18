@@ -1,4 +1,7 @@
-{ ... }:
+{
+  inputs,
+  ...
+}:
 {
   flake.modules.homeManager.noctalia =
     {
@@ -64,6 +67,27 @@
         };
       };
       config = mkIf cfg.enable {
+
+        home.packages = [
+          inputs.nirimod.packages.${pkgs.stdenv.hostPlatform.system}.default
+        ];
+        # Bad workaround til the niri-flake dev finally merges https://github.com/sodiboo/niri-flake/pull/1548
+        home.activation.niri-include-monitors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          echo "Adding include to niri config.kdl"
+          if [ -f ~/.config/niri/config.kdl ]; then
+            run cp ~/.config/niri/config.kdl ~/.config/niri/config.kdl.tmp
+            run rm ~/.config/niri/config.kdl -f
+            run cp ~/.config/niri/config.kdl.tmp ~/.config/niri/config.kdl
+            run rm ~/.config/niri/config.kdl.tmp -f
+            run rm ~/.config/niri/config.kdl.hm-bak -f
+            run chmod +w ~/.config/niri/config.kdl
+            run sed -i '1i\' ~/.config/niri/config.kdl
+            run sed -i '1i include optional=true "./monitors.kdl"' ~/.config/niri/config.kdl
+            echo "Done, include prepended to config.kdl"
+          else
+            echo "config.kdl not found, skipping"
+          fi
+        '';
 
         programs.niri.settings = {
           input.mouse.accel-profile = "flat";

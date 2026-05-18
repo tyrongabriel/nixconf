@@ -8,6 +8,7 @@
     }:
     {
       nixpkgs.overlays = [
+        inputs.niri-flake.overlays.niri
         (_final: _prev: {
           stable = import inputs.nixpkgs-stable {
             system = pkgs.stdenv.hostPlatform.system;
