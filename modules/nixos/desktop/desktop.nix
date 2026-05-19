@@ -29,7 +29,7 @@
       config = mkIf cfg.enable {
         # Your configuration here
         programs.nix-index-database.comma.enable = true;
-        #security.polkit.enable = true;
+        security.polkit.enable = true;
 
         myNixos = {
           networking.tuvpn.enable = true;
@@ -51,7 +51,12 @@
           alacritty
           adwaita-icon-theme
           hicolor-icon-theme
+          inputs.hyprpolkitagent.packages.${stdenv.hostPlatform.system}.default
+          gparted
         ];
+
+        programs.gnome-disks.enable = true;
+        services.udisks2.enable = true;
 
         services.printing.enable = true;
       };

@@ -75,7 +75,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
     nirimod = {
       url = "github:srinivasr/nirimod";
       inputs.nixpkgs.follows = "nixpkgs";

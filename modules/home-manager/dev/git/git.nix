@@ -66,6 +66,9 @@
         };
 
         programs.lazygit.enable = true;
+        # Enable github cli
+        programs.gh.enable = true;
+
         # Configure ssh to use the right keys
         myHome.ssh = {
           matchBlocks = {

@@ -26,6 +26,8 @@ in
             "input"
             "kvm"
             "docker"
+            "disk"
+            "storage"
           ];
           #initialPassword = "password";
           hashedPasswordFile = config.sops.secrets."tyron/password_hash".path;

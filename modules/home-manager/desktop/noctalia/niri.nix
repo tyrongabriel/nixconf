@@ -113,6 +113,14 @@
           ];
 
           spawn-at-startup = [
+            {
+              command = [
+                "systemctl"
+                "--user"
+                "start"
+                "hyprpolkitagent"
+              ];
+            }
             # 1. Sync DBus/Systemd environment (Fixes most Wayland-related crashes/hangs)
             {
               command = [

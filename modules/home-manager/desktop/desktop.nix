@@ -105,9 +105,13 @@
         programs.fuzzel = {
           enable = true;
         };
+        # 2. Automatically mount USBs on plugin and handle notifications
+        services.udiskie.enable = true;
 
         myHome.cli.nvf.enable = true; # enable nvf for desktop
         home.packages = with pkgs; [
+          vorta
+          nautilus
           mission-center
           localsend
           blanket # ambient sounds

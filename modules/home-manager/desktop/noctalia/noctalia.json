@@ -112,7 +112,7 @@
       ],
       "right": [
         {
-          "blacklist": [],
+          "blacklist": ["udiskie"],
           "chevronColor": "none",
           "colorizeIcons": true,
           "drawerEnabled": false,
