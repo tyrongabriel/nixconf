@@ -24,6 +24,17 @@
           chafa
         ];
 
+        programs.carapace = {
+          enable = true;
+          # enableBashIntegration = true;
+          enableZshIntegration = true;
+          # enableFishIntegration = true;
+          # enableNushellIntegration = true;
+
+          # Optional: force case-insensitive completion matching
+          ignoreCase = true;
+        };
+
         programs.zoxide = {
           enable = true;
           enableZshIntegration = true;
