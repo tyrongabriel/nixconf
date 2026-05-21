@@ -189,6 +189,7 @@
             ];
 
             "super+shift+f".action = fullscreen-window;
+            "super+ctrl+f".action = expand-column-to-available-width;
             "super+f".action = maximize-column;
             "super+t".action = toggle-window-floating;
 

@@ -39,7 +39,9 @@
             KbdInteractiveAuthentication = false;
             PermitRootLogin = "no";
           };
+          openFirewall = true;
         };
+
         services.fail2ban.enable = if cfg.fail2ban then (mkDefault true) else mkDefault false;
       };
     };

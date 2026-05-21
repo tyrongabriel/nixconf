@@ -21,6 +21,7 @@
         desktop
         user_tyron
         user_deploy
+        dev
       ];
       config = {
         # Deployment

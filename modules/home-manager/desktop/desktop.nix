@@ -92,6 +92,7 @@
           spotify.enable = true;
           nixcord.enable = true;
           zed-editor.enable = true;
+          onlyoffice.enable = true;
         };
         myHome.desktop.terminal = {
           alacritty.enable = true;
@@ -110,6 +111,8 @@
 
         myHome.cli.nvf.enable = true; # enable nvf for desktop
         home.packages = with pkgs; [
+          mattermost-desktop
+          mattermost
           vorta
           nautilus
           mission-center
