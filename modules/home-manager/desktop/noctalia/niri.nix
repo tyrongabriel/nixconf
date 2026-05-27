@@ -200,6 +200,15 @@
             #  "${apps.wayscrollshot}"
             #  "-c"
             #]; # -c copies to clipboard
+            #
+            "super+shift+C".action.spawn-sh =
+              "niri msg pick-color | wl-copy && notify-send 'Color Picked' '$(wl-paste)' -i color-picker";
+            # binds {
+            #     // Triggers the color picker. Click anywhere on screen to grab the hex code.
+            #     Mod+Shift+C {
+            #         spawn "sh" "-c" "niri msg pick-color | wl-copy && notify-send 'Color Picked' '$(wl-paste)' -i color-picker"
+            #     }
+            # }
 
             # Vim-style navigation
             "super+h".action = focus-window-up-or-column-left;

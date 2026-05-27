@@ -23,6 +23,10 @@
       };
       config = mkIf cfg.enable {
 
+        myNixos.dev = {
+          docker.enable = true;
+        };
+
         environment.systemPackages = with pkgs; [
           selfPkgs.ox
           selfPkgs.iburg

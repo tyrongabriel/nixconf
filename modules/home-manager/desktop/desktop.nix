@@ -109,8 +109,24 @@
         # 2. Automatically mount USBs on plugin and handle notifications
         services.udiskie.enable = true;
 
+        xdg.enable = true;
+        xdg.cacheHome = "${config.home.homeDirectory}/.cache";
+        xdg.userDirs = {
+          enable = true; # needed by switcheroo etc. to find the correct paths for downloads, documents, etc.
+          setSessionVariables = true;
+          createDirectories = true;
+          extraConfig = {
+            # needed by switcheroo, it looks for cache, and expects a tmp folder to be there
+            HOME = "${config.home.homeDirectory}/.cache";
+            TMP_HOME = "${config.home.homeDirectory}/.cache/tmp";
+          };
+        };
+
         myHome.cli.nvf.enable = true; # enable nvf for desktop
         home.packages = with pkgs; [
+          xdg-user-dirs
+          xdg-user-dirs-gtk
+          inkscape-with-extensions
           mattermost-desktop
           mattermost
           vorta
@@ -143,6 +159,7 @@
             "image/png" = [ "oculante.desktop" ];
             "image/jpeg" = [ "oculante.desktop" ];
             "image/gif" = [ "oculante.desktop" ];
+            "image/avif" = [ "oculante.desktop" ];
             "image/webp" = [ "oculante.desktop" ];
             "video/mp4" = [ "mpv.desktop" ];
             "video/x-matroska" = [ "mpv.desktop" ];
