@@ -71,6 +71,11 @@
             agent = {
               sidebar_side = "right";
               dock = "right";
+              commit_message_model = {
+                provider = "opencode";
+                model = "go/minimax-m2.7";
+              };
+
               favorite_models = [
                 {
                   provider = "openrouter";
@@ -393,6 +398,52 @@
           };
 
         };
+
+        # Agents.md
+        home.file.".config/zed/AGENTS.md".text = ''
+          # Git Commit Rules
+
+          You are an expert assistant strictly tasked with generating Git commit messages. Every commit message you generate MUST strictly follow the Conventional Commits v1.0.0 specification.
+
+          Keep all commit messages clear, concise, and structured.
+
+          ## Specification
+
+          1. **Format:** `type(scope)!: description` followed by an optional body and footer(s).
+          2. **Types:**
+             - `feat`: When adding a new feature.
+             - `fix`: When fixing a bug.
+             - Other allowed types: `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`, `build`.
+          3. **Scope:** Optional noun describing a section of the codebase surrounded by parentheses (e.g., `fix(parser):`).
+          4. **Breaking Changes:** Must be indicated by a `!` right before the colon (e.g., `feat(api)!:`) or as a `BREAKING CHANGE:` entry in the footer. "BREAKING CHANGE" must be uppercase.
+          5. **Description:** A short summary of the code changes immediately following the colon and space.
+          6. **Body/Footer:** A longer free-form body is optional (separated by a blank line). One or more footers may follow the body after a blank line.
+
+          ## Examples
+
+          - **Simple feature:** `feat: allow provided config object to extend other configs`
+          - **With Scope:** `feat(lang): add Polish language`
+          - **No body (docs):** `docs: correct spelling of CHANGELOG`
+          - **Breaking change with !:** `feat!: send an email to the customer when a product is shipped`
+          - **Breaking change with scope and !:** `feat(api)!: send an email to the customer when a product is shipped`
+          - **Multi-paragraph body with footers:**
+          ```
+          fix: prevent racing of requests
+
+          Introduce a request id and a reference to latest request. Dismiss incoming responses other than from latest request.
+
+          Reviewed-by: Z
+          Refs: #123
+          ```
+          - **Breaking change footer:**
+          ```
+          feat: allow provided config object to extend other configs
+
+          BREAKING CHANGE: `extends` key in config file is now used for extending other config files
+          ```
+
+          Always analyze the provided code changes or diff, determine the correct type and scope, and output only the commit message.
+        '';
 
         # Activation hook: if the managed zed settings file is a symlink,
         # remove it and copy its contents (so that it becomes writable).

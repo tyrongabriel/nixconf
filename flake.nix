@@ -5,7 +5,7 @@
     # Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     # Home Manager
     home-manager = {
@@ -43,21 +43,23 @@
 
     nixvim = {
       url = "github:nix-community/nixvim";
-      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of Nixvim.
-      # url = "github:nix-community/nixvim/nixos-25.11";
-
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nvf = {
       url = "github:NotAShelf/nvf";
-      # You can override the input nixpkgs to follow your system's
-      # instance of nixpkgs. This is safe to do as nvf does not depend
-      # on a binary cache.
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    nixcord.url = "github:FlameFlag/nixcord";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixcord = {
+      url = "github:FlameFlag/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     talhelper = {
       url = "github:budimanjojo/talhelper";
@@ -69,21 +71,32 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # Wrapping modules
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+    wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent";
+
     nirimod = {
       url = "github:srinivasr/nirimod";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    monique.url = "github:ToRvaLDz/monique";
+    monique = {
+      url = "github:ToRvaLDz/monique";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    niri-flake.url = "github:sodiboo/niri-flake";
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     cosmic-manager = {
       url = "github:HeitorAugustoLN/cosmic-manager";
@@ -117,9 +130,6 @@
           ./users
           ./hosts
         ])
-        # (inputs.import-tree ./modules)
-        # (inputs.import-tree ./users)
-        # (inputs.import-tree ./hosts)
         ./colmena.nix
       ];
 

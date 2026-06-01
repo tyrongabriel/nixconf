@@ -18,7 +18,7 @@ prompt = "What system architecture should be used?"
 
 [[variables]]
 name = "system_state_version"
-default = "25.11"
+default = "26.05"
 prompt = "What system state version should be used?"
 
 [[variables]]

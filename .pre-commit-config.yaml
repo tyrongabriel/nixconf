@@ -19,7 +19,7 @@ repos:
     rev: v1.3.1
     hooks:
       - id: deadnix
-        args: [--edit] # Uncomment to automatically modify files
+        #args: ["--edit", "--quiet"] # Uncomment to automatically modify files, requires re-adding files, and re committing
         stages: [pre-commit]
 
   - repo: https://github.com/NixOS/nixfmt
