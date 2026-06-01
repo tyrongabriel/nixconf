@@ -11,6 +11,13 @@
       myHome = {
         desktop = {
           enable = true;
+          apps.yubico.ssh-keys = {
+            enable = true;
+            yubiKeys = [
+              "yelen"
+              "yusuf"
+            ];
+          };
           # niri msg outputs
           monitors = [
             {

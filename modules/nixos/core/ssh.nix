@@ -42,6 +42,9 @@
           openFirewall = true;
         };
 
+        services.gnome.gcr-ssh-agent.enable = false; # conflicts if i have gnome keyring enabled
+        programs.ssh.startAgent = true;
+
         services.fail2ban.enable = if cfg.fail2ban then (mkDefault true) else mkDefault false;
       };
     };

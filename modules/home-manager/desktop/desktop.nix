@@ -94,6 +94,10 @@
           zed-editor.enable = true;
           onlyoffice.enable = true;
           bitwarden.enable = true;
+          yubico = {
+            enable = true;
+            touchDetector.enable = true;
+          };
         };
         myHome.desktop.terminal = {
           alacritty.enable = true;

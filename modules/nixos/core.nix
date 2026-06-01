@@ -52,6 +52,9 @@
           busybox
           wireguard-tools
           wireshark
+          veracrypt
+          rsync
+          rclone
         ];
 
         # Unpatched binaries

@@ -73,9 +73,9 @@
         myHome.ssh = {
           matchBlocks = {
             "github.com" = {
-              identityFile = "~/.ssh/id_ed25519";
-              user = "git";
-              identitiesOnly = true;
+              IdentityFile = "~/.ssh/id_ed25519";
+              User = "git";
+              IdentitiesOnly = true;
             };
           };
         };

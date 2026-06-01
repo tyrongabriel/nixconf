@@ -39,11 +39,15 @@
         programs.ssh = {
           enable = true;
           enableDefaultConfig = false;
+          # needed for yubikey-agent
+          extraConfig = ''
+            AddKeysToAgent yes
+          '';
           includes = [ "~/.ssh/config_custom" ];
-          matchBlocks = {
+          settings = {
             "*" = {
-              identityFile = "~/.ssh/id_ed25519";
-              setEnv = {
+              IdentityFile = "~/.ssh/id_ed25519";
+              SetEnv = {
                 TERM = "xterm-256color";
               };
             };

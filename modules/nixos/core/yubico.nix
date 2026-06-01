@@ -27,7 +27,7 @@
 
         programs.gnupg.agent = {
           enable = true;
-          enableSSHSupport = true;
+          enableSSHSupport = false;
         };
 
         # yubikey login / sudo
