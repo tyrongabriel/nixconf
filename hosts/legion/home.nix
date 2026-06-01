@@ -44,7 +44,7 @@
             startupCommands = [
               { command = [ "${pkgs.bitwarden-desktop}/bin/bitwarden" ]; }
               { command = [ "mullvad-vpn" ]; }
-              { command = [ "vorta -d" ]; }
+              #{ command = [ "vorta -d" ]; }
               # {
               #   command = [
               #     "discord"

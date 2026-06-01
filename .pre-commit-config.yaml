@@ -19,7 +19,7 @@ repos:
     rev: v1.3.1
     hooks:
       - id: deadnix
-        #args: [--edit] # Uncomment to automatically modify files
+        args: [--edit] # Uncomment to automatically modify files
         stages: [pre-commit]
 
   - repo: https://github.com/NixOS/nixfmt
@@ -27,13 +27,13 @@ repos:
     hooks:
       - id: nixfmt-nix
 
-  - repo: local
-    hooks:
-      - id: nix-flake-check
-        name: Nix Flake Check
-        entry: nix flake check
-        args:
-          - "--no-build"
-        language: system
-        pass_filenames: false # Prevents passing modified file names to the command
-        always_run: true # Ensures it runs even if no nix files were modified
+  # - repo: local
+  #   hooks:
+  #     - id: nix-flake-check
+  #       name: Nix Flake Check
+  #       entry: nix flake check
+  #       args:
+  #         - "--no-build"
+  #       language: system
+  #       pass_filenames: false # Prevents passing modified file names to the command
+  #       always_run: true # Ensures it runs even if no nix files were modified

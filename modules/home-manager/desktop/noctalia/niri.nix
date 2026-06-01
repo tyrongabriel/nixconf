@@ -20,7 +20,7 @@
           "--incognito"
         ];
         terminal = "ghostty";
-        fileManager = "cosmic-files";
+        fileManager = "nautilus";
         editor = "zeditor";
         discord = "discord";
         appLauncher = "fuzzel";

@@ -93,6 +93,7 @@
           nixcord.enable = true;
           zed-editor.enable = true;
           onlyoffice.enable = true;
+          bitwarden.enable = true;
         };
         myHome.desktop.terminal = {
           alacritty.enable = true;
@@ -130,7 +131,6 @@
           mattermost-desktop
           mattermost
           vorta
-          nautilus
           mission-center
           localsend
           blanket # ambient sounds
@@ -142,6 +142,7 @@
           #discord # do not install if using nixcord
           wl-clipboard
           cosmic-files
+          nautilus
           vial
           yaak
           signal-desktop
@@ -150,7 +151,11 @@
           thunderbird
           mullvad-vpn
           vscode
-          oculante # image viewer
+          oculante
+
+          # Extra icon packs
+          hicolor-icon-theme
+          gnome-themes-extra # Provides fallback assets that Electron apps expect
         ];
 
         xdg.mimeApps = {

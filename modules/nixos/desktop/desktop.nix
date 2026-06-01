@@ -42,6 +42,7 @@
           desktop.apps = {
             # Enable desktop-specific applications here
             vial.enable = mkDefault true;
+            yubico.enable = mkDefault true;
           };
         };
 

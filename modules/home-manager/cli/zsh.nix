@@ -66,6 +66,7 @@
           enable = lib.mkDefault true;
           enableCompletion = lib.mkDefault true;
           autosuggestion.enable = lib.mkDefault true;
+          dotDir = config.home.homeDirectory;
           #initExtra = "neofetch";
           ## Content at the very end:
           initContent = mkAfter ''

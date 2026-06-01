@@ -117,7 +117,7 @@ Taking inspiration from vim, having clear seperation of what modifier is respons
 | **Spawn Terminal** | `Super + Return` | `spawn alacritty` | App spawn |
 | **Spawn Browser** | `Super + b` | `spawn brave` | App spawn |
 | **Spawn Browser (Incognito)** | `Super + Ctrl + B` | `spawn brave --incognito` | App spawn |
-| **Spawn File Manager** | `Super + Shift + E` | `spawn cosmic-files` | App spawn |
+| **Spawn File Manager** | `Super + Shift + E` | `spawn nautilus` | App spawn |
 | **Spawn Editor** | `Super + E` | `spawn zeditor` | App spawn |
 | **Spawn Bitwarden** | `Super + p` | `spawn bitwarden-desktop` | App spawn |
 | **Toggle Launcher** | `Super + Space` | `spawn noctalia "launcher toggle"` | Noctalia IPC |
