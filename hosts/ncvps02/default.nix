@@ -31,6 +31,11 @@
         # I like comma
         programs.nix-index-database.comma.enable = true;
 
+        myNixos.sops = {
+          sopsFile = ./secrets/secrets.yaml;
+          users.tyron.sopsSecretsFile = ./secrets/users/tyron.yaml;
+        };
+
         myNixos = {
           users.tyron.homeManager = {
             enable = true;

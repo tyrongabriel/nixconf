@@ -21,6 +21,11 @@
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
 
+        myNixos.sops = {
+          sopsFile = ./secrets/secrets.yaml;
+          users.tyron.sopsSecretsFile = ./secrets/users/tyron.yaml;
+        };
+
         myNixos = {
           ssh = {
             enable = mkForce true;

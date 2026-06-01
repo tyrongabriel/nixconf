@@ -3,24 +3,62 @@
   flake.modules.nixos.core =
     {
       inputs,
+      config,
+      lib,
+      pkgs,
       ...
     }:
+    let
+      cfg = config.myNixos.sops;
+    in
     {
       imports = [
         inputs.sops-nix.nixosModules.sops
       ];
 
+      options.myNixos.sops = {
+        sopsFile = lib.mkOption {
+          type = lib.types.nullOr lib.types.path;
+          default = null;
+          description = "Path to the host's secrets.yaml file";
+        };
+        users = lib.mkOption {
+          type = lib.types.attrsOf (
+            lib.types.submodule {
+              options = {
+                sopsSecretsFile = lib.mkOption {
+                  type = lib.types.nullOr lib.types.path;
+                  default = null;
+                  description = "Path to the user's per-host secrets file";
+                };
+              };
+            }
+          );
+          default = { };
+          description = "Users with sops secret files";
+        };
+      };
+
       config = {
-        # Secrets
-        #sops.defaultSopsFile = ./secrets/secrets.yaml;
-        #sops.defaultSopsFile = "${self.outPath}/hosts/${config.networking.hostName}/secrets/secrets.yaml";
-
+        # Use SSH host key for system-level secret decryption
         sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-        sops.age.keyFile = "/var/lib/sops-nix/cluster-key.txt";
 
-        # sops.secrets."path/to/secret" = {
-        #   sopsFile = ./secrets/secrets.yaml;
-        # };
+        # Set the default sops file to the host's secrets (when configured)
+        sops.defaultSopsFile = lib.mkIf (cfg.sopsFile != null) cfg.sopsFile;
+
+        # Deploy each user's age private key to their home directory
+        # This allows home-manager sops to decrypt user-specific secrets
+        sops.secrets = lib.mkMerge (
+          lib.mapAttrsToList (username: _userCfg: {
+            "age_keys/${username}/private" = lib.mkIf (cfg.sopsFile != null) {
+              sopsFile = cfg.sopsFile;
+              path = "/home/${username}/.config/sops/age/keys.txt";
+              owner = config.users.users.${username}.name;
+              group = if pkgs.stdenv.isLinux then config.users.users.${username}.group else "staff";
+              key = "age_keys/${username}/private";
+            };
+          }) cfg.users
+        );
       };
     };
 }

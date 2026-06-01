@@ -1,19 +1,23 @@
 creation_rules:
-  # Rule 1: Global Secrets
+  # Rule 1: Global Secrets (decryptable by maintainers + all hosts)
   - path_regex: ^secrets/secrets\.yaml$
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
-        - age17khcy56n07ffmt7l932cxgpjqgelmqpp8er8yqaqtv6xulyvvdlsm9drlz
+        - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
+        - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
+        - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
 
-  # Rule 2: Shared Host Secrets
+  # Rule 2: Shared Host Secrets (decryptable by maintainers + all hosts)
   - path_regex: ^hosts/[^/]+/secrets/shared\.secrets\.yaml$
     key_groups:
       - age:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
-        - age17khcy56n07ffmt7l932cxgpjqgelmqpp8er8yqaqtv6xulyvvdlsm9drlz
+        - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
+        - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
+        - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
 
   # Rule 3: Node-Specific Secrets for legion
   - path_regex: ^hosts/legion/secrets/secrets\.yaml$
@@ -22,6 +26,15 @@ creation_rules:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
+        - age1rad9v03c5n8etreuwezegnhsh56dzwyzje3lcu0wj25s68kch9hsswj0m3
+
+  # Rule 4: User-Specific Secrets for tyron on legion
+  - path_regex: ^hosts/legion/secrets/users/tyron\.yaml$
+    key_groups:
+      - age:
+        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1rad9v03c5n8etreuwezegnhsh56dzwyzje3lcu0wj25s68kch9hsswj0m3
 
   # Rule 3: Node-Specific Secrets for ncvps02
   - path_regex: ^hosts/ncvps02/secrets/secrets\.yaml$
@@ -30,6 +43,15 @@ creation_rules:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
+        - age1rw63cg8qm94e6hyqftxha2jx9nw389rqsepzkv4rxzw4zy4yw3gq5kzc6n
+
+  # Rule 4: User-Specific Secrets for tyron on ncvps02
+  - path_regex: ^hosts/ncvps02/secrets/users/tyron\.yaml$
+    key_groups:
+      - age:
+        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1rw63cg8qm94e6hyqftxha2jx9nw389rqsepzkv4rxzw4zy4yw3gq5kzc6n
 
   # Rule 3: Node-Specific Secrets for yoga
   - path_regex: ^hosts/yoga/secrets/secrets\.yaml$
@@ -38,8 +60,17 @@ creation_rules:
         - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
         - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
         - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
+        - age1artq6w8lk7046qkfurcftj69v2y4s9sm2rz5agu77p4naqwk8ylssmrqer
 
-  # Rule 4: Fallback for any other secrets.yaml (Maintainers only)
+  # Rule 4: User-Specific Secrets for tyron on yoga
+  - path_regex: ^hosts/yoga/secrets/users/tyron\.yaml$
+    key_groups:
+      - age:
+        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
+        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1artq6w8lk7046qkfurcftj69v2y4s9sm2rz5agu77p4naqwk8ylssmrqer
+
+  # Rule 5: Fallback for any other secrets.yaml (Maintainers only)
   - path_regex: ^hosts/[^/]+/secrets/.*secrets\.yaml$
     key_groups:
       - age:

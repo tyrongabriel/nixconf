@@ -40,9 +40,7 @@ in
               homeDirectory = "/home/${username}";
               stateVersion = osConfig.system.stateVersion;
               sessionVariables = {
-                # SOPS_AGE_SSH_PRIVATE_KEY_FILE = "/home/tyron/.ssh/id_ed25519";
-                # SOPS_AGE_SSH_PRIVATE_KEY_CMD = "/home/tyron/.ssh/id_ed25519";
-                SOPS_AGE_KEY_FILE = "/home/tyron/.config/sops/age/key.txt";
+                SOPS_AGE_KEY_FILE = "/home/${username}/.config/sops/age/keys.txt";
               };
             };
             programs.git.settings.user = {

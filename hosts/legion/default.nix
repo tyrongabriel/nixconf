@@ -33,6 +33,12 @@
           tags = [ ] ++ deployTags;
         };
 
+        # Sops
+        myNixos.sops = {
+          sopsFile = ./secrets/secrets.yaml;
+          users.tyron.sopsSecretsFile = ./secrets/users/tyron.yaml;
+        };
+
         # Config
         myNixos.users.tyron.homeManager = {
           enable = true;

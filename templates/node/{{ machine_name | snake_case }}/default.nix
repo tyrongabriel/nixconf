@@ -23,6 +23,11 @@
         };
         time.timeZone = lib.mkDefault "{{ timezone }}";
 
+        myNixos.sops = {
+          sopsFile = ./secrets/secrets.yaml;
+          users.tyron.sopsSecretsFile = ./secrets/users/tyron.yaml;
+        };
+
         myNixos.users.tyron.homeManager = {
           enable = true;
           tags = [ ];

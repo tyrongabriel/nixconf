@@ -26,6 +26,7 @@ repos:
     rev: v1.2.0 # Use the latest stable version or commit hash
     hooks:
       - id: nixfmt-nix
+        exclude: ^templates/
 
   # - repo: local
   #   hooks:
