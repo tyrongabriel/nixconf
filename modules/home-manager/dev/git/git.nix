@@ -73,7 +73,7 @@
         myHome.ssh = {
           matchBlocks = {
             "github.com" = {
-              IdentityFile = "~/.ssh/id_ed25519";
+              IdentityFile = "~/.ssh/id_yubikey";
               User = "git";
               IdentitiesOnly = true;
             };
