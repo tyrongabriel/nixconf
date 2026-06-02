@@ -32,6 +32,11 @@
         security.polkit.enable = true;
 
         myNixos = {
+          core.yubico.enable = true;
+          core.yubico.identifiers = {
+            yelen = 37374407;
+            yusuf = 37373134;
+          };
           networking.tuvpn.enable = true;
 
           desktop = {

@@ -19,6 +19,7 @@
           default = "";
           description = "Custom SSH configuration text that is written to ~/.ssh/config_custom and included into ssh.";
         };
+        useYubiKey = mkEnableOption "Use YubiKey for SSH authentication, which will set the default IdentityFile to ~/.ssh/id_yubikey instead of ~/.ssh/id_ed25519.";
         matchBlocks = lib.mkOption {
           type = lib.types.attrsOf (lib.types.attrs);
           default = { };
@@ -46,7 +47,7 @@
           includes = [ "~/.ssh/config_custom" ];
           settings = {
             "*" = {
-              IdentityFile = "~/.ssh/id_ed25519";
+              IdentityFile = if config.myHome.ssh.useYubiKey then "~/.ssh/id_yubikey" else "~/.ssh/id_ed25519";
               SetEnv = {
                 TERM = "xterm-256color";
               };

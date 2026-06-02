@@ -9,6 +9,7 @@
     with lib;
     {
       myHome = {
+        ssh.useYubiKey = true;
         desktop = {
           enable = true;
           apps.yubico.ssh-keys = {
