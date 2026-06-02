@@ -3,8 +3,8 @@ creation_rules:
   - path_regex: ^secrets/secrets\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
         - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
@@ -13,8 +13,8 @@ creation_rules:
   - path_regex: ^hosts/[^/]+/secrets/shared\.secrets\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
         - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
@@ -23,8 +23,8 @@ creation_rules:
   - path_regex: ^hosts/legion/secrets/secrets\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
         - age1rad9v03c5n8etreuwezegnhsh56dzwyzje3lcu0wj25s68kch9hsswj0m3
 
@@ -32,16 +32,16 @@ creation_rules:
   - path_regex: ^hosts/legion/secrets/users/tyron\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age1rad9v03c5n8etreuwezegnhsh56dzwyzje3lcu0wj25s68kch9hsswj0m3
 
   # Rule 3: Node-Specific Secrets for ncvps02
   - path_regex: ^hosts/ncvps02/secrets/secrets\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
         - age1rw63cg8qm94e6hyqftxha2jx9nw389rqsepzkv4rxzw4zy4yw3gq5kzc6n
 
@@ -49,16 +49,16 @@ creation_rules:
   - path_regex: ^hosts/ncvps02/secrets/users/tyron\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age1rw63cg8qm94e6hyqftxha2jx9nw389rqsepzkv4rxzw4zy4yw3gq5kzc6n
 
   # Rule 3: Node-Specific Secrets for yoga
   - path_regex: ^hosts/yoga/secrets/secrets\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
         - age1artq6w8lk7046qkfurcftj69v2y4s9sm2rz5agu77p4naqwk8ylssmrqer
 
@@ -66,13 +66,13 @@ creation_rules:
   - path_regex: ^hosts/yoga/secrets/users/tyron\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age1artq6w8lk7046qkfurcftj69v2y4s9sm2rz5agu77p4naqwk8ylssmrqer
 
   # Rule 5: Fallback for any other secrets.yaml (Maintainers only)
   - path_regex: ^hosts/[^/]+/secrets/.*secrets\.yaml$
     key_groups:
       - age:
-        - age1ejzmv648srczvsw42sv0wq9725ck6d4g3q28gskwgg5kfslqnywq92gm7f
-        - age1yacmz82gdmwvm5ecqmanpdsshdts240fprqdsht5xsqmyx6e7qssjlcu2r
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3

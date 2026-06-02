@@ -154,6 +154,7 @@
               (inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena)
               sops
               age
+              age-plugin-yubikey
               jq
               just
               nixos-anywhere

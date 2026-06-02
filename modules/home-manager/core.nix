@@ -32,6 +32,9 @@
 
         # Base packages every home should have
         home.packages = with pkgs; [
+          age
+          ssh-to-age
+          openssl
           croc # fileshare
           ouch # compression
           borgbackup # backup
