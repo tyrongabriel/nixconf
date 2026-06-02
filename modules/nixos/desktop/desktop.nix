@@ -37,7 +37,10 @@
             yelen = 37374407;
             yusuf = 37373134;
           };
-          networking.tuvpn.enable = true;
+          networking = {
+            tuvpn.enable = true;
+            netbird.mullvadBypass.enable = mkDefault true;
+          };
 
           desktop = {
             displayManager.greetd.enable = mkDefault true;
