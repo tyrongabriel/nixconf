@@ -3,7 +3,6 @@
   flake.modules.homeManager.legion_tyron =
     {
       lib,
-      pkgs,
       ...
     }:
     with lib;
@@ -50,19 +49,36 @@
           ];
           niri = {
             startupCommands = [
-              { command = [ "${pkgs.bitwarden-desktop}/bin/bitwarden" ]; }
-              { command = [ "mullvad-vpn" ]; }
-              #{ command = [ "vorta -d" ]; }
-              # {
-              #   command = [
-              #     "discord"
-              #     "--start-minimized"
-              #   ];
-              # }
+              { command = [ "mullvad-daemon" ]; }
+              {
+                command = [
+                  "tray-launch"
+                  "mullvad-vpn --ozone-platform=wayland"
+                ];
+              }
+              {
+                command = [
+                  "tray-launch"
+                  "bitwarden"
+                ];
+              }
+              {
+                command = [
+                  "tray-launch"
+                  "signal-desktop"
+                ];
+              }
             ];
           };
         };
       };
 
+      # xdg.autostart = {
+      #   enable = true;
+      #   entries = [
+      #     #"${pkgs.evolution}/share/applications/org.gnome.Evolution.desktop"
+      #     "${pkgs.bitwarden-desktop}/share/applications/bitwarden.desktop"
+      #   ];
+      # };
     };
 }

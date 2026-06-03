@@ -25,6 +25,11 @@
       # This fixes 'nix-shell -p' and 'nixos-rebuild'
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
+      # !TODO: when flakes/deps get updated, remove
+      nixpkgs.config.permittedInsecurePackages = [
+        "electron-39.8.10"
+      ];
+
       nix.gc = {
         automatic = true;
         dates = "weekly";

@@ -39,6 +39,34 @@
           "call"
         ]
         ++ (pkgs.lib.splitString " " cmd);
+
+      #https://github.com/DataLabTechTV/dltos/blob/main/system_files/usr/bin/tray-launch
+      tray-launch = pkgs.writeShellScriptBin "tray-launch" ''
+        #!/usr/bin/env bash
+
+        usage() {
+            echo "Usage: tray-launch PROGRAM [ARGS...]"
+            echo "Launch a program after the system tray interface is ready."
+            echo
+            echo "Options:"
+            echo "  -h, --help    Show this help message and exit"
+        }
+
+        if [[ $# -lt 1 ]]; then
+            echo "Error: Insufficient arguments."
+            usage
+            exit 1
+        fi
+
+        if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+            usage
+            exit 0
+        fi
+
+        ${pkgs.glib.bin}/bin/gdbus wait --session org.kde.StatusNotifierWatcher
+        exec "$@"
+      '';
+
     in
     with lib;
     {
@@ -68,8 +96,10 @@
       };
       config = mkIf cfg.enable {
 
-        home.packages = [
+        home.packages = with pkgs; [
           inputs.nirimod.packages.${pkgs.stdenv.hostPlatform.system}.default
+          tray-launch
+          glib.bin
         ];
         # Bad workaround til the niri-flake dev finally merges https://github.com/sodiboo/niri-flake/pull/1548
         home.activation.niri-include-monitors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -140,8 +170,28 @@
                 "--components=secrets"
               ];
             }
-            { command = [ "noctalia-shell" ]; }
             { command = [ "xwayland-satellite" ]; }
+            # {
+            #   # waits for services to be fully ready before starting apps
+            #   command = [
+            #     "${pkgs.bash}/bin/bash"
+            #     "-c"
+            #     ''
+            #       # Wait for keyring to be active
+            #       systemctl --user wait-active gnome-keyring 2>/dev/null || true
+            #       # Wait for dbus session to be ready
+            #       while ! dbus-send --session --dest=org.freedesktop.DBus --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames 2>/dev/null; do
+            #         sleep 0.2
+            #       done
+            #     ''
+            #   ];
+            # }
+            {
+              command = [
+                "noctalia-shell"
+              ];
+            }
+
           ]
           ++ cfg.startupCommands;
 

@@ -129,6 +129,7 @@
 
         myHome.cli.nvf.enable = true; # enable nvf for desktop
         home.packages = with pkgs; [
+          qrencode
           xdg-user-dirs
           xdg-user-dirs-gtk
           inkscape-with-extensions

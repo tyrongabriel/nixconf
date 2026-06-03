@@ -21,7 +21,7 @@
           enable = true;
           settings = {
             animateMap = true;
-            autoConnect = false;
+            autoConnect = true;
             browsedForSplitTunnelingApplications = [ ];
             changelogDisplayedForVersion = "";
             enableSystemNotifications = true;

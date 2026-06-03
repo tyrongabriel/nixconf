@@ -32,9 +32,11 @@
           // {
             "${cfg.secretPrefix}/${yubikey}/private" = {
               path = "${config.home.homeDirectory}/.ssh/id_${yubikey}";
+              mode = "0600";
             };
             "${cfg.secretPrefix}/${yubikey}/public" = {
               path = "${config.home.homeDirectory}/.ssh/id_${yubikey}.pub";
+              mode = "0644";
             };
           }
         ) { } cfg.yubiKeys;
