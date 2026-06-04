@@ -4,6 +4,7 @@
     {
       pkgs,
       lib,
+      config,
       ...
     }:
     with lib;
@@ -63,7 +64,7 @@
         ];
 
         # fix warnings stylix makes
-        #gtk.gtk4.theme = config.gtk.theme;
+        gtk.gtk4.theme = mkForce config.gtk.theme;
       };
     };
 }

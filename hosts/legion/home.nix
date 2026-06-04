@@ -56,12 +56,12 @@
                   "mullvad-vpn --ozone-platform=wayland"
                 ];
               }
-              {
-                command = [
-                  "tray-launch"
-                  "bitwarden"
-                ];
-              }
+              # {
+              #   command = [
+              #     "tray-launch"
+              #     "bitwarden"
+              #   ];
+              # }
               {
                 command = [
                   "tray-launch"
