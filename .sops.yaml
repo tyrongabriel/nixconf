@@ -7,7 +7,7 @@ creation_rules:
         - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
-        - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
+        - age1uyhg2mnq3nknwy25jh4xmsqltd5dslcp5xh70930ckpm32c5ga7q6mg7sk
 
   # Rule 2: Shared Host Secrets (decryptable by maintainers + all hosts)
   - path_regex: ^hosts/[^/]+/secrets/shared\.secrets\.yaml$
@@ -17,7 +17,7 @@ creation_rules:
         - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
-        - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
+        - age1uyhg2mnq3nknwy25jh4xmsqltd5dslcp5xh70930ckpm32c5ga7q6mg7sk
 
   # Rule 3: Node-Specific Secrets for legion
   - path_regex: ^hosts/legion/secrets/secrets\.yaml$
@@ -59,7 +59,7 @@ creation_rules:
       - age:
         - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
         - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
-        - age1jw09eg6ads9fktju43ytynx7fd2jthn9e9ynuecr7psdqvz56q8suq9kha
+        - age1uyhg2mnq3nknwy25jh4xmsqltd5dslcp5xh70930ckpm32c5ga7q6mg7sk
         - age1artq6w8lk7046qkfurcftj69v2y4s9sm2rz5agu77p4naqwk8ylssmrqer
 
   # Rule 4: User-Specific Secrets for tyron on yoga

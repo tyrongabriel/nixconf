@@ -4,21 +4,52 @@
     { lib, ... }:
     {
       ## Boot Config ##
+      networking.dhcpcd.wait = "background"; # makes boot faster by not waiting for network
+      ## Boot Config ##
       boot = {
-        #kernelPackages = pkgs.linuxPackages_latest;
-        supportedFilesystems = lib.mkForce [ "btrfs" ]; # Force support for my used filesystem
+        supportedFilesystems = lib.mkForce [ "btrfs" ];
 
         ## Bootloader ##
-        # TODO: Fit into a module!
-        loader.grub = {
-          # no need to set devices, disko will add all devices that have a EF02 partition to the list already
-          #devices = [ ];
-          devices = [ "nodev" ]; # No specific partition, disko will add the correct one
-          # device = "nodev"; # No specific partition
-          useOSProber = true; # Autodetect windows
-          efiSupport = true;
-          efiInstallAsRemovable = true;
+        loader = {
+          efi.canTouchEfiVariables = true;
+          systemd-boot = {
+            enable = true;
+            configurationLimit = 10;
+          };
+          timeout = 0; # Skip boot menu — hold key at boot to show
         };
+
+        ## Kernel ##
+        initrd = {
+          availableKernelModules = [
+            "xhci_pci"
+            "ahci"
+            "nvme"
+            "usb_storage"
+            "sd_mod"
+            "rtsx_pci_sdmmc"
+          ];
+          systemd.enable = true; # Parallel initrd for faster boot
+        };
+
+        kernelModules = [
+          "kvm-amd"
+          "amdgpu"
+        ];
+
+        kernelParams = [
+          "quiet"
+          "loglevel=0"
+          "rd.systemd.show_status=0"
+          "rd.udev.log_level=0"
+          "udev.log_level=0"
+          "vt.global_cursor_default=0"
+        ];
+
+        consoleLogLevel = 0;
+
+        ## Plymouth splash — clean transition from OEM splash to desktop ##
+        plymouth.enable = true;
       };
     };
 }

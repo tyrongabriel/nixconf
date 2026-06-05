@@ -67,7 +67,7 @@
 
                 echo "Creating links to ${homeDirectory}/id_$key_name"
                 ln -sf "${homeDirectory}/.ssh/id_$key_name" ${homeDirectory}/.ssh/id_yubikey
-                ln -sf "${homeDirectory}/.ssh/yubikeys/id_$key_name.pub" ${homeDirectory}/.ssh/id_yubikey.pub
+                ln -sf "${homeDirectory}/.ssh/id_$key_name.pub" ${homeDirectory}/.ssh/id_yubikey.pub
               '';
             };
           yubikey-down = pkgs.writeShellApplication {
@@ -121,7 +121,7 @@
           #    #RUN+="${lib.getBin pkgs.xorg.xset}/bin/xset dpms force on"
           # '';
 
-          services.yubikey-agent.enable = true; # creates a yubikey ssh agent
+          #services.yubikey-agent.enable = true; # creates a yubikey ssh agent # doesnt seem to work
 
           programs.gnupg.agent = {
             enable = true;

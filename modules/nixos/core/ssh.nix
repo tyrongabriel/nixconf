@@ -4,6 +4,7 @@
     {
       config,
       lib,
+      pkgs,
       ...
     }:
     let
@@ -43,7 +44,10 @@
         };
 
         services.gnome.gcr-ssh-agent.enable = false; # conflicts if i have gnome keyring enabled
-        programs.ssh.startAgent = true;
+        #programs.ssh.startAgent = true; # doesnt work with yubikeys
+
+        # Ensure the seahorse package is available
+        environment.systemPackages = [ pkgs.seahorse ];
 
         services.fail2ban.enable = if cfg.fail2ban then (mkDefault true) else mkDefault false;
       };

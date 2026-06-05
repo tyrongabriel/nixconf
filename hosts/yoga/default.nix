@@ -15,34 +15,45 @@
       config = {
         networking.hostName = "yoga";
         deployment = {
-          targetHost = "localhost";
+          targetHost = "yoga.netbird.cloud";
           targetUser = "deploy";
+          # sshOptions = [
+          #   "-i"
+          #   "/home/tyron/.ssh/id_ed25519"
+          # ];
           allowLocalDeployment = true;
+          tags = [
+            "dev"
+            "desktop"
+          ];
         };
         time.timeZone = lib.mkDefault "Europe/Vienna";
 
+        # Sops
         myNixos.sops = {
           sopsFile = ./secrets/secrets.yaml;
           users.tyron.sopsSecretsFile = ./secrets/users/tyron.yaml;
         };
 
-        myNixos = {
-          ssh = {
-            enable = mkForce true;
-            fail2ban = mkForce true;
-          };
-          users.tyron.homeManager = {
-            enable = true;
-            tags = [
-              "dev"
-              "desktop"
-            ];
-            #extraImports = [ self.modules.homeManager.git ];
-          };
+        # Config
+        myNixos.users.tyron.homeManager = {
+          enable = true;
+          tags = [
+            "dev"
+            "desktop"
+          ];
+          extraImports = [
+            self.modules.homeManager.yoga_tyron
+          ];
+        };
+
+        myNixos.ssh = {
+          enable = mkForce true;
+          fail2ban = mkForce true;
         };
 
         hardware.facter.reportPath = ./facter.json;
-        system.stateVersion = "25.05";
+        system.stateVersion = "26.05";
       };
     };
 }

@@ -46,6 +46,13 @@
         # Set the default sops file to the host's secrets (when configured)
         sops.defaultSopsFile = lib.mkIf (cfg.sopsFile != null) cfg.sopsFile;
 
+        # Pre-create the user's .config directory with the right permissions, fails otherwise since
+        # .config will be owned by root!!!!!
+        systemd.tmpfiles.rules = lib.mapAttrsToList (
+          username: _userCfg:
+          "d /home/${username}/.config 0700 ${username} ${config.users.users.${username}.group} - -"
+        ) cfg.users;
+
         # Deploy each user's age private key to their home directory
         # This allows home-manager sops to decrypt user-specific secrets
         sops.secrets = lib.mkMerge (
