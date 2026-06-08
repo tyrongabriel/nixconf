@@ -11,6 +11,8 @@
         ssh.useYubiKey = true;
         desktop = {
           enable = true;
+          gaming.enable = true;
+
           apps.yubico.ssh-keys = {
             enable = true;
             yubiKeys = [

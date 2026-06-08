@@ -411,9 +411,9 @@
 
           1. **Format:** `type(scope)!: description` followed by an optional body and footer(s).
           2. **Types:**
-             - `feat`: When adding a new feature.
-             - `fix`: When fixing a bug.
-             - Other allowed types: `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`, `build`.
+              - `feat`: When adding a new feature.
+              - `fix`: When fixing a bug.
+              - Other allowed types: `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`, `build`.
           3. **Scope:** Optional noun describing a section of the codebase surrounded by parentheses (e.g., `fix(parser):`).
           4. **Breaking Changes:** Must be indicated by a `!` right before the colon (e.g., `feat(api)!:`) or as a `BREAKING CHANGE:` entry in the footer. "BREAKING CHANGE" must be uppercase.
           5. **Description:** A short summary of the code changes immediately following the colon and space.
@@ -443,6 +443,11 @@
           ```
 
           Always analyze the provided code changes or diff, determine the correct type and scope, and output only the commit message.
+
+          DO NOT add imaginary refs to issues, or a reviewed by note!
+
+          ## Formatting
+          Do NOT wrap the output inside of ``` and do NOT add any newlines before the text, simply output the text, beginning with the feat, refactor etc. text
         '';
 
         # Activation hook: if the managed zed settings file is a symlink,

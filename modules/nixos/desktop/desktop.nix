@@ -18,6 +18,7 @@
         self.modules.nixos.displayManagers
         self.modules.nixos.windowManagers
         self.modules.nixos.apps
+        self.modules.nixos.gaming
       ];
       options.myNixos.desktop = with lib; {
         enable = mkOption {
@@ -45,6 +46,9 @@
           desktop = {
             displayManager.greetd.enable = mkDefault true;
             windowManager.niri.enable = mkDefault true;
+            gaming = {
+              enable = true;
+            };
           };
 
           desktop.apps = {

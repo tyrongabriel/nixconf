@@ -17,6 +17,7 @@
         self.modules.homeManager.cosmic
         self.modules.homeManager.terminal
         self.modules.homeManager.apps
+        self.modules.homeManager.gaming
       ];
       options.myHome.desktop = with lib; {
         enable = mkOption {
@@ -129,6 +130,7 @@
 
         myHome.cli.nvf.enable = true; # enable nvf for desktop
         home.packages = with pkgs; [
+          pwvucontrol
           qrencode
           xdg-user-dirs
           xdg-user-dirs-gtk
