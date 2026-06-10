@@ -14,3 +14,10 @@ Note: to generate an ssh key (non-resident) with a yubikey:
 ```bash
 ssh-keygen -t ed25519-sk -O verify-required -N "" -C "<username>@<hostname>" -f ./id_<yubikey-name>
 ```
+
+
+change swap size:
+
+```bash
+sudo btrfs filesystem mkswapfile --size 32G /.swapvol/swapfile
+```

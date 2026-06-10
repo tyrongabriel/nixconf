@@ -10,7 +10,7 @@
     let
       cfg = config.myHome.desktop.noctalia;
       desktopCfg = config.myHome.desktop;
-      noctaliaConf = builtins.fromJSON (builtins.readFile ./noctalia.json);
+      noctaliaConf = fromTOML (builtins.readFile ./noctalia.toml);
     in
     with lib;
     {
@@ -51,6 +51,8 @@
 
         home.file = {
           ".face".source = ../assets/catppuccin-pfp.png;
+          ".face.png".source = ../assets/catppuccin-pfp.png;
+          "Pictures/Wallpapers/default.png".source = config.stylix.image;
         };
 
         # Manages idle behavior, to lock when idle
@@ -66,8 +68,8 @@
         #   ];
         # };
 
-        programs.noctalia-shell.enable = true;
-        programs.noctalia-shell.settings = lib.mkMerge [
+        programs.noctalia.enable = true;
+        programs.noctalia.settings = lib.mkMerge [
           (lib.mapAttrsRecursive (_path: value: lib.mkOverride 2000 value) noctaliaConf)
           {
             general = {
@@ -75,6 +77,8 @@
             };
             bar.monitors = lib.mkForce (lib.map (m: m.id) (lib.filter (m: m.bar == true) desktopCfg.monitors));
             location.name = mkForce "${cfg.location.name}";
+            wallpaper.directory = mkForce "~/Pictures/Wallpapers";
+            wallpaper.default = mkForce "~/Pictures/Wallpapers/default.png";
           }
         ];
 

@@ -34,7 +34,7 @@
       noctalia =
         cmd:
         [
-          "noctalia-shell"
+          "noctali"
           "ipc"
           "call"
         ]
@@ -188,7 +188,7 @@
             # }
             {
               command = [
-                "noctalia-shell"
+                "noctalia"
               ];
             }
 

@@ -1,0 +1,71 @@
+[bar.widgets]
+center = [ "media", "clipboard" ]
+end = [ "tray", "bluetooth", "network", "volume", "date", "clock", "notifications", "session" ]
+margin_edge = 4
+margin_ends = 16
+start = [ "control-center", "workspaces", "brightness", "cpu", "ram", "temp", "battery" ]
+thickness = 32
+
+[dock]
+auto_hide = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 957.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 873.0
+    cy = 859.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+[shell]
+avatar_path = "~/.face.png"
+font_family = "JetBrainsMono Nerd Font"
+settings_show_advanced = true
+
+    [shell.panel]
+    control_center_placement = "centered"
+    launcher_categories = false
+    launcher_compact = true
+    session_placement = "centered"
+    wallpaper_placement = "centered"
+
+[theme]
+builtin = "Catppuccin"
+
+[wallpaper]
+directory = "~/Pictures/Wallpapers"
+
+    [wallpaper.default]
+    path = "/home/tyron/Pictures/Wallpapers/wallhaven_1p55dw.jpg"
+
+    [wallpaper.last]
+    path = "/home/tyron/Pictures/Wallpapers/wallhaven_1p55dw.jpg"
+
+[widget.cpu]
+show_label = false
+
+[widget.ram]
+show_label = false
+
+[widget.temp]
+show_label = false
