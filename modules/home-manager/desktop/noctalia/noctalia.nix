@@ -51,7 +51,6 @@
 
         home.file = {
           ".face".source = ../assets/catppuccin-pfp.png;
-          ".face.png".source = ../assets/catppuccin-pfp.png;
           "Pictures/Wallpapers/default.png".source = config.stylix.image;
         };
 
@@ -72,11 +71,12 @@
         programs.noctalia.settings = lib.mkMerge [
           (lib.mapAttrsRecursive (_path: value: lib.mkOverride 2000 value) noctaliaConf)
           {
-            general = {
-              avatarImage = lib.mkForce "/home/${config.home.username}/.face";
+            shell = {
+              avatar_path = lib.mkForce "~/.face";
             };
             bar.monitors = lib.mkForce (lib.map (m: m.id) (lib.filter (m: m.bar == true) desktopCfg.monitors));
-            location.name = mkForce "${cfg.location.name}";
+            location.address = mkForce "${cfg.location.name}";
+            weather.address = mkForce "${cfg.location.name}";
             wallpaper.directory = mkForce "~/Pictures/Wallpapers";
             wallpaper.default = mkForce "~/Pictures/Wallpapers/default.png";
           }

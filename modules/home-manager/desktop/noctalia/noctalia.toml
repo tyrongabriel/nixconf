@@ -41,6 +41,7 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
 avatar_path = "~/.face.png"
 font_family = "JetBrainsMono Nerd Font"
 settings_show_advanced = true
+screen_time_enabled = true
 
     [shell.panel]
     control_center_placement = "centered"
