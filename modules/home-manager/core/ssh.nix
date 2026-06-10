@@ -37,7 +37,7 @@
       config = mkIf cfg.enable {
         # Your configuration here
         home.file.".ssh/config_custom".text = cfg.customConfig;
-        services.ssh-agent.enable = true;
+        #services.ssh-agent.enable = true;
         programs.ssh = {
           enable = true;
           enableDefaultConfig = false;
