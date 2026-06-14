@@ -1143,7 +1143,8 @@
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
         "talhelper": "talhelper",
-        "wrapper-modules": "wrapper-modules"
+        "wrapper-modules": "wrapper-modules",
+        "zen-browser": "zen-browser"
       }
     },
     "sops-nix": {
@@ -1462,6 +1463,29 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781173532,
+        "narHash": "sha256-MwnZpL82aQO1I15JH525vz6REI/OULEAmXDp6cIcgNg=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "f13e82162fae68af7716147207fa5f868f5ca381",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

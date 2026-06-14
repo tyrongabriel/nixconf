@@ -95,6 +95,7 @@
           zed-editor.enable = true;
           onlyoffice.enable = true;
           bitwarden.enable = true;
+          zen-browser.enable = true;
           yubico = {
             enable = true;
             touchDetector.enable = true;
