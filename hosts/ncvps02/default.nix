@@ -22,6 +22,10 @@
         deployment = {
           targetHost = "159.195.9.89";
           targetUser = "deploy";
+          # sshOptions = [
+          #   "-i"
+          #   "/home/tyron/.ssh/id_ed25519"
+          # ];
           tags = [
             "vps"
             "server"

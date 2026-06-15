@@ -45,7 +45,10 @@
           extraConfig = ''
             AddKeysToAgent yes
           '';
-          includes = [ "~/.ssh/config_custom" ];
+          includes = [
+            "~/.ssh/config_custom"
+            "~/.ssh/config_stateful"
+          ];
           settings = {
             "*" = {
               IdentityFile = if config.myHome.ssh.useYubiKey then "~/.ssh/id_yubikey" else "~/.ssh/id_ed25519";
