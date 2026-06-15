@@ -44,6 +44,10 @@
           "rd.udev.log_level=0"
           "udev.log_level=0"
           "vt.global_cursor_default=0"
+
+          # Trackpad fix (hopefully)
+          "amd_pstate=active"
+          "i2c_hid.poll=1"
         ];
 
         consoleLogLevel = 0;
@@ -51,5 +55,10 @@
         ## Plymouth splash — clean transition from OEM splash to desktop ##
         plymouth.enable = true;
       };
+
+      # Trackpad fix (hopefully)
+      services.udev.extraRules = ''
+        ACTION=="add", SUBSYSTEM=="platform", KERNEL=="AMDI0010:00", ATTR{power/control}="on"
+      '';
     };
 }
