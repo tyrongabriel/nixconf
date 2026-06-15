@@ -37,6 +37,7 @@
           core.yubico.identifiers = {
             yelen = 37374407;
             yusuf = 37373134;
+            #yusuf_rk = 37373134;
           };
           networking = {
             tuvpn.enable = true;

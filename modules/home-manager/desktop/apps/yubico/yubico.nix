@@ -3,7 +3,6 @@
   flake.modules.homeManager.apps =
     {
       config,
-      pkgs,
       lib,
       ...
     }:
@@ -17,8 +16,7 @@
         enable = mkEnableOption "Enable yubico";
       };
       config = mkIf cfg.enable {
-        home.packages = with pkgs; [
-        ];
+
       };
     };
 }
