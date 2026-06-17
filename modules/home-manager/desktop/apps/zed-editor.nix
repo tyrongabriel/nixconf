@@ -435,8 +435,11 @@
         };
 
         # Agents.md
-        # home.file.".config/zed/AGENTS.md".text = ''
-        #   '';
+        home.file.".config/zed/AGENTS.md".text = ''
+          Never, under any circumstance use your tools to try and gain access to secure info, unless the user explicitly requests it.
+          eg. never cat/otherwise leak the contents of a private ssh key, certificate or api key or other sensitive information, unless the user explicitly requests it.
+          Always ask the user before using a tool that could access sensitive information, and if they approve, use the tool in a way that minimizes the risk of exposing that information (e.g. by only outputting the relevant parts of a file instead of the whole file).
+        '';
 
         # Activation hook: if the managed zed settings file is a symlink,
         # remove it and copy its contents (so that it becomes writable).
