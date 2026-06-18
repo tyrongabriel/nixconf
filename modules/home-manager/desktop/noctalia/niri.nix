@@ -34,9 +34,8 @@
       noctalia =
         cmd:
         [
-          "noctali"
-          "ipc"
-          "call"
+          "noctalia"
+          "msg"
         ]
         ++ (pkgs.lib.splitString " " cmd);
 
@@ -201,16 +200,16 @@
           binds = with config.lib.niri.actions; {
             "super+i".action.show-hotkey-overlay = [ ];
             # Volume
-            "XF86AudioRaiseVolume".action.spawn = noctalia "volume increase"; # output increase
-            "XF86AudioLowerVolume".action.spawn = noctalia "volume decrease"; # output decrease
-            "XF86AudioMute".action.spawn = noctalia "volume muteOutput"; # output mute
-            "shift+XF86AudioRaiseVolume".action.spawn = noctalia "volume increaseInput"; # input increase
-            "shift+XF86AudioLowerVolume".action.spawn = noctalia "volume decreaseInput"; # input decrease
-            "shift+XF86AudioMute".action.spawn = noctalia "volume muteInput"; # input mute
-            "control+XF86AudioMute".action.spawn = noctalia "volume togglePanel"; # open volume panel
+            "XF86AudioRaiseVolume".action.spawn = noctalia "volume-up"; # output increase
+            "XF86AudioLowerVolume".action.spawn = noctalia "volume-down"; # output decrease
+            "XF86AudioMute".action.spawn = noctalia "volume-mute"; # output mute
+            "shift+XF86AudioRaiseVolume".action.spawn = noctalia "mic-volume-up"; # input increase
+            "shift+XF86AudioLowerVolume".action.spawn = noctalia "mic-volume-down"; # input decrease
+            "shift+XF86AudioMute".action.spawn = noctalia "mic-mute"; # input mute
+            "control+XF86AudioMute".action.spawn = noctalia "panel-toggle control-center audio"; # open volume panel
 
             # Media
-            "XF86AudioPlay".action.spawn = noctalia "media playPause";
+            "XF86AudioPlay".action.spawn = noctalia "media toggle";
             "XF86AudioNext".action.spawn = noctalia "media next";
             "XF86AudioPrev".action.spawn = noctalia "media previous";
 
@@ -223,7 +222,7 @@
             #    "super+Space".action = spawn apps.appLauncher;
             "super+Shift+E".action = spawn apps.fileManager;
             "super+E".action = spawn apps.editor;
-            "super+Escape".action.spawn = noctalia "lockScreen lock";
+            "super+Escape".action.spawn = noctalia "session lock";
 
             # Tested with ghostty and kitty
             # "super+m".action = spawn apps.terminal [
