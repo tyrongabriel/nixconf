@@ -71,6 +71,7 @@
             # };
             load_direnv = "shell_hook";
             agent = {
+              show_turn_stats = true;
               sidebar_side = "right";
               dock = "right";
               commit_message_model = {
@@ -160,19 +161,23 @@
 
               ];
               profiles = {
-                none = {
-                  name = "Internet";
+                research = {
+                  context_servers = { };
+                  enable_all_context_servers = false;
+                  name = "Research";
                   tools = {
-                    thinking = true;
-                    search_web = true;
                     copy_path = false;
                     fetch = true;
+                    find_path = true;
                     grep = true;
-
+                    list_directory = true;
+                    read_file = true;
+                    skill = true;
+                    terminal = true;
+                    write_file = false;
                   };
-                  enable_all_context_servers = false;
-                  context_servers = { };
                 };
+
               };
               #version = "2";
               enabled = true;
@@ -188,8 +193,108 @@
               opencode = {
                 show_free_models = true;
                 show_zen_models = false;
+                available_models = [
+                  {
+                    display_name = "GLM 5.2";
+                    interleaved_reasoning = false;
+                    max_output_tokens = 131072;
+                    max_tokens = 1000000;
+                    name = "glm-5.2";
+                    protocol = "openai_chat";
+                    reasoning_effort_levels = [
+                      "low"
+                      "medium"
+                      "high"
+                      "xhigh"
+                    ];
+                    subscription = "go";
+                  }
+                ];
+
               };
               openai_compatible = {
+                Umans = {
+                  api_url = "https://api.code.umans.ai/v1";
+                  available_models = [
+                    {
+                      capabilities = {
+                        chat_completions = true;
+                        images = true;
+                        interleaved_reasoning = false;
+                        parallel_tool_calls = false;
+                        prompt_cache_key = false;
+                        tools = true;
+                      };
+                      display_name = "Umans Coder (Kimi K2.7)";
+                      max_completion_tokens = 32768;
+                      max_output_tokens = 32768;
+                      max_tokens = 262144;
+                      name = "umans-coder";
+                    }
+                    {
+                      capabilities = {
+                        chat_completions = true;
+                        images = true;
+                        interleaved_reasoning = false;
+                        parallel_tool_calls = false;
+                        prompt_cache_key = false;
+                        tools = true;
+                      };
+                      display_name = "Umans Flash (Qwen3.6 35B)";
+                      max_completion_tokens = 32768;
+                      max_output_tokens = 32768;
+                      max_tokens = 262144;
+                      name = "umans-flash";
+                    }
+                    {
+                      capabilities = {
+                        chat_completions = true;
+                        images = true;
+                        interleaved_reasoning = false;
+                        parallel_tool_calls = false;
+                        prompt_cache_key = false;
+                        tools = true;
+                      };
+                      display_name = "Umans Kimi K2.7 Code";
+                      max_completion_tokens = 32768;
+                      max_output_tokens = 32768;
+                      max_tokens = 262144;
+                      name = "umans-kimi-k2.7";
+                    }
+                    {
+                      capabilities = {
+                        chat_completions = true;
+                        images = false;
+                        interleaved_reasoning = false;
+                        parallel_tool_calls = true;
+                        prompt_cache_key = true;
+                        tools = true;
+                      };
+                      display_name = "Umans GLM 5.2";
+                      max_completion_tokens = 131072;
+                      max_output_tokens = 131071;
+                      max_tokens = 405504;
+                      name = "umans-glm-5.2";
+                      reasoning_effort = "high";
+                    }
+                    {
+                      capabilities = {
+                        chat_completions = true;
+                        images = false;
+                        interleaved_reasoning = false;
+                        parallel_tool_calls = true;
+                        prompt_cache_key = true;
+                        tools = true;
+                      };
+                      display_name = "Umans GLM 5.1";
+                      max_completion_tokens = 131072;
+                      max_output_tokens = 131071;
+                      max_tokens = 202752;
+                      name = "umans-glm-5.1";
+                    }
+                  ];
+                };
+
                 Cerebras = {
                   api_url = "https://api.cerebras.ai/v1";
                   available_models = [
