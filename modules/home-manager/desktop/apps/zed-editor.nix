@@ -33,6 +33,7 @@
         programs.zed-editor = {
           enable = true;
           package = pkgs.unstable-small.zed-editor;
+          mutableUserSettings = true;
           extensions = [
             "justfile"
             "ini"
@@ -62,19 +63,19 @@
 
           #https://zed.dev/docs/configuring-zed#direnv-integration
           userSettings = {
-            agent_servers = {
-              opencode = {
-                default_model = "opencode/gpt-5-nano/high";
-                type = "registry";
-              };
-            };
+            # agent_servers = {
+            #   opencode = {
+            #     default_model = "opencode/gpt-5-nano/high";
+            #     type = "registry";
+            #   };
+            # };
             load_direnv = "shell_hook";
             agent = {
               sidebar_side = "right";
               dock = "right";
               commit_message_model = {
                 provider = "opencode";
-                model = "go/minimax-m2.7";
+                model = "go/deepseek-v4-flash";
               };
               commit_message_instructions = ''
                 # Git Commit Rules
@@ -143,7 +144,17 @@
                 }
                 {
                   provider = "opencode";
-                  model = "go/minimax-m2.7";
+                  model = "go/minimax-m3";
+                  enable_thinking = false;
+                }
+                {
+                  provider = "opencode";
+                  model = "go/deepseek-v4-pro";
+                  enable_thinking = false;
+                }
+                {
+                  provider = "opencode";
+                  model = "go/deepseek-v4-flash";
                   enable_thinking = false;
                 }
 
@@ -157,6 +168,7 @@
                     copy_path = false;
                     fetch = true;
                     grep = true;
+
                   };
                   enable_all_context_servers = false;
                   context_servers = { };
@@ -166,9 +178,9 @@
               enabled = true;
               default_profile = "minimal";
               default_model = {
-                enable_thinking = false;
+                enable_thinking = true;
                 provider = "opencode";
-                model = "go/qwen3.7-max";
+                model = "go/deepseek-v4-pro";
               };
             };
 
@@ -441,27 +453,30 @@
           Always ask the user before using a tool that could access sensitive information, and if they approve, use the tool in a way that minimizes the risk of exposing that information (e.g. by only outputting the relevant parts of a file instead of the whole file).
         '';
 
+        # DEPRECATED SINCE WE HAVE MUTABLE SETTINGS NOW
         # Activation hook: if the managed zed settings file is a symlink,
         # remove it and copy its contents (so that it becomes writable).
         # The file created by home-manager is placed at ~/.config/zed/settings.json.
         # Activation hook: adjust the zed settings file so that it's not a symlink.
         # This block runs after the writeBoundary and uses the provided run and verboseEcho functions.
-        home.activation.makeZedWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          echo "Starting to move the settings.json file to a writable file"
-          ls -l $HOME/.config/zed/
-          echo "Now copying the settings.json file to a writable file"
-          if [ -f $HOME/.config/zed/settings.json ]; then
-            run cp $HOME/.config/zed/settings.json $HOME/.config/zed/settings.json.tmp
-            run rm $HOME/.config/zed/settings.json -f
-            run cp $HOME/.config/zed/settings.json.tmp $HOME/.config/zed/settings.json
-            run rm $HOME/.config/zed/settings.json.tmp -f
-            run rm $HOME/.config/zed/settings.json.bak -f
-            run chmod +w $HOME/.config/zed/settings.json
-            echo "Done, settings.json now a regular file"
-          else
-            echo "settings.json not found, skipping"
-          fi
-        '';
+        # home.activation.makeZedWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        #   echo "Starting to move the settings.json file to a writable file"
+        #   ls -l $HOME/.config/zed/
+        #   echo "Now copying the settings.json file to a writable file"
+        #   if [ -f $HOME/.config/zed/settings.json ]; then
+        #     run cp $HOME/.config/zed/settings.json $HOME/.config/zed/settings.json.tmp
+        #     run rm $HOME/.config/zed/settings.json.generated -f
+        #     run cp $HOME/.config/zed/settings.json $HOME/.config/zed/settings.json.generated
+        #     run rm $HOME/.config/zed/settings.json -f
+        #     run cp $HOME/.config/zed/settings.json.tmp $HOME/.config/zed/settings.json
+        #     run rm $HOME/.config/zed/settings.json.tmp -f
+        #     run rm $HOME/.config/zed/settings.json.bak -f
+        #     run chmod +w $HOME/.config/zed/settings.json
+        #     echo "Done, settings.json now a regular file"
+        #   else
+        #     echo "settings.json not found, skipping"
+        #   fi
+        # '';
 
       };
     };
