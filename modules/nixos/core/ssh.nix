@@ -33,6 +33,8 @@
             message = "No users have authorized SSH keys configured for machine ${config.networking.hostName}! You will be locked out of SSH.";
           }
         ];
+        #programs.ssh.askPassword = "${pkgs.openssh-askpass}/libexec/gtk-ssh-askpass";
+        #programs.ssh.enableAskPassword = true;
         services.openssh = {
           enable = true;
           settings = {
@@ -47,7 +49,9 @@
         #programs.ssh.startAgent = true; # doesnt work with yubikeys
 
         # Ensure the seahorse package is available
-        environment.systemPackages = [ pkgs.seahorse ];
+        environment.systemPackages = [
+          pkgs.seahorse
+        ];
 
         services.fail2ban.enable = if cfg.fail2ban then (mkDefault true) else mkDefault false;
       };
