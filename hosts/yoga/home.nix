@@ -18,6 +18,7 @@
               "yusuf"
             ];
           };
+          apps.security.enable = true;
           # niri msg outputs
           monitors = [
             {
