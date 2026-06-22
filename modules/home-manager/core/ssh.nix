@@ -4,6 +4,7 @@
     {
       config,
       lib,
+      pkgs,
       ...
     }:
     let
@@ -37,14 +38,21 @@
       config = mkIf cfg.enable {
         # Your configuration here
         home.file.".ssh/config_custom".text = cfg.customConfig;
-        #services.ssh-agent.enable = true;
+        services.ssh-agent.enable = true;
+
+        # The systemd-managed ssh-agent can't find ssh-sk-helper at signing time.
+        # Explicitly point it to the FIDO2 security key helper binary.
+        systemd.user.services.ssh-agent.Service.Environment = [
+          "SSH_SK_HELPER=${pkgs.openssh}/libexec/ssh-sk-helper"
+        ];
         programs.ssh = {
           enable = true;
+
           enableDefaultConfig = false;
           # needed for yubikey-agent
-          extraConfig = ''
-            AddKeysToAgent yes
-          '';
+          # extraConfig = ''
+          #   AddKeysToAgent yes
+          # '';
           includes = [
             "~/.ssh/config_custom"
             "~/.ssh/config_stateful"
@@ -55,6 +63,7 @@
               SetEnv = {
                 TERM = "xterm-256color";
               };
+              addKeysToAgent = "yes";
             };
           }
           // cfg.matchBlocks;
