@@ -22,7 +22,7 @@
         terminal = "ghostty";
         fileManager = "nautilus";
         editor = "zeditor";
-        discord = "discord";
+        discord = "vesktop";
         appLauncher = "fuzzel";
         #wayscrollshot = "${pkgs.waysc}/bin/wayscrollshot";
 
