@@ -7,6 +7,7 @@ creation_rules:
         - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
+        - age18m5zjuezwl2zgku9w7upwd57hty7x7xg4t4mqquazr7s3h3q8ufqnrxnkr
         - age1uyhg2mnq3nknwy25jh4xmsqltd5dslcp5xh70930ckpm32c5ga7q6mg7sk
 
   # Rule 2: Shared Host Secrets (decryptable by maintainers + all hosts)
@@ -17,6 +18,7 @@ creation_rules:
         - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age164yyf2l8ra740kw9cfut7mgyf7mhgh4sw739melzp2nnvqzmay8sjaldnp
         - age10f9zggeecv57xdh5e87fywyqau2thr8a47wx36ztefkctxceqfjszg5ffm
+        - age18m5zjuezwl2zgku9w7upwd57hty7x7xg4t4mqquazr7s3h3q8ufqnrxnkr
         - age1uyhg2mnq3nknwy25jh4xmsqltd5dslcp5xh70930ckpm32c5ga7q6mg7sk
 
   # Rule 3: Node-Specific Secrets for legion
@@ -52,6 +54,23 @@ creation_rules:
         - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
         - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
         - age1rw63cg8qm94e6hyqftxha2jx9nw389rqsepzkv4rxzw4zy4yw3gq5kzc6n
+
+  # Rule 3: Node-Specific Secrets for typc
+  - path_regex: ^hosts/typc/secrets/secrets\.yaml$
+    key_groups:
+      - age:
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
+        - age18m5zjuezwl2zgku9w7upwd57hty7x7xg4t4mqquazr7s3h3q8ufqnrxnkr
+        - age16d5l235x50nnq32qjgppm4f9gh6ha7djadh3rlycjx5r5x37tf7qkxec6q
+
+  # Rule 4: User-Specific Secrets for tyron on typc
+  - path_regex: ^hosts/typc/secrets/users/tyron\.yaml$
+    key_groups:
+      - age:
+        - age1yubikey1qw7nelt3pyxeyzz4c4mv0zweh9mxvy43wdmglfm0d96lwm5zhrqysexfk4g
+        - age1yubikey1qdl9mymks3umrlh9hgcdg88alwxf7qwvg5du6uh5ypy0a4p3zg7ms4wepf3
+        - age16d5l235x50nnq32qjgppm4f9gh6ha7djadh3rlycjx5r5x37tf7qkxec6q
 
   # Rule 3: Node-Specific Secrets for yoga
   - path_regex: ^hosts/yoga/secrets/secrets\.yaml$

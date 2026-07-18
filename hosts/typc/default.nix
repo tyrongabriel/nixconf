@@ -1,0 +1,60 @@
+{ self, ... }:
+{
+  flake.modules.nixos.host_typc =
+    { lib, ... }:
+    let
+      deployTags = [
+        "dev"
+        "desktop"
+      ];
+      tags = [
+        "dev"
+        "desktop"
+      ];
+    in
+    with lib;
+    {
+      #system = "x86_64-linux";
+      #specialArgs = { inherit inputs; };
+      imports = with self.modules.nixos; [
+        core
+        desktop
+        user_tyron
+        user_deploy
+        dev
+      ];
+      config = {
+        # Deployment
+        networking.hostName = "typc";
+        deployment = {
+          targetHost = "192.168.1.138"; # "typc.netbird.cloud"; # "192.168.8.172";
+          targetUser = "deploy";
+          allowLocalDeployment = true;
+          tags = [ ] ++ deployTags;
+        };
+
+        # Sops
+        myNixos.sops = {
+          sopsFile = ./secrets/secrets.yaml;
+          users.tyron.sopsSecretsFile = ./secrets/users/tyron.yaml;
+        };
+
+        # Config
+        myNixos.users.tyron.homeManager = {
+          enable = true;
+          tags = [ ] ++ tags;
+          extraImports = [
+            self.modules.homeManager.typc_tyron
+          ];
+        };
+
+        myNixos.ssh = {
+          enable = mkForce true;
+          fail2ban = mkForce true;
+        };
+
+        hardware.facter.reportPath = ./facter.json;
+        system.stateVersion = "26.05";
+      };
+    };
+}

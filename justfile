@@ -292,8 +292,8 @@ onboard-machine machine ssh-host:
     just regenerate-sops
     just rekey-secrets
 
-    echo "🚀 Applying config to {{ ssh-host }} (Flake attr: {{ machine }})..."
-    colmena apply --on {{ machine }} --build-on-target
+    #echo "🚀 Applying config to {{ ssh-host }} (Flake attr: {{ machine }})..."
+    #colmena apply --on {{ machine }} --build-on-target
 
 new template-name:
     kickstart templates/{{ template-name }} -o hosts
