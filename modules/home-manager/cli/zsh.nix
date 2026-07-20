@@ -77,9 +77,9 @@
           '';
           shellAliases = {
             # General
-            ll = "eza -lag --icons";
-            llt = "eza -lag --icons --tree --level 2"; # Specify --level to limit depth
-            lah = "eza -lahg --icons";
+            ll = "eza -lag --icons always";
+            llt = "eza -lag --icons always --tree --level 2"; # Specify --level to limit depth
+            lah = "eza -lahg --icons always";
             fzfb = "fzf --preview='bat --color=always {}'";
             cd = "z";
             zj = "zellij";

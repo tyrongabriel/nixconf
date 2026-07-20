@@ -34,6 +34,7 @@
           enable = true;
           alsa.enable = true;
           pulse.enable = true;
+          wireplumber.enable = true; # hopeful aux switching fix
         };
 
         # Screensharing

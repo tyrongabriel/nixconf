@@ -54,6 +54,11 @@
 
         ## Plymouth splash — clean transition from OEM splash to desktop ##
         plymouth.enable = true;
+
+        # Hopeful AUX fix (no reboot required when hot-pluggin aux)
+        extraModprobeConfig = ''
+          options snd-hda-intel power_save=0 power_save_controller=N
+        '';
       };
 
       ## CPU ##
