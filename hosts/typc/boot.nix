@@ -16,6 +16,7 @@
           systemd-boot = {
             enable = true;
             configurationLimit = 10;
+            graceful = true;
           };
           timeout = 0; # Skip boot menu — hold key at boot to show
         };
