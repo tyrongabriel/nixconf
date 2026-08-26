@@ -27,6 +27,7 @@
           license-go
           gitlab-ci-ls # Language server for the gitlab ci
           gcc # For rustup
+          bubblewrap # zed sandboxing
         ];
         # https://mynixos.com/home-manager/options/programs.zed-editor
         # https://github.com/nathansbradshaw/zed-angular
