@@ -8,6 +8,7 @@
       ## Boot Config ##
       boot = {
         supportedFilesystems = lib.mkForce [ "btrfs" ];
+        blacklistedKernelModules = [ "ucsi_ccg" ]; # hopeful nvidia fix
 
         ## Bootloader ##
         loader = {
@@ -58,6 +59,7 @@
         # Hopeful AUX fix (no reboot required when hot-pluggin aux)
         extraModprobeConfig = ''
           options snd-hda-intel power_save=0 power_save_controller=N
+          options nvidia NVreg_EnableS0ixPowerManagement=1
         '';
       };
 
@@ -76,6 +78,8 @@
           enable = true;
           # finegrained = true;
         };
+        # Not available in this nixpkgs — use modprobe config below instead
+
       };
 
       ## Unfree for NVIDIA proprietary driver ##

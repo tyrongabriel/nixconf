@@ -66,6 +66,67 @@
         exec "$@"
       '';
 
+      audio-sink-cycle = pkgs.writeShellScriptBin "audio-sink-cycle" ''
+        #!/usr/bin/env bash
+        set -eu
+
+        wpctl=${pkgs.wireplumber}/bin/wpctl
+        notify=${pkgs.libnotify}/bin/notify-send
+        awkBin=${pkgs.gawk}/bin/awk
+        timeoutBin=${pkgs.coreutils}/bin/timeout
+
+        # Guard against wpctl hanging (e.g. daemon unreachable from this env).
+        status=$("$timeoutBin" 3 "$wpctl" status) || status=""
+
+        [ -z "$status" ] && exit 0
+
+        # `wpctl status` prints a tree with ├─/│ box characters. The Sinks
+        # section header looks like " ├─ Sinks:"; entries look like
+        # " │      56. Description [vol: 1.00]" and the default is marked
+        # " │  *   57. Description [vol: 0.50]".
+        # Pick the sink id that follows the current default (wrap to first).
+        next_id=$(printf '%s\n' "$status" | "$awkBin" '
+          /─ Sinks:/ && !done { on=1; next }
+          on && /─/ { on=0; done=1 }
+          on && match($0, /[0-9]+\./) {
+            id = substr($0, RSTART, RLENGTH); sub(/\./, "", id)
+            ids[++n] = id
+            if (index(substr($0, 1, RSTART-1), "*") > 0) cur = n
+          }
+          END {
+            if (n == 0) exit
+            if (cur == "") cur = 0
+            print ids[(cur % n) + 1]
+          }')
+
+        [ -z "$next_id" ] && exit 0
+
+        "$wpctl" set-default "$next_id"
+
+        # Best-effort notification with the new sink's description.
+        desc=$(printf '%s\n' "$status" | "$awkBin" -v id="$next_id" '
+          /─ Sinks:/ && !done { on=1; next }
+          on && /─/ { on=0; done=1 }
+          on && match($0, /[0-9]+\./) {
+            s = substr($0, RSTART, RLENGTH); sub(/\./, "", s)
+            if (s == id) {
+              rest = substr($0, RSTART + RLENGTH)
+              sub(/^[[:space:]]*/, "", rest)
+              sub(/[[:space:]]*\[vol:.*$/, "", rest)
+              print rest
+              exit
+            }
+          }')
+
+        if [ -n "$desc" ]; then
+          msg="Switched to $desc"
+        else
+          msg="Switched to sink $next_id"
+        fi
+
+        "$notify" -i audio-speakers "Audio Output" "$msg" 2>/dev/null || true
+      '';
+
     in
     with lib;
     {
@@ -99,6 +160,7 @@
           inputs.nirimod.packages.${pkgs.stdenv.hostPlatform.system}.default
           tray-launch
           glib.bin
+          audio-sink-cycle
         ];
         # Bad workaround til the niri-flake dev finally merges https://github.com/sodiboo/niri-flake/pull/1548
         home.activation.niri-include-monitors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -207,6 +269,9 @@
             "shift+XF86AudioLowerVolume".action.spawn = noctalia "mic-volume-down"; # input decrease
             "shift+XF86AudioMute".action.spawn = noctalia "mic-mute"; # input mute
             "control+XF86AudioMute".action.spawn = noctalia "panel-toggle control-center audio"; # open volume panel
+
+            # Cycle the default audio output sink (e.g. between headphones and speakers)
+            "super+o".action.spawn = [ "${audio-sink-cycle}/bin/audio-sink-cycle" ];
 
             # Media
             "XF86AudioPlay".action.spawn = noctalia "media toggle";
