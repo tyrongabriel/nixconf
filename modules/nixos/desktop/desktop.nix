@@ -45,6 +45,7 @@
           };
 
           desktop = {
+            printing.enable = mkDefault true;
             displayManager.greetd.enable = mkDefault true;
             #displayManager.noctalia-greeter.enable = mkDefault true;
             windowManager.niri.enable = mkDefault true;
