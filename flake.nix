@@ -179,6 +179,7 @@
               cilium-cli
               gitleaks
               pre-commit
+              go # needed by pre-commit
               deadnix
               nil
               nixd

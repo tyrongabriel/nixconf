@@ -77,7 +77,7 @@
               dock = "right";
               commit_message_model = {
                 provider = "opencode";
-                model = "go/deepseek-v4-flash";
+                model = "go/glm-5.3-flash";
               };
               commit_message_instructions = ''
                 # Git Commit Rules
@@ -186,33 +186,32 @@
               default_model = {
                 enable_thinking = true;
                 provider = "opencode";
-                model = "go/deepseek-v4-pro";
+                model = "go/glm-5.3-flash";
               };
             };
 
             language_models = {
-              # opencode = {
-              #   show_free_models = true;
-              #   show_zen_models = false;
-              #   available_models = [
-              #     {
-              #       display_name = "GLM 5.2";
-              #       interleaved_reasoning = false;
-              #       max_output_tokens = 131072;
-              #       max_tokens = 1000000;
-              #       name = "glm-5.2";
-              #       protocol = "openai_chat";
-              #       reasoning_effort_levels = [
-              #         "low"
-              #         "medium"
-              #         "high"
-              #         "xhigh"
-              #       ];
-              #       subscription = "go";
-              #     }
-              #   ];
+              opencode = {
+                show_free_models = true;
+                show_zen_models = false;
+                available_models = [
+                  {
+                    display_name = "GLM-5.3-Flash";
+                    interleaved_reasoning = true;
+                    max_output_tokens = 131072;
+                    max_tokens = 1000000;
+                    name = "glm-5.3-flash";
+                    protocol = "openai_chat";
+                    reasoning_effort_levels = [
+                      "low"
+                      "high"
+                      "max"
+                    ];
+                    subscription = "go";
+                  }
+                ];
 
-              # };
+              };
               # openai_compatible = {
               # Umans = {
               #   api_url = "https://api.code.umans.ai/v1";

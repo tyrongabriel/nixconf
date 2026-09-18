@@ -16,14 +16,14 @@ repos:
         stages: [commit-msg]
         args: []
   - repo: https://github.com/astro/deadnix
-    rev: v1.3.1
+    rev: v1.3.2
     hooks:
       - id: deadnix
         #args: ["--edit", "--quiet"] # Uncomment to automatically modify files, requires re-adding files, and re committing
         stages: [pre-commit]
 
   - repo: https://github.com/NixOS/nixfmt
-    rev: v1.2.0 # Use the latest stable version or commit hash
+    rev: v1.5.0 # Use the latest stable version or commit hash
     hooks:
       - id: nixfmt-nix
         exclude: ^templates/

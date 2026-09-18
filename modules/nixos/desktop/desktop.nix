@@ -52,6 +52,7 @@
             gaming = {
               enable = true;
             };
+            logitech.enable = mkDefault true;
           };
 
           desktop.apps = {
