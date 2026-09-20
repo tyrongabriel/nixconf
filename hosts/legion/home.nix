@@ -10,6 +10,7 @@
       myHome = {
         ssh.useYubiKey = true;
         cli.kubernetes.enable = true;
+        cli.pi-agent.enable = true;
         desktop = {
           enable = true;
           gaming.enable = true;
