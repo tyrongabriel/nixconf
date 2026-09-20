@@ -81,6 +81,10 @@
           targets.grub.enable = true;
           targets.grub.useWallpaper = true;
           targets.plymouth.enable = true;
+          # Workaround: upstream stylix emits `-border 42%` before the input image,
+          # which ImageMagick rejects with "no images found for operation `-border'".
+          # https://github.com/danth/stylix/blob/72b961ba/modules/plymouth/nixos.nix
+          targets.plymouth.logoAnimated = false;
           #targets.gnome-text-editor.enable = false;
 
           autoEnable = true;
