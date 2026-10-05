@@ -21,6 +21,10 @@
         programs.steam.enable = mkForce true;
 
         hardware.graphics.enable = mkForce true;
+        hardware.graphics.extraPackages = with pkgs; [
+          vulkan-loader
+          libvdpau
+        ];
         # Vulkan support (required for many Proton games)
         environment.systemPackages = with pkgs; [
           vulkan-loader
