@@ -38,7 +38,7 @@
       config = mkIf cfg.enable {
         # Your configuration here
         home.file.".ssh/config_custom".text = cfg.customConfig;
-        services.ssh-agent.enable = true;
+        services.ssh-agent.enable = false;
 
         # The systemd-managed ssh-agent can't find ssh-sk-helper at signing time.
         # Explicitly point it to the FIDO2 security key helper binary.

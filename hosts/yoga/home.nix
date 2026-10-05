@@ -9,6 +9,7 @@
     {
       myHome = {
         ssh.useYubiKey = true;
+        cli.pi-agent.enable = true;
         desktop = {
           enable = true;
           apps.yubico.ssh-keys = {
