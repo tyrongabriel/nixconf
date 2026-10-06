@@ -33,7 +33,7 @@
         # https://github.com/nathansbradshaw/zed-angular
         programs.zed-editor = {
           enable = true;
-          package = pkgs.unstable-small.zed-editor;
+          package = pkgs.zed-editor;
           mutableUserSettings = true;
           extensions = [
             "justfile"

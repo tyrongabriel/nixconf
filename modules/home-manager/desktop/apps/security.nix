@@ -18,7 +18,7 @@
       };
       config = mkIf cfg.enable {
         home.packages = with pkgs; [
-          binaryninja-free
+          stable.binaryninja-free # to not have to recomplile it all the time
         ];
       };
     };
