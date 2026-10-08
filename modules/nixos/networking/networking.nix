@@ -15,6 +15,7 @@
         self.modules.nixos.tailscale
         self.modules.nixos.netbird
         self.modules.nixos.tuvpn
+        self.modules.nixos.storagebox
       ];
       options.myNixos.networking = with lib; {
         enable = mkOption {
