@@ -9,6 +9,10 @@
     }:
     let
       cfg = config.myHome.ssh;
+      # Names of SSH keypairs in the global secrets/secrets.yaml under ssh_keys.<name>
+      sshKeyNames = [
+        "ml-sec"
+      ];
     in
     with lib;
     {
@@ -36,8 +40,24 @@
         };
       };
       config = mkIf cfg.enable {
-        # Your configuration here
         home.file.".ssh/config_custom".text = cfg.customConfig;
+
+        # Place SSH keypairs from the global secrets file into ~/.ssh as id_<name>/.pub
+        sops.secrets = lib.foldl' (
+          acc: name:
+          acc
+          // {
+            "ssh_keys/${name}/private" = {
+              path = "${config.home.homeDirectory}/.ssh/id_${name}";
+              mode = "0600";
+            };
+            "ssh_keys/${name}/public" = {
+              path = "${config.home.homeDirectory}/.ssh/id_${name}.pub";
+              mode = "0644";
+            };
+          }
+        ) { } sshKeyNames;
+
         services.ssh-agent.enable = false;
 
         # The systemd-managed ssh-agent can't find ssh-sk-helper at signing time.
