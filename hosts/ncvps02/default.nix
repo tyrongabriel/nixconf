@@ -48,13 +48,17 @@
             ];
           };
           k8s.lb = {
-            enable = true;
+            enable = false;
             k8sApi.hosts = [
               "${ncvps02}:6443"
             ];
             talosApi.hosts = [
               "${ncvps02}:50000"
             ];
+            # NOTE: 80/443 on the VPS are now DNAT'd to the homelab ingress VIP
+            # over the WireGuard tunnel (myNixos.networking.wgOortIngress), so
+            # these haproxy ingress frontends are shadowed and only kept as a
+            # fallback config.
             ingress.http.hosts = [
               ncvps02
             ];
@@ -62,6 +66,15 @@
               ncvps02
             ];
           };
+
+          # networking.wgOortIngress = {
+          #   enable = true;
+          #   publicIp = "159.195.9.89"; # eth0
+          #   vip = "192.168.8.50";
+          #   # Public key of the home gateway peer; generate with:
+          #   #   wg genkey | tee gateway.key | wg pubkey > gateway.pub
+          #   peerPublicKey = "BPNCGqCeAimRyIL7UP+npzmD6kqgqMHef87h43syCCs=";
+          # };
         };
 
         hardware.facter.reportPath = ./facter.json;

@@ -55,6 +55,8 @@
         myNixos.storagebox = {
           enable = true;
           server = "u596626-sub3.your-storagebox.de";
+          # Sub-accounts expose their own username as share, not "backup"
+          share = "u596626-sub3";
           mountPoint = "/mnt/storagebox";
           user = "tyron";
           autoMount = true;

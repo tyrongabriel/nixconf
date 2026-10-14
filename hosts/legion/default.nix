@@ -53,6 +53,17 @@
           fail2ban = mkForce true;
         };
 
+        myNixos.storagebox = {
+          enable = true;
+          server = "u596626-sub3.your-storagebox.de";
+          # Sub-accounts expose their own username as share, not "backup"
+          share = "u596626-sub3";
+          mountPoint = "/mnt/storagebox";
+          user = "tyron";
+          autoMount = true;
+          idleTimeout = "600s";
+        };
+
         hardware.facter.reportPath = ./facter.json;
         system.stateVersion = "25.11";
       };

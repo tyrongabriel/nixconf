@@ -16,6 +16,7 @@
         self.modules.nixos.netbird
         self.modules.nixos.tuvpn
         self.modules.nixos.storagebox
+        self.modules.nixos.wgOortIngress
       ];
       options.myNixos.networking = with lib; {
         enable = mkOption {
@@ -28,7 +29,7 @@
         # DNS Settings
         services.resolved.enable = true;
         networking.networkmanager.dns = "systemd-resolved";
-
+        networking.hosts."192.168.8.30" = [ "api.k8s.int.oortian.com" ];
         # OVERLAY NETWORKS
         sops.secrets = {
           "tailscale_auth" = {

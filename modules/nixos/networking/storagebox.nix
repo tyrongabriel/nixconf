@@ -48,7 +48,11 @@
         share = mkOption {
           type = types.str;
           default = "backup";
-          description = "Share name. Hetzner Storage Boxes always expose ''backup''.";
+          description = ''
+            Share name. The main account exposes "backup"; a sub-account
+            (u123456-sub1) exposes its own username as the share, e.g.
+            "u123456-sub1" — using "backup" there fails with EACCES (-13).
+          '';
         };
 
         mountPoint = mkOption {
