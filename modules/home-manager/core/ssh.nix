@@ -85,6 +85,9 @@
               };
               addKeysToAgent = "yes";
             };
+            "mlsec.hackthe.space" = {
+              IdentityFile = "~/.ssh/id_ml-sec";
+            };
           }
           // cfg.matchBlocks;
         };
