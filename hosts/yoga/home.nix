@@ -9,6 +9,9 @@
     {
       myHome = {
         ssh.useYubiKey = true;
+        ssh.customSSHKeys = [
+          "ml-sec"
+        ];
         cli.pi-agent.enable = true;
         desktop = {
           enable = true;

@@ -16,7 +16,6 @@
         self.modules.nixos.netbird
         self.modules.nixos.tuvpn
         self.modules.nixos.storagebox
-        self.modules.nixos.wgOortIngress
       ];
       options.myNixos.networking = with lib; {
         enable = mkOption {

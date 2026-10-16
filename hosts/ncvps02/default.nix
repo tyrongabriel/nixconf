@@ -11,6 +11,7 @@
         with self.modules.nixos;
         [
           core
+          dev
           user_tyron
           user_deploy
           k8s
@@ -41,6 +42,7 @@
         };
 
         myNixos = {
+          dev.docker.enable = true;
           users.tyron.homeManager = {
             enable = true;
             tags = [

@@ -9,10 +9,7 @@
     }:
     let
       cfg = config.myHome.ssh;
-      # Names of SSH keypairs in the global secrets/secrets.yaml under ssh_keys.<name>
-      sshKeyNames = [
-        "ml-sec"
-      ];
+
     in
     with lib;
     {
@@ -38,6 +35,15 @@
           };
           description = "SSH match blocks to be included in the SSH configuration.";
         };
+
+        customSSHKeys = lib.mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          example = [
+            "ml-sec"
+          ];
+          description = "Custom SSH keypairs to be placed in ~/.ssh. The keys will be copied from the specified paths.";
+        };
       };
       config = mkIf cfg.enable {
         home.file.".ssh/config_custom".text = cfg.customConfig;
@@ -56,7 +62,7 @@
               mode = "0644";
             };
           }
-        ) { } sshKeyNames;
+        ) { } cfg.customSSHKeys;
 
         services.ssh-agent.enable = false;
 
