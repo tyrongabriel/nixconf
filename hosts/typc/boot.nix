@@ -31,7 +31,6 @@
             "sd_mod"
             "rtsx_pci_sdmmc"
           ];
-          systemd.enable = true; # Parallel initrd for faster boot
         };
 
         kernelModules = [

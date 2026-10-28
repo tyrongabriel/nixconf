@@ -27,7 +27,6 @@
       };
       config = mkIf cfg.enable {
         home.packages = with pkgs; [
-          noctalia-qs
           brightnessctl
           imagemagick
 
@@ -36,7 +35,6 @@
           slurp
           wl-clipboard
           tesseract
-          imagemagick
           zbar
           curl
           ffmpeg
@@ -62,7 +60,7 @@
         #     {
         #       event = "before-sleep";
         #       # Instructs Noctalia to lock the screen right before suspend
-        #       command = "qs -c noctalia-shell ipc call lockScreen lock";
+        #       command = "noctalia msg session lock";
         #     }
         #   ];
         # };

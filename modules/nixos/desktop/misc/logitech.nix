@@ -16,13 +16,8 @@
       };
 
       config = mkIf cfg.enable {
-        hardware.logitech = {
-          #enable = true; # alias of wireless.enable
-          wireless = {
-            enable = true;
-            enableGraphical = true;
-          };
-        };
+        hardware.logitech.wireless.enable = true;
+        programs.solaar.enable = true;
       };
     };
 }

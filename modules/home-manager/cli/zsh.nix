@@ -32,7 +32,7 @@
           # enableNushellIntegration = true;
 
           # Optional: force case-insensitive completion matching
-          ignoreCase = true;
+          environment.CARAPACE_MATCH = true;
         };
 
         programs.zoxide = {
