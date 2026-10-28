@@ -13,8 +13,10 @@
           "ml-sec"
         ];
         cli.pi-agent.enable = true;
+        cli.opencode.enable = true;
         desktop = {
           enable = true;
+          apps.t3code.enable = true;
           apps.yubico.ssh-keys = {
             enable = true;
             yubiKeys = [
