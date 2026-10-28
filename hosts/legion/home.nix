@@ -14,6 +14,7 @@
         desktop = {
           enable = true;
           gaming.enable = true;
+          apps.t3code.enable = true;
 
           apps.yubico.ssh-keys = {
             enable = true;
