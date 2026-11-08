@@ -20,9 +20,9 @@
         programs.nixcord = {
           enable = true;
 
-          vesktop.enable = true;
+          #vesktop.enable = true;
           # Choose your client (enable only one of these two)
-          discord.enable = false; # Disables default discord
+          discord.enable = true; # Disables default discord
           # discord.equicord.enable = true;   # Equicord (has more plugins)
 
           # Or these

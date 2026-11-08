@@ -9,6 +9,10 @@
     {
       myHome = {
         ssh.useYubiKey = true;
+        ssh.customSSHKeys = [
+          "ml-sec"
+          "ml-sec-group"
+        ];
         cli.kubernetes.enable = true;
         cli.pi-agent.enable = true;
         desktop = {

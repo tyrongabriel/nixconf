@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.modules.nixos.host_legion =
-    { lib, ... }:
+    { lib, pkgs, ... }:
     let
       deployTags = [
         "dev"
@@ -65,6 +65,9 @@
         };
 
         hardware.facter.reportPath = ./facter.json;
+        hardware.graphics.extraPackages = with pkgs; [
+          intel-media-driver # ← iHD VA-API driver for the UHD 630
+        ];
         system.stateVersion = "25.11";
       };
     };
